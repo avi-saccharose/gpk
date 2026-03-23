@@ -32,5 +32,8 @@ int hmToMins(int hour, int minutes) {
 
 String displayTime(int time) {
   var (hour, minutes) = minsToHM(time);
-  return "$hour:$minutes";
+  String formattedHour = hour.toString().padLeft(2, '0');
+  String formattedMinute = minutes.toString().padLeft(2, '0');
+
+  return "$formattedHour:$formattedMinute";
 }

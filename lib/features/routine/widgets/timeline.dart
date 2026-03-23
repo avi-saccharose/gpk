@@ -1,24 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/constants/app_sizes.dart';
 import 'package:gpk_app/features/routine/data/mock_routine_repository.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
+import 'package:gpk_app/features/routine/providers/clock_provider.dart';
 import 'package:gpk_app/utils/time_helper.dart';
 
-class Timeline extends StatelessWidget {
-  const Timeline({super.key});
-
+class Timeline extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final routine = MockRoutineRepository.instance.getRoutine();
+    final now = ref.watch(minutesNowProvider).value ?? 0;
     return Expanded(
       child: ListView.builder(
         itemCount: routine.length,
         itemBuilder: (context, index) {
           final isLast = index == (routine.length - 1);
+          final item = routine[index];
+          bool isActive = false;
+
+          if (now >= item.startTime) {
+            if (isLast) {
+              isActive = now < item.endTime;
+            } else if (now < routine[index + 1].startTime) {
+              isActive = true;
+            }
+          }
 
           return TimelineTile(
             item: routine[index],
             isLast: isLast,
+            isActive: isActive,
           );
         },
       ),
@@ -99,8 +111,14 @@ class TimelineTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Image(
+                        width: Sizes.p24,
+                        height: Sizes.p24,
+                        image: AssetImage('assets/icons/c-programming-64.png'),
+                      ),
+                      gapW12,
                       Text(
                         item.subjectName,
                         style: TextStyle(
@@ -109,6 +127,7 @@ class TimelineTile extends StatelessWidget {
                           fontSize: 18,
                         ),
                       ),
+                      Spacer(),
                       Text(
                         item.subjectID ?? "",
                         style: const TextStyle(
