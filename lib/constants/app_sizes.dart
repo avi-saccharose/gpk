@@ -24,11 +24,11 @@ const gapH32 = SizedBox(height: Sizes.p32);
 const gapH64 = SizedBox(height: Sizes.p64);
 
 // Horizontal spacing
-const gapW4 = SizedBox(height: Sizes.p4);
-const gapW8 = SizedBox(height: Sizes.p8);
-const gapW12 = SizedBox(height: Sizes.p12);
-const gapW16 = SizedBox(height: Sizes.p16);
-const gapW20 = SizedBox(height: Sizes.p20);
-const gapW24 = SizedBox(height: Sizes.p24);
-const gapW32 = SizedBox(height: Sizes.p32);
-const gapW64 = SizedBox(height: Sizes.p64);
+const gapW4 = SizedBox(width: Sizes.p4);
+const gapW8 = SizedBox(width: Sizes.p8);
+const gapW12 = SizedBox(width: Sizes.p12);
+const gapW16 = SizedBox(width: Sizes.p16);
+const gapW20 = SizedBox(width: Sizes.p20);
+const gapW24 = SizedBox(width: Sizes.p24);
+const gapW32 = SizedBox(width: Sizes.p32);
+const gapW64 = SizedBox(width: Sizes.p64);
