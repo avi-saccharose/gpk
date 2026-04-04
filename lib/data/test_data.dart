@@ -8,6 +8,7 @@ final kTestTimeline = [
     subjectName: "Physics",
     subjectID: "101",
     instructorName: "Pete",
+    iconUrl: "assets/icons/physics-64.png",
   ),
   TimelineItem(
     startTime: hmToMins(13, 30),
@@ -15,6 +16,7 @@ final kTestTimeline = [
     subjectName: "Chemistry",
     subjectID: "102",
     instructorName: "Puthu",
+    iconUrl: "assets/icons/test-tube-64.png",
   ),
   TimelineItem(
     startTime: hmToMins(14, 30),
@@ -22,6 +24,7 @@ final kTestTimeline = [
     subjectName: "Maths",
     subjectID: "101",
     instructorName: "Kenei",
+    iconUrl: "assets/icons/pi-64.png",
   ),
   TimelineItem(
     startTime: hmToMins(15, 30),
@@ -29,6 +32,7 @@ final kTestTimeline = [
     subjectName: "Break",
     subjectID: null,
     instructorName: null,
+    iconUrl: "assets/icons/ice-cream-cone-64.png",
   ),
   TimelineItem(
     startTime: hmToMins(19, 07),
@@ -36,12 +40,14 @@ final kTestTimeline = [
     subjectName: "Digital Ciruit",
     subjectID: "10",
     instructorName: "Ayang",
+    iconUrl: "assets/icons/transistor-64.png",
   ),
   TimelineItem(
     startTime: hmToMins(19, 08),
-    endTime: hmToMins(19, 30),
+    endTime: hmToMins(23, 30),
     subjectName: "C programming",
     subjectID: "99",
     instructorName: "Vikethol",
+    iconUrl: "assets/icons/c-programming-64.png",
   ),
 ];

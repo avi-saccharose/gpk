@@ -4,6 +4,7 @@ class TimelineItem {
   final String subjectName;
   final String? subjectID;
   final String? instructorName;
+  final String iconUrl;
 
   const TimelineItem({
     required this.startTime,
@@ -11,5 +12,6 @@ class TimelineItem {
     required this.subjectName,
     required this.subjectID,
     required this.instructorName,
+    required this.iconUrl,
   });
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gpk_app/features/calendar/ui/calendar_screen.dart';
+import 'package:gpk_app/features/home/ui/home_screen.dart';
 import 'package:gpk_app/features/routine/ui/routine_screen.dart';
 import 'package:gpk_app/features/syllabus/ui/syllabus_screen.dart';
 
@@ -14,7 +15,7 @@ class _AppNavigationState extends State<AppNavigation> {
   int _selectedIndex = 1;
 
   final List<Widget> _screens = [
-    CalendarScreen(),
+    HomeScreen(),
     RoutineScreen(),
     SyllabusScreen(),
   ];
@@ -33,12 +34,12 @@ class _AppNavigationState extends State<AppNavigation> {
 
           NavigationDestination(
             icon: Icon(Icons.calendar_month),
-            label: "Home",
+            label: "Routine",
           ),
 
           NavigationDestination(
             icon: Icon(Icons.account_circle),
-            label: "Home",
+            label: "Syllabus",
           ),
         ],
       ),

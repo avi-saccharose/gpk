@@ -3,10 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/constants/app_sizes.dart';
 import 'package:gpk_app/features/routine/data/mock_routine_repository.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
-import 'package:gpk_app/features/routine/providers/clock_provider.dart';
+import 'package:gpk_app/providers/clock_provider.dart';
 import 'package:gpk_app/utils/time_helper.dart';
 
 class Timeline extends ConsumerWidget {
+  const Timeline({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final routine = MockRoutineRepository.instance.getRoutine();
@@ -116,7 +118,7 @@ class TimelineTile extends StatelessWidget {
                       Image(
                         width: Sizes.p24,
                         height: Sizes.p24,
-                        image: AssetImage('assets/icons/c-programming-64.png'),
+                        image: AssetImage(item.iconUrl),
                       ),
                       gapW12,
                       Text(
