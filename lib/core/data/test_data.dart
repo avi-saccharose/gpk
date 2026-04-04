@@ -1,5 +1,5 @@
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
-import 'package:gpk_app/utils/time_helper.dart';
+import 'package:gpk_app/core/utils/time_helper.dart';
 
 final kTestTimeline = [
   TimelineItem(

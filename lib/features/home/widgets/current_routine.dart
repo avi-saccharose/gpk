@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gpk_app/providers/routine_providers.dart';
+import 'package:gpk_app/core/providers/routine_providers.dart';
 
 class CurrentRoutine extends ConsumerWidget {
   const CurrentRoutine({super.key});

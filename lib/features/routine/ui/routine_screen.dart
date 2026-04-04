@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gpk_app/constants/app_sizes.dart';
+import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/widgets/date_today.dart';
 import 'package:gpk_app/features/routine/widgets/date_picker.dart';
 import 'package:gpk_app/features/routine/widgets/timeline.dart';

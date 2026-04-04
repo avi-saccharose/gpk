@@ -1,4 +1,4 @@
-import 'package:gpk_app/data/test_data.dart';
+import 'package:gpk_app/core/data/test_data.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
 
 class MockRoutineRepository {
