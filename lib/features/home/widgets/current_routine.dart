@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gpk_app/features/routine/widgets/timeline.dart';
 import 'package:gpk_app/providers/routine_providers.dart';
 
 class CurrentRoutine extends ConsumerWidget {
@@ -15,7 +14,8 @@ class CurrentRoutine extends ConsumerWidget {
       return const SizedBox.shrink();
     }
     final item = routine[activeIndex];
-    final isLast = activeIndex == (routine.length - 1);
-    return TimelineTile(item: item, isLast: isLast, isActive: true);
+    return Row(
+      children: [Text(item.subjectName)],
+    );
   }
 }

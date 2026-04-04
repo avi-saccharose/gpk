@@ -27,7 +27,6 @@ class _DatePickerState extends State<DatePicker> {
           final bool isSelected = index == selectedIndex;
           return GestureDetector(
             onTap: () => setState(() {
-              print("selected $selectedIndex");
               selectedIndex = index;
             }),
             child: Container(

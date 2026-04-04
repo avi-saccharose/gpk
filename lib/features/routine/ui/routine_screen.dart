@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gpk_app/constants/app_sizes.dart';
+import 'package:gpk_app/core/widgets/date_today.dart';
 import 'package:gpk_app/features/routine/widgets/date_picker.dart';
 import 'package:gpk_app/features/routine/widgets/timeline.dart';
 
@@ -15,14 +16,7 @@ class RoutineScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             gapH20,
-            Text(
-              "May 5 2020",
-              style: TextStyle(color: Colors.grey, fontSize: 16),
-            ),
-            Text(
-              'Today',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-            ),
+            DateToday(),
             gapH20,
             DatePicker(),
             gapH20,
