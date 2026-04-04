@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/constants/app_sizes.dart';
-import 'package:gpk_app/features/routine/data/mock_routine_repository.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
-import 'package:gpk_app/providers/clock_provider.dart';
+import 'package:gpk_app/providers/routine_providers.dart';
 import 'package:gpk_app/utils/time_helper.dart';
 
 class Timeline extends ConsumerWidget {
@@ -11,23 +10,14 @@ class Timeline extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final routine = MockRoutineRepository.instance.getRoutine();
-    final now = ref.watch(minutesNowProvider).value ?? 0;
+    final routine = ref.watch(routineProvider);
+    final activeIndex = ref.watch(activeRoutineIndexProvider);
     return Expanded(
       child: ListView.builder(
         itemCount: routine.length,
         itemBuilder: (context, index) {
           final isLast = index == (routine.length - 1);
-          final item = routine[index];
-          bool isActive = false;
-
-          if (now >= item.startTime) {
-            if (isLast) {
-              isActive = now < item.endTime;
-            } else if (now < routine[index + 1].startTime) {
-              isActive = true;
-            }
-          }
+          final isActive = index == activeIndex;
 
           return TimelineTile(
             item: routine[index],

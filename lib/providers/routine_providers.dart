@@ -12,7 +12,6 @@ final activeRoutineIndexProvider = Provider<int?>((ref) {
   final now = ref.watch(minutesNowProvider).value ?? 0;
   for (int i = 0; i < routine.length; i++) {
     final item = routine[i];
-    //final isLast = i == (routine.length) - 1;
     if (now <= item.endTime) {
       return i;
     }

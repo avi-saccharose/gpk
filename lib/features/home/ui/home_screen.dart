@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/constants/app_sizes.dart';
+import 'package:gpk_app/features/home/widgets/current_routine.dart';
 import 'package:gpk_app/features/routine/data/mock_routine_repository.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -20,6 +21,7 @@ class HomeScreen extends ConsumerWidget {
               'Class today',
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
+            CurrentRoutine(),
           ],
         ),
       ),
