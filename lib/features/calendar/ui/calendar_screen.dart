@@ -24,7 +24,6 @@ class CalendarScreen extends StatelessWidget {
               ),
               gapH16,
               EventList(),
-              Text('list'),
             ],
           ),
         ),

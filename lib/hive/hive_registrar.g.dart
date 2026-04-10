@@ -8,11 +8,13 @@ import 'package:gpk_app/hive/hive_adapters.dart';
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
     registerAdapter(EventAdapter());
+    registerAdapter(EventGroupAdapter());
   }
 }
 
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
     registerAdapter(EventAdapter());
+    registerAdapter(EventGroupAdapter());
   }
 }

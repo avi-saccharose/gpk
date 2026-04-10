@@ -7,7 +7,27 @@ class EventList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final focusedDay = ref.watch(focusedDayProvider);
-    return Text('${focusedDay.month}');
+    final monthlyEvents = ref.watch(monthlyEventsProvider);
+    return monthlyEvents.when(
+      data: (data) {
+        if (data.isEmpty) return Text("no events");
+        return ListView.builder(
+          shrinkWrap: true,
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            final event = data[index];
+            return Text(event.title);
+          },
+        );
+      },
+      loading: () {
+        return CircularProgressIndicator();
+      },
+
+      // TODO: handle error
+      error: (error, stackTrace) {
+        return Text("Error");
+      },
+    );
   }
 }

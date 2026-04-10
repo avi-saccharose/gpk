@@ -16,15 +16,20 @@ class EventAdapter extends TypeAdapter<Event> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Event(title: fields[0] as String);
+    return Event(
+      title: fields[0] as String,
+      group: fields[2] == null ? EventGroup.all : fields[2] as EventGroup,
+    );
   }
 
   @override
   void write(BinaryWriter writer, Event obj) {
     writer
-      ..writeByte(1)
+      ..writeByte(2)
       ..writeByte(0)
-      ..write(obj.title);
+      ..write(obj.title)
+      ..writeByte(2)
+      ..write(obj.group);
   }
 
   @override
@@ -34,6 +39,75 @@ class EventAdapter extends TypeAdapter<Event> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is EventAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class EventGroupAdapter extends TypeAdapter<EventGroup> {
+  @override
+  final typeId = 1;
+
+  @override
+  EventGroup read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return EventGroup.all;
+      case 1:
+        return EventGroup.cse1;
+      case 2:
+        return EventGroup.cse2;
+      case 3:
+        return EventGroup.cse3;
+      case 4:
+        return EventGroup.ce1;
+      case 5:
+        return EventGroup.ce2;
+      case 6:
+        return EventGroup.ce3;
+      case 7:
+        return EventGroup.ct1;
+      case 8:
+        return EventGroup.ct2;
+      case 9:
+        return EventGroup.ct3;
+      default:
+        return EventGroup.all;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, EventGroup obj) {
+    switch (obj) {
+      case EventGroup.all:
+        writer.writeByte(0);
+      case EventGroup.cse1:
+        writer.writeByte(1);
+      case EventGroup.cse2:
+        writer.writeByte(2);
+      case EventGroup.cse3:
+        writer.writeByte(3);
+      case EventGroup.ce1:
+        writer.writeByte(4);
+      case EventGroup.ce2:
+        writer.writeByte(5);
+      case EventGroup.ce3:
+        writer.writeByte(6);
+      case EventGroup.ct1:
+        writer.writeByte(7);
+      case EventGroup.ct2:
+        writer.writeByte(8);
+      case EventGroup.ct3:
+        writer.writeByte(9);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EventGroupAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

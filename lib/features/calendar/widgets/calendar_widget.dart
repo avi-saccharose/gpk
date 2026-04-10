@@ -16,7 +16,6 @@ class CalendarWidget extends ConsumerWidget {
 
     // we cannot check for errors with this method
     final eventsMap = events.value;
-
     List<Event> getEventsForDay(DateTime day) {
       return eventsMap?[day] ?? [];
     }
@@ -28,13 +27,40 @@ class CalendarWidget extends ConsumerWidget {
       ),
       child: TableCalendar(
         focusedDay: DateTime.now(),
+        onDaySelected: (selectedDay, _) {
+          print(selectedDay.toString());
+        },
         onPageChanged: (newFocusedDay) {
-          ref.read(focusedDayProvider.notifier).set(newFocusedDay);
+          ref.read(selectedMonthProvider.notifier).set(newFocusedDay);
         },
         firstDay: DateTime.utc(2025, 05, 01),
         lastDay: DateTime.utc(2027, 05, 31),
         eventLoader: getEventsForDay,
 
+        calendarBuilders: CalendarBuilders<Event>(
+          markerBuilder: (context, date, events) {
+            if (events.isEmpty) return const SizedBox();
+
+            return Positioned(
+              bottom: 8.0,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: events.map((event) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 1.5),
+                    width: 7,
+                    height: 7,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: event.group.color,
+                    ),
+                  );
+                }).toList(),
+              ),
+            );
+          },
+        ),
         // styles
         calendarStyle: CalendarStyle(
           // tableBorder: TableBorder(
@@ -58,11 +84,11 @@ class CalendarWidget extends ConsumerWidget {
             color: Colors.grey,
             fontSize: 16,
           ),
-          markerDecoration: BoxDecoration(
-            color: Colors.redAccent,
-            shape: BoxShape.circle,
-          ),
-          markerSize: 6,
+          // markerDecoration: BoxDecoration(
+          //   color: Colors.redAccent,
+          //   shape: BoxShape.circle,
+          // ),
+          // markerSize: 6,
           todayDecoration: BoxDecoration(
             color: Colors.blue,
             borderRadius: BorderRadius.circular(Sizes.p8),

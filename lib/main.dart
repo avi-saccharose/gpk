@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/app_navigation.dart';
+import 'package:gpk_app/core/cache/cache_service.dart';
+import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
+import 'package:gpk_app/hive/hive_registrar.g.dart';
 import 'package:hive_ce_flutter/adapters.dart';
 
 void main() async {
   await Hive.initFlutter();
-  await Hive.openBox('settings');
-  runApp(ProviderScope(child: MyApp()));
+  Hive.registerAdapters();
+
+  final calendarCacheService = CacheService("calendarBox");
+  await calendarCacheService.init();
+
+  runApp(
+    ProviderScope(
+      overrides: [
+        calendarCacheServiceProvide.overrideWithValue(calendarCacheService),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
