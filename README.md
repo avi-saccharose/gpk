@@ -33,3 +33,9 @@ flutter run -d android
 ## 🙏 Acknowledgments
 
 * Icons provided by [Icons8](https://icons8.com)
+
+## License
+
+This application is released under the [MIT license](LICENSE).
+
+[![license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
