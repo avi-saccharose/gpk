@@ -13,6 +13,8 @@ class CalendarWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final events = ref.watch(calendarEventsProvider);
+
+    // we cannot check for errors with this method
     final eventsMap = events.value;
 
     List<Event> getEventsForDay(DateTime day) {

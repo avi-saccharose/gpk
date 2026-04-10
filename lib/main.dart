@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/app_navigation.dart';
+import 'package:hive_ce_flutter/adapters.dart';
 
-void main() => runApp(ProviderScope(child: MyApp()));
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('settings');
+  runApp(ProviderScope(child: MyApp()));
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

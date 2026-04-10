@@ -20,6 +20,7 @@ class MockCalendarApi implements CalendarApi {
         Event(title: "Event 2"),
       ],
     };
+    await Future.delayed(Duration(seconds: 10));
     final events = EventsMapList(
       equals: (a, b) {
         return a.year == b.year && a.month == b.month && a.day == b.day;
