@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:gpk_app/features/calendar/data/calendar_api.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 
