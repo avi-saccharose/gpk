@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:gpk_app/features/calendar/data/calendar_api.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 
@@ -18,7 +20,6 @@ class MockCalendarApi implements CalendarApi {
         Event(title: "Event 2"),
       ],
     };
-
     final events = EventsMapList(
       equals: (a, b) {
         return a.year == b.year && a.month == b.month && a.day == b.day;

@@ -4,6 +4,21 @@ import 'package:gpk_app/features/calendar/data/calendar_repository.dart';
 import 'package:gpk_app/features/calendar/data/mock_calendar_api.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 
+class DateNotifier extends Notifier<DateTime> {
+  @override
+  DateTime build() {
+    return DateTime.now();
+  }
+
+  void set(DateTime time) {
+    state = time;
+  }
+}
+
+final focusedDayProvider = NotifierProvider<DateNotifier, DateTime>(
+  DateNotifier.new,
+);
+
 final calendarApiProvider = Provider<CalendarApi>((ref) {
   return MockCalendarApi();
 });

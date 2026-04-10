@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -18,45 +19,82 @@ class CalendarWidget extends ConsumerWidget {
       return eventsMap?[day] ?? [];
     }
 
-    return TableCalendar(
-      focusedDay: DateTime.now(),
-      firstDay: DateTime.utc(2025, 05, 01),
-      lastDay: DateTime.utc(2027, 05, 31),
-      eventLoader: getEventsForDay,
-      calendarStyle: CalendarStyle(
-        defaultTextStyle: TextStyle(
-          color: Colors.black87,
-          fontSize: 16,
-        ),
-        outsideTextStyle: TextStyle(
-          color: Colors.grey,
-          fontSize: 16,
-        ),
-        markerDecoration: BoxDecoration(
-          color: Colors.red,
-          shape: BoxShape.circle,
-        ),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(Sizes.p16),
       ),
-      headerStyle: HeaderStyle(
-        titleCentered: true,
-        formatButtonVisible: false,
-        titleTextStyle: TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      child: TableCalendar(
+        focusedDay: DateTime.now(),
+        onPageChanged: (newFocusedDay) {
+          ref.read(focusedDayProvider.notifier).set(newFocusedDay);
+        },
+        firstDay: DateTime.utc(2025, 05, 01),
+        lastDay: DateTime.utc(2027, 05, 31),
+        eventLoader: getEventsForDay,
 
-      daysOfWeekHeight: 30,
-      daysOfWeekStyle: DaysOfWeekStyle(
-        weekdayStyle: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Colors.grey,
+        // styles
+        calendarStyle: CalendarStyle(
+          // tableBorder: TableBorder(
+          //   horizontalInside: BorderSide(
+          //     color: Colors.grey,
+          //     width: 0.5,
+          //   ),
+          // top: BorderSide(color: Colors.black12, width: 1.0),
+          // bottom: BorderSide(color: Colors.black12, width: 1.0),
+          // left: BorderSide(color: Colors.black12, width: 1.0),
+          // right: BorderSide(color: Colors.black12, width: 1.0),
+          //  )//dev/, color: Colors.grey.shade300, // Light grey border
+          //width: 1.0, // Thickness of the line
+          // style: BorderStyle.solid,
+          // ),
+          defaultTextStyle: TextStyle(
+            color: Colors.black87,
+            fontSize: 16,
+          ),
+          outsideTextStyle: TextStyle(
+            color: Colors.grey,
+            fontSize: 16,
+          ),
+          markerDecoration: BoxDecoration(
+            color: Colors.redAccent,
+            shape: BoxShape.circle,
+          ),
+          markerSize: 6,
+          todayDecoration: BoxDecoration(
+            color: Colors.blue,
+            borderRadius: BorderRadius.circular(Sizes.p8),
+          ),
+
+          // cellPadding: EdgeInsets.symmetric(vertical: 12.0),
         ),
-        weekendStyle: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-          color: Colors.grey,
+        headerStyle: HeaderStyle(
+          titleCentered: true,
+          formatButtonVisible: false,
+          titleTextStyle: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: Colors.grey, width: 0.5),
+            ),
+          ),
+          headerMargin: const EdgeInsets.only(bottom: 8.0),
+        ),
+
+        daysOfWeekHeight: 30,
+        daysOfWeekStyle: DaysOfWeekStyle(
+          weekdayStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey,
+          ),
+          weekendStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: Colors.grey,
+          ),
         ),
       ),
     );
