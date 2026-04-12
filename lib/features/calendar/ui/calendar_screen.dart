@@ -11,23 +11,23 @@ class CalendarScreen extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              gapH20,
-              CalendarWidget(),
-              gapH20,
-              Text(
-                'Events',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              gapH16,
-              EventList(),
-            ],
-          ),
+        // child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            gapH20,
+            CalendarWidget(),
+            gapH20,
+            Text(
+              'Events',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            gapH16,
+            EventList(),
+          ],
         ),
       ),
+      // ),
     );
   }
 }

@@ -18,6 +18,7 @@ class EventAdapter extends TypeAdapter<Event> {
     };
     return Event(
       title: fields[0] as String,
+      description: fields[3] == null ? "" : fields[3] as String,
       group: fields[2] == null ? EventGroup.all : fields[2] as EventGroup,
     );
   }
@@ -25,11 +26,13 @@ class EventAdapter extends TypeAdapter<Event> {
   @override
   void write(BinaryWriter writer, Event obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(2)
-      ..write(obj.group);
+      ..write(obj.group)
+      ..writeByte(3)
+      ..write(obj.description);
   }
 
   @override

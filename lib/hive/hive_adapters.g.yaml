@@ -5,12 +5,14 @@ nextTypeId: 2
 types:
   Event:
     typeId: 0
-    nextIndex: 3
+    nextIndex: 4
     fields:
       title:
         index: 0
       group:
         index: 2
+      description:
+        index: 3
   EventGroup:
     typeId: 1
     nextIndex: 10

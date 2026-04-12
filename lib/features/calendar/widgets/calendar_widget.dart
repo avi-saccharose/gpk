@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
+import 'package:gpk_app/features/calendar/widgets/events_bottom_sheet.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarWidget extends ConsumerWidget {
@@ -28,7 +29,17 @@ class CalendarWidget extends ConsumerWidget {
       child: TableCalendar(
         focusedDay: DateTime.now(),
         onDaySelected: (selectedDay, _) {
-          print(selectedDay.toString());
+          final events = getEventsForDay(selectedDay);
+          if (events.isNotEmpty) {
+            showModalBottomSheet<void>(
+              context: context,
+              builder: (BuildContext context) => EventsBottomSheet(
+                events: events,
+                date: selectedDay,
+              ),
+            );
+          }
+          //showEventSheet(context, selectedDay, events);
         },
         onPageChanged: (newFocusedDay) {
           ref.read(selectedMonthProvider.notifier).set(newFocusedDay);

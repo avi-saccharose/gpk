@@ -11,7 +11,7 @@ class MockCalendarApi implements CalendarApi {
   Future<EventsMapList> fetchEvents() async {
     final source = {
       DateTime.now(): [
-        Event(title: "Event 1"),
+        Event(title: "Event 1", description: "test description"),
         Event(title: "Event 2", group: EventGroup.cse1),
       ],
       DateTime.now().add(const Duration(days: 1)): [
@@ -30,7 +30,7 @@ class MockCalendarApi implements CalendarApi {
     //   print(e);
     // }
     //
-    await Future.delayed(Duration(seconds: 10));
+    await Future.delayed(Duration(seconds: 3));
     final events = EventsMapList(
       equals: (a, b) {
         return a.year == b.year && a.month == b.month && a.day == b.day;

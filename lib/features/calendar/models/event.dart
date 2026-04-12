@@ -5,8 +5,13 @@ typedef EventsMapList = LinkedHashMap<DateTime, List<Event>>;
 
 class Event {
   final String title;
+  final String description;
   final EventGroup group;
-  Event({required this.title, this.group = EventGroup.all});
+  Event({
+    required this.title,
+    this.description = "",
+    this.group = EventGroup.all,
+  });
 
   @override
   String toString() => title.toString();
