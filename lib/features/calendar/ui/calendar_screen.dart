@@ -20,7 +20,7 @@ class CalendarScreen extends StatelessWidget {
             gapH20,
             Text(
               'Events',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             gapH16,
             EventList(),

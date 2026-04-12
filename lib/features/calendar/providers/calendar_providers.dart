@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/features/calendar/data/calendar_api.dart';
@@ -43,18 +45,31 @@ final calendarEventsProvider = FutureProvider<EventsMapList>((ref) {
   return repo.getEvents();
 });
 
-final monthlyEventsProvider = Provider<AsyncValue<List<Event>>>((ref) {
-  final allEvents = ref.watch(calendarEventsProvider);
-  final selectedMonth = ref.watch(selectedMonthProvider);
-  return allEvents.whenData((events) {
-    // TODO: lookup days of month instead of going through the entire map
-    return events.entries
-        .where(
-          (entry) =>
-              entry.key.year == selectedMonth.year &&
-              entry.key.month == selectedMonth.month,
-        )
-        .expand((entry) => entry.value)
-        .toList();
-  });
+final monthlyEventsMapProvider =
+    Provider<AsyncValue<Map<DateTime, List<Event>>>>((Ref ref) {
+      final allEvents = ref.watch(calendarEventsProvider);
+      final seclectedMonth = ref.watch(selectedMonthProvider);
+
+      return allEvents.whenData(
+        (eventsMap) => LinkedHashMap.fromEntries(
+          eventsMap.entries.where(
+            (entry) =>
+                entry.key.year == seclectedMonth.year &&
+                entry.key.month == seclectedMonth.month,
+          ),
+        ),
+      );
+    });
+
+final monthlyEventsProvider =
+    Provider<AsyncValue<List<MapEntry<DateTime, List<Event>>>>>((Ref ref) {
+      final allEvents = ref.watch(monthlyEventsMapProvider);
+      return allEvents.whenData((eventsMap) => eventsMap.entries.toList());
+    });
+
+final monthlyEventsListProvider = Provider<AsyncValue<List<Event>>>((ref) {
+  final monthlyEventsMap = ref.watch(monthlyEventsMapProvider);
+  return monthlyEventsMap.whenData(
+    (eventsMap) => eventsMap.values.expand((eventsList) => eventsList).toList(),
+  );
 });

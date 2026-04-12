@@ -111,7 +111,7 @@ class CalendarWidget extends ConsumerWidget {
           titleCentered: true,
           formatButtonVisible: false,
           titleTextStyle: TextStyle(
-            fontSize: 24,
+            fontSize: 28,
             fontWeight: FontWeight.bold,
           ),
           decoration: BoxDecoration(
