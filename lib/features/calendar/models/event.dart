@@ -26,9 +26,9 @@ enum EventGroup {
   ce2,
   ce3,
 
-  ct1,
-  ct2,
-  ct3,
+  ft1,
+  ft2,
+  ft3,
 }
 
 extension EventGroupColor on EventGroup {

@@ -15,7 +15,7 @@ types:
         index: 3
   EventGroup:
     typeId: 1
-    nextIndex: 10
+    nextIndex: 13
     fields:
       all:
         index: 0
@@ -31,9 +31,9 @@ types:
         index: 5
       ce3:
         index: 6
-      ct1:
-        index: 7
-      ct2:
-        index: 8
-      ct3:
-        index: 9
+      ft1:
+        index: 10
+      ft2:
+        index: 11
+      ft3:
+        index: 12

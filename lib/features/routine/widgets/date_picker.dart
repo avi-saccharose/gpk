@@ -10,14 +10,20 @@ class DatePicker extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dates = getDaysListInMonth(2024, 3);
     final selectedDay = ref.watch(selectedDayProvider);
+    final dates = getDaysListInMonth(selectedDay.year, selectedDay.month);
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
+    const itemWidth = 55.0;
+
+    final scrollController = ScrollController(
+      initialScrollOffset: selectedDay.day * itemWidth,
+    );
 
     return SizedBox(
       height: Sizes.p80,
       child: ListView.builder(
+        controller: scrollController,
         scrollDirection: Axis.horizontal,
         itemCount: dates.length,
         itemBuilder: (context, index) {

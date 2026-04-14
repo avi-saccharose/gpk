@@ -67,12 +67,12 @@ class EventGroupAdapter extends TypeAdapter<EventGroup> {
         return EventGroup.ce2;
       case 6:
         return EventGroup.ce3;
-      case 7:
-        return EventGroup.ct1;
-      case 8:
-        return EventGroup.ct2;
-      case 9:
-        return EventGroup.ct3;
+      case 10:
+        return EventGroup.ft1;
+      case 11:
+        return EventGroup.ft2;
+      case 12:
+        return EventGroup.ft3;
       default:
         return EventGroup.all;
     }
@@ -95,12 +95,12 @@ class EventGroupAdapter extends TypeAdapter<EventGroup> {
         writer.writeByte(5);
       case EventGroup.ce3:
         writer.writeByte(6);
-      case EventGroup.ct1:
-        writer.writeByte(7);
-      case EventGroup.ct2:
-        writer.writeByte(8);
-      case EventGroup.ct3:
-        writer.writeByte(9);
+      case EventGroup.ft1:
+        writer.writeByte(10);
+      case EventGroup.ft2:
+        writer.writeByte(11);
+      case EventGroup.ft3:
+        writer.writeByte(12);
     }
   }
 
