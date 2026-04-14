@@ -1,3 +1,4 @@
+import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/features/calendar/data/calendar_api.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:http/http.dart' as http;
@@ -10,11 +11,11 @@ class MockCalendarApi implements CalendarApi {
   @override
   Future<EventsMapList> fetchEvents() async {
     final source = {
-      DateTime.now(): [
+      DateTime.now().normalize(): [
         Event(title: "Event 1", description: "test description"),
         Event(title: "Event 2", group: EventGroup.cse1),
       ],
-      DateTime.now().add(const Duration(days: 1)): [
+      DateTime.now().normalize().add(const Duration(days: 1)): [
         Event(title: "Event 4"),
         Event(title: "Event 5"),
       ],
@@ -33,7 +34,7 @@ class MockCalendarApi implements CalendarApi {
     await Future.delayed(Duration(seconds: 3));
     final events = EventsMapList(
       equals: (a, b) {
-        return a.year == b.year && a.month == b.month && a.day == b.day;
+        return a.normalize() == b.normalize();
       },
       hashCode: (key) {
         return key.year * 10000 + key.month * 100 + key.day;

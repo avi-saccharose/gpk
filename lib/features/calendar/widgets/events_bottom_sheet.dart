@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
-import 'package:gpk_app/core/widgets/header_text.dart';
-import 'package:gpk_app/core/widgets/sub_heading.dart';
-import 'package:gpk_app/core/widgets/subtitle_text.dart';
+import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
-import 'package:intl/intl.dart';
 
 class EventsBottomSheet extends StatelessWidget {
   final List<Event> events;
@@ -17,7 +14,9 @@ class EventsBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedDate = DateFormat().add_yMMMd().format(date);
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     return SizedBox(
       height: 800,
       width: double.infinity,
@@ -43,9 +42,17 @@ class EventsBottomSheet extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const HeaderText(text: "Events"),
+                Text(
+                  "Events",
+                  style: textTheme.headlineSmall,
+                ),
                 gapH4,
-                SubtitleText(text: formattedDate),
+                Text(
+                  date.shortDate,
+                  style: textTheme.titleMedium!.copyWith(
+                    color: colorScheme.onSurfaceVariant.withValues(alpha: 0.8),
+                  ),
+                ),
                 gapH12,
                 for (var event in events)
                   BottomSheetItem(
@@ -72,21 +79,40 @@ class BottomSheetItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
+
+    return SizedBox(
       width: double.infinity,
-      margin: EdgeInsetsGeometry.all(Sizes.p4),
-      padding: EdgeInsetsGeometry.all(Sizes.p16),
-      decoration: BoxDecoration(
-        color: Colors.pink[200],
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SubHeading(text: title),
-          gapH4,
-          SubtitleText(text: description),
-        ],
+      child: Card(
+        margin: EdgeInsets.all(Sizes.p4),
+        color: colorScheme.primaryContainer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Padding(
+          padding: EdgeInsets.all(Sizes.p16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                title,
+                style: textTheme.titleMedium?.copyWith(
+                  color: colorScheme.onPrimaryContainer,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              gapH4,
+              Text(
+                description,
+                style: textTheme.bodyMedium?.copyWith(
+                  color: colorScheme.onPrimaryContainer.withValues(alpha: 0.6),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

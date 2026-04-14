@@ -35,9 +35,9 @@ extension EventGroupColor on EventGroup {
   Color get color {
     switch (this) {
       case EventGroup.cse1:
-        return Colors.red;
+        return Colors.redAccent;
       default:
-        return Colors.black;
+        return Colors.grey;
     }
   }
 }

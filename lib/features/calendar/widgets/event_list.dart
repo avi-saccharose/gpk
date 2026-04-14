@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
-import 'package:gpk_app/core/widgets/sub_heading.dart';
+import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/core/widgets/subtitle_text.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
-import 'package:intl/intl.dart';
 
 class EventList extends ConsumerWidget {
   const EventList({super.key});
@@ -12,20 +11,30 @@ class EventList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final montlyEvents = ref.watch(monthlyEventsProvider);
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
     return montlyEvents.when(
       data: (eventsList) {
         // final eventsList = eventsMap.entries.toList();
-        if (eventsList.isEmpty) return SubtitleText(text: "no events");
+        if (eventsList.isEmpty) {
+          return Text(
+            "no events",
+            style: textTheme.bodyLarge?.copyWith(
+              color: colorScheme.onSurfaceVariant,
+            ),
+          );
+        }
         return Expanded(
           child: ListView.builder(
             itemCount: eventsList.length,
             itemBuilder: (context, index) {
               final date = eventsList[index].key;
+              final isToday = date.isToday;
               final entries = eventsList[index].value;
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  EventListDate(date: date),
+                  EventListDate(date: date, isToday: isToday),
                   ...entries.map(
                     (e) => EventListItem(
                       title: e.title,
@@ -46,9 +55,11 @@ class EventList extends ConsumerWidget {
 
 class EventListDate extends StatelessWidget {
   final DateTime date;
+  final bool isToday;
   const EventListDate({
     super.key,
     required this.date,
+    this.isToday = false,
   });
 
   @override
@@ -56,7 +67,6 @@ class EventListDate extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
 
-    final formattedDate = DateFormat.MMMMd().format(date);
     return Padding(
       padding: const EdgeInsets.all(2),
       child: Row(
@@ -71,10 +81,10 @@ class EventListDate extends StatelessWidget {
           ),
           gapW8,
           Text(
-            formattedDate,
+            date.monthDate,
             style: textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w600,
-              color: colorScheme.primary,
+              color: isToday ? colorScheme.primary : colorScheme.secondary,
             ),
           ),
           gapW8,
@@ -135,24 +145,5 @@ class EventListItem extends StatelessWidget {
         ),
       ),
     );
-    // return Container(
-    //   margin: EdgeInsetsGeometry.symmetric(vertical: Sizes.p4),
-    //   padding: EdgeInsetsGeometry.symmetric(
-    //     vertical: Sizes.p8,
-    //     horizontal: Sizes.p4,
-    //   ),
-    //   decoration: BoxDecoration(
-    //     color: Colors.red,
-    //     borderRadius: BorderRadius.circular(Sizes.p8),
-    //   ),
-    //   child: Column(
-    //     crossAxisAlignment: CrossAxisAlignment.start,
-    //     children: [
-    //       Text(title),
-    //       gapH8,
-    //       Text(description),
-    //     ],
-    //   ),
-    // );
   }
 }

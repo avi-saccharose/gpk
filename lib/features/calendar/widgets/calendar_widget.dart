@@ -13,6 +13,9 @@ class CalendarWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+
     final events = ref.watch(calendarEventsProvider);
 
     // we cannot check for errors with this method
@@ -21,11 +24,9 @@ class CalendarWidget extends ConsumerWidget {
       return eventsMap?[day] ?? [];
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(Sizes.p16),
-      ),
+    return Card(
+      color: colorScheme.surfaceContainerLow,
+      elevation: 1,
       child: TableCalendar(
         focusedDay: DateTime.now(),
         onDaySelected: (selectedDay, _) {
@@ -45,7 +46,7 @@ class CalendarWidget extends ConsumerWidget {
           ref.read(selectedMonthProvider.notifier).set(newFocusedDay);
         },
         firstDay: DateTime.utc(2025, 05, 01),
-        lastDay: DateTime.utc(2027, 05, 31),
+        lastDay: DateTime.utc(2050, 05, 31),
         eventLoader: getEventsForDay,
 
         calendarBuilders: CalendarBuilders<Event>(
@@ -74,49 +75,30 @@ class CalendarWidget extends ConsumerWidget {
         ),
         // styles
         calendarStyle: CalendarStyle(
-          // tableBorder: TableBorder(
-          //   horizontalInside: BorderSide(
-          //     color: Colors.grey,
-          //     width: 0.5,
-          //   ),
-          // top: BorderSide(color: Colors.black12, width: 1.0),
-          // bottom: BorderSide(color: Colors.black12, width: 1.0),
-          // left: BorderSide(color: Colors.black12, width: 1.0),
-          // right: BorderSide(color: Colors.black12, width: 1.0),
-          //  )//dev/, color: Colors.grey.shade300, // Light grey border
-          //width: 1.0, // Thickness of the line
-          // style: BorderStyle.solid,
-          // ),
-          defaultTextStyle: TextStyle(
-            color: Colors.black87,
-            fontSize: 16,
-          ),
-          outsideTextStyle: TextStyle(
-            color: Colors.grey,
-            fontSize: 16,
-          ),
-          // markerDecoration: BoxDecoration(
-          //   color: Colors.redAccent,
-          //   shape: BoxShape.circle,
-          // ),
-          // markerSize: 6,
-          todayDecoration: BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.circular(Sizes.p8),
+          defaultTextStyle: textTheme.bodyLarge!.copyWith(
+            color: colorScheme.onSurface,
+            fontSize: textTheme.bodyLarge?.fontSize ?? 16,
           ),
 
-          // cellPadding: EdgeInsets.symmetric(vertical: 12.0),
+          outsideTextStyle: textTheme.bodyLarge!.copyWith(
+            color: colorScheme.onSurfaceVariant.withValues(alpha: 0.6),
+            fontSize: textTheme.bodyLarge?.fontSize ?? 16,
+          ),
+          todayDecoration: BoxDecoration(
+            color: colorScheme.primary,
+            borderRadius: BorderRadius.circular(Sizes.p8),
+          ),
         ),
         headerStyle: HeaderStyle(
           titleCentered: true,
           formatButtonVisible: false,
-          titleTextStyle: TextStyle(
-            fontSize: 28,
+          titleTextStyle: textTheme.headlineSmall!.copyWith(
             fontWeight: FontWeight.bold,
+            color: colorScheme.primary,
           ),
           decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(color: Colors.grey, width: 0.5),
+              bottom: BorderSide(color: colorScheme.outlineVariant, width: 0.5),
             ),
           ),
           headerMargin: const EdgeInsets.only(bottom: 8.0),
@@ -125,14 +107,14 @@ class CalendarWidget extends ConsumerWidget {
         daysOfWeekHeight: 30,
         daysOfWeekStyle: DaysOfWeekStyle(
           weekdayStyle: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey,
+            fontSize: textTheme.labelLarge?.fontSize ?? 18,
+            fontWeight: FontWeight.w600,
+            color: colorScheme.onSurface,
           ),
           weekendStyle: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey,
+            fontSize: textTheme.labelLarge?.fontSize ?? 18,
+            fontWeight: FontWeight.w600,
+            color: colorScheme.primary,
           ),
         ),
       ),
