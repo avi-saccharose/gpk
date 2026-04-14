@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
+import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/core/utils/time_helper.dart';
-import 'package:intl/intl.dart';
+import 'package:gpk_app/features/routine/providers/routine_providers.dart';
 
-class DatePicker extends StatefulWidget {
+class DatePicker extends ConsumerWidget {
   const DatePicker({super.key});
 
   @override
-  State<DatePicker> createState() => _DatePickerState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dates = getDaysListInMonth(2024, 3);
+    final selectedDay = ref.watch(selectedDayProvider);
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
 
-class _DatePickerState extends State<DatePicker> {
-  int selectedIndex = 5;
-
-  final dates = getDaysListInMonth(2024, 3);
-
-  @override
-  Widget build(BuildContext context) {
     return SizedBox(
       height: Sizes.p80,
       child: ListView.builder(
@@ -24,11 +22,20 @@ class _DatePickerState extends State<DatePicker> {
         itemCount: dates.length,
         itemBuilder: (context, index) {
           final date = dates[index];
-          final bool isSelected = index == selectedIndex;
+          final isWeekend = date.isWeekend;
+          final bool isSelected = date.isSameDay(selectedDay);
+
+          final Color color = isWeekend
+              ? colorScheme.onSurface.withValues(alpha: 0.6)
+              : isSelected
+              ? colorScheme.primary
+              : colorScheme.outline;
+
           return GestureDetector(
-            onTap: () => setState(() {
-              selectedIndex = index;
-            }),
+            onTap: () => {
+              if (!isWeekend)
+                ref.read(selectedDayProvider.notifier).update(date),
+            },
             child: Container(
               width: 55,
               margin: const EdgeInsets.symmetric(horizontal: 2),
@@ -38,20 +45,15 @@ class _DatePickerState extends State<DatePicker> {
               child: Column(
                 children: [
                   Text(
-                    DateFormat('E').format(date),
-                    style: TextStyle(
-                      color: isSelected ? Colors.blue : Colors.grey,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    date.shortDay,
+                    style: textTheme.labelLarge?.copyWith(color: color),
                   ),
                   gapH8,
                   Text(
-                    DateFormat('d').format(date),
-                    style: TextStyle(
-                      color: isSelected ? Colors.blue : Colors.black87,
+                    date.dayNum,
+                    style: textTheme.titleMedium?.copyWith(
+                      color: color,
                       fontWeight: FontWeight.bold,
-                      fontSize: 18,
                     ),
                   ),
                   gapH4,
@@ -59,7 +61,9 @@ class _DatePickerState extends State<DatePicker> {
                     width: Sizes.p4,
                     height: Sizes.p4,
                     decoration: BoxDecoration(
-                      color: isSelected ? Colors.blue : Colors.transparent,
+                      color: isSelected
+                          ? colorScheme.primary
+                          : Colors.transparent,
                       shape: BoxShape.circle,
                     ),
                   ),

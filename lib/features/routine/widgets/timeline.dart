@@ -43,6 +43,8 @@ class TimelineTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
     return IntrinsicHeight(
       child: Row(
         children: [
@@ -50,16 +52,16 @@ class TimelineTile extends StatelessWidget {
             children: [
               Text(
                 displayTime(item.startTime),
-                style: const TextStyle(
+                style: textTheme.titleLarge?.copyWith(
                   fontWeight: FontWeight.bold,
-                  fontSize: 18,
+                  color: colorScheme.onSurface,
                 ),
               ),
 
               Text(
                 displayTime(item.endTime),
-                style: const TextStyle(
-                  fontSize: 14,
+                style: textTheme.labelLarge?.copyWith(
+                  color: colorScheme.onSurface.withValues(alpha: 0.6),
                 ),
               ),
             ],
@@ -72,14 +74,14 @@ class TimelineTile extends StatelessWidget {
                 height: Sizes.p12,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: Colors.blue, width: 2),
+                  border: Border.all(color: colorScheme.primary, width: 2),
                 ),
               ),
               if (!isLast)
                 Expanded(
                   child: Container(
                     width: 2,
-                    color: Colors.blue.withValues(alpha: 0.3),
+                    color: colorScheme.primary.withValues(alpha: 0.3),
                   ),
                 ),
             ],
@@ -89,15 +91,17 @@ class TimelineTile extends StatelessWidget {
               margin: const EdgeInsets.only(bottom: Sizes.p20),
               padding: const EdgeInsets.all(Sizes.p16),
               decoration: BoxDecoration(
-                color: isActive ? Colors.blue : Colors.white,
+                color: isActive
+                    ? colorScheme.primary
+                    : colorScheme.primaryContainer,
                 borderRadius: BorderRadius.circular(Sizes.p16),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.09),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
-                  ),
-                ],
+                // boxShadow: [
+                //   BoxShadow(
+                //     color: Colors.red.withValues(alpha: 0.09),
+                //     blurRadius: 10,
+                //     offset: const Offset(0, 4),
+                //   ),
+                //],
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +118,9 @@ class TimelineTile extends StatelessWidget {
                       Text(
                         item.subjectName,
                         style: TextStyle(
-                          color: isActive ? Colors.white : Colors.black,
+                          color: isActive
+                              ? colorScheme.onPrimary
+                              : colorScheme.onPrimaryContainer,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -122,9 +128,12 @@ class TimelineTile extends StatelessWidget {
                       Spacer(),
                       Text(
                         item.subjectID ?? "",
-                        style: const TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12,
+                        style: textTheme.labelSmall?.copyWith(
+                          color:
+                              (isActive
+                                      ? colorScheme.primary
+                                      : colorScheme.onPrimaryContainer)
+                                  .withValues(alpha: 0.8),
                         ),
                       ),
                     ],
@@ -132,7 +141,13 @@ class TimelineTile extends StatelessWidget {
                   gapH8,
                   Text(
                     item.instructorName ?? "",
-                    style: const TextStyle(color: Colors.grey),
+                    style: TextStyle(
+                      color:
+                          (isActive
+                                  ? colorScheme.onPrimary
+                                  : colorScheme.onPrimaryContainer)
+                              .withValues(alpha: 0.8),
+                    ),
                   ),
                 ],
               ),
