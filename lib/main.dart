@@ -16,7 +16,7 @@ void main() async {
   runApp(
     ProviderScope(
       overrides: [
-        calendarCacheServiceProvide.overrideWithValue(calendarCacheService),
+        calendarCacheServiceProvider.overrideWithValue(calendarCacheService),
       ],
       child: MyApp(),
     ),
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Colors.white,
+        colorSchemeSeed: Colors.blueAccent,
       ),
       home: AppNavigation(),
     );

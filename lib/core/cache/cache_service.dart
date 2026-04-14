@@ -13,11 +13,11 @@ class CacheService {
     }
   }
 
-  Future<void> save<T>(String key, T data) async {
+  Future<void> write<T>(String key, T data) async {
     await _box.put(key, data);
   }
 
-  Future<T?> get<T>(String key) async {
+  T? get<T>(String key) {
     return _box.get(key) as T?;
   }
 

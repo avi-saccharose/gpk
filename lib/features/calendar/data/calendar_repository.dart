@@ -31,8 +31,7 @@ class CalendarRepository {
 
   Future<EventsMapList> getEvents({bool forceRefresh = false}) async {
     final events = await api.fetchEvents();
-    cacheService.save(cacheKey, events);
-    print("saved");
+    cacheService.write(cacheKey, events);
     return events;
   }
 }

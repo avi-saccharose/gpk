@@ -103,47 +103,6 @@ final class RoutineCacheServiceProvider
 String _$routineCacheServiceHash() =>
     r'80af1a8859547ae5ac32843357dd12a339ba9004';
 
-@ProviderFor(routineApiServer)
-final routineApiServerProvider = RoutineApiServerProvider._();
-
-final class RoutineApiServerProvider
-    extends $FunctionalProvider<ApiServer, ApiServer, ApiServer>
-    with $Provider<ApiServer> {
-  RoutineApiServerProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'routineApiServerProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$routineApiServerHash();
-
-  @$internal
-  @override
-  $ProviderElement<ApiServer> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  ApiServer create(Ref ref) {
-    return routineApiServer(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(ApiServer value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<ApiServer>(value),
-    );
-  }
-}
-
-String _$routineApiServerHash() => r'c283f6d7c984150129cf97568e87c552e377ff67';
-
 @ProviderFor(routineRepository)
 final routineRepositoryProvider = RoutineRepositoryProvider._();
 
@@ -189,4 +148,4 @@ final class RoutineRepositoryProvider
   }
 }
 
-String _$routineRepositoryHash() => r'152bc7ff9317b6d755dba3891d3863f6416d108d';
+String _$routineRepositoryHash() => r'706c21ba45935b10e29e8831cdd4c51088fbc5d6';
