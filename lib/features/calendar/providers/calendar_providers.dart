@@ -1,13 +1,16 @@
 import 'dart:collection';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/features/calendar/data/calendar_api.dart';
 import 'package:gpk_app/features/calendar/data/calendar_repository.dart';
 import 'package:gpk_app/features/calendar/data/mock_calendar_api.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class DateNotifier extends Notifier<DateTime> {
+part 'calendar_providers.g.dart';
+
+@riverpod
+class FocusedDay extends _$FocusedDay {
   @override
   DateTime build() {
     return DateTime.now();
@@ -18,58 +21,69 @@ class DateNotifier extends Notifier<DateTime> {
   }
 }
 
-final calendarCacheServiceProvide = Provider<CacheService>((ref) {
+@riverpod
+class SelectedMonth extends _$SelectedMonth {
+  @override
+  DateTime build() {
+    return DateTime.now();
+  }
+
+  void set(DateTime time) {
+    state = DateTime.utc(time.year, time.month, time.day);
+  }
+}
+
+@riverpod
+CacheService calendarCacheService(Ref ref) {
   throw UnimplementedError();
-});
+}
 
-final focusedDayProvider = NotifierProvider<DateNotifier, DateTime>(
-  DateNotifier.new,
-);
-
-final selectedMonthProvider = NotifierProvider<DateNotifier, DateTime>(
-  DateNotifier.new,
-);
-
-final calendarApiProvider = Provider<CalendarApi>((ref) {
+@riverpod
+CalendarApi calendarApi(Ref ref) {
   return MockCalendarApi();
-});
+}
 
-final calendarRepositoryProvider = Provider<CalendarRepository>((ref) {
+@riverpod
+CalendarRepository calendarRepository(Ref ref) {
+  // The generator appends 'Provider' to your function names automatically
   final api = ref.watch(calendarApiProvider);
-  final cacheService = ref.watch(calendarCacheServiceProvide);
-  return CalendarRepository(api: api, cacheService: cacheService);
-});
+  final cacheService = ref.watch(
+    calendarCacheServiceProvider,
+  ); // Fixed typo from 'Provide'
 
-final calendarEventsProvider = FutureProvider<EventsMapList>((ref) {
+  return CalendarRepository(api: api, cacheService: cacheService);
+}
+
+@riverpod
+Future<EventsMapList> calendarEvents(Ref ref) {
   final repo = ref.watch(calendarRepositoryProvider);
   return repo.getEvents();
-});
+}
 
-final monthlyEventsMapProvider =
-    Provider<AsyncValue<Map<DateTime, List<Event>>>>((Ref ref) {
-      final allEvents = ref.watch(calendarEventsProvider);
-      final seclectedMonth = ref.watch(selectedMonthProvider);
+@riverpod
+Future<Map<DateTime, List<Event>>> monthlyEventsMap(Ref ref) async {
+  final allEvents = await ref.watch(calendarEventsProvider.future);
+  final seclectedMonth = ref.watch(selectedMonthProvider);
 
-      return allEvents.whenData(
-        (eventsMap) => LinkedHashMap.fromEntries(
-          eventsMap.entries.where(
-            (entry) =>
-                entry.key.year == seclectedMonth.year &&
-                entry.key.month == seclectedMonth.month,
-          ),
-        ),
-      );
-    });
-
-final monthlyEventsProvider =
-    Provider<AsyncValue<List<MapEntry<DateTime, List<Event>>>>>((Ref ref) {
-      final allEvents = ref.watch(monthlyEventsMapProvider);
-      return allEvents.whenData((eventsMap) => eventsMap.entries.toList());
-    });
-
-final monthlyEventsListProvider = Provider<AsyncValue<List<Event>>>((ref) {
-  final monthlyEventsMap = ref.watch(monthlyEventsMapProvider);
-  return monthlyEventsMap.whenData(
-    (eventsMap) => eventsMap.values.expand((eventsList) => eventsList).toList(),
+  return LinkedHashMap.fromEntries(
+    allEvents.entries.where(
+      (entry) =>
+          entry.key.year == seclectedMonth.year &&
+          entry.key.month == seclectedMonth.month,
+    ),
   );
-});
+}
+
+@riverpod
+Future<List<MapEntry<DateTime, List<Event>>>> monthlyEvents(
+  Ref ref,
+) async {
+  final allEvents = await ref.watch(monthlyEventsMapProvider.future);
+  return allEvents.entries.toList();
+}
+
+@riverpod
+Future<List<Event>> monthlyEventsList(Ref ref) async {
+  final monthlyEventsMap = await ref.watch(monthlyEventsMapProvider.future);
+  return monthlyEventsMap.values.expand((eventsList) => eventsList).toList();
+}
