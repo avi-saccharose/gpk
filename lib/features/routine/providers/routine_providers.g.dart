@@ -9,12 +9,12 @@ part of 'routine_providers.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(DateNotifier)
-final selectedDayProvider = DateNotifierProvider._();
+@ProviderFor(SelectedDay)
+final selectedDayProvider = SelectedDayProvider._();
 
-final class DateNotifierProvider
-    extends $NotifierProvider<DateNotifier, DateTime> {
-  DateNotifierProvider._()
+final class SelectedDayProvider
+    extends $NotifierProvider<SelectedDay, DateTime> {
+  SelectedDayProvider._()
     : super(
         from: null,
         argument: null,
@@ -26,11 +26,11 @@ final class DateNotifierProvider
       );
 
   @override
-  String debugGetCreateSourceHash() => _$dateNotifierHash();
+  String debugGetCreateSourceHash() => _$selectedDayHash();
 
   @$internal
   @override
-  DateNotifier create() => DateNotifier();
+  SelectedDay create() => SelectedDay();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(DateTime value) {
@@ -41,9 +41,9 @@ final class DateNotifierProvider
   }
 }
 
-String _$dateNotifierHash() => r'cb1870e59aa8edcabaeb96ab309c99544208fc84';
+String _$selectedDayHash() => r'd143bf7b3ecd9a6506e8e326109bd3b53132f35c';
 
-abstract class _$DateNotifier extends $Notifier<DateTime> {
+abstract class _$SelectedDay extends $Notifier<DateTime> {
   DateTime build();
   @$mustCallSuper
   @override

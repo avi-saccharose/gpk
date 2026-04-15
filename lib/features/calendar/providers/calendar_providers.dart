@@ -45,11 +45,10 @@ CalendarApi calendarApi(Ref ref) {
 
 @riverpod
 CalendarRepository calendarRepository(Ref ref) {
-  // The generator appends 'Provider' to your function names automatically
   final api = ref.watch(calendarApiProvider);
   final cacheService = ref.watch(
     calendarCacheServiceProvider,
-  ); // Fixed typo from 'Provide'
+  );
 
   return CalendarRepository(api: api, cacheService: cacheService);
 }

@@ -6,10 +6,20 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'routine_providers.g.dart';
 
-@Riverpod(name: 'selectedDayProvider')
-class DateNotifier extends _$DateNotifier {
+@riverpod
+class SelectedDay extends _$SelectedDay {
   @override
-  DateTime build() => DateTime.now().normalize();
+  DateTime build() {
+    // We skip weekends as we dont have routines for weekends
+    final date = DateTime.now().normalize();
+    if (date.weekday == DateTime.sunday) {
+      date.add(Duration(days: 1));
+    } else if (date.weekday == DateTime.saturday) {
+      date.add(Duration(days: 2));
+    }
+    return date;
+  }
+
   void update(DateTime newDate) => state = newDate.normalize();
 }
 
