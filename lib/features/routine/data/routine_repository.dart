@@ -19,7 +19,7 @@ class RoutineRepository {
     if (cachedRoutine != null) return cachedRoutine.scheduleMap;
     try {
       final dynamic responseData = await apiServer.fetch(
-        "/routine/$branch/$semester",
+        "/routine/${branch.code}/$semester",
       );
 
       final routineMap = {

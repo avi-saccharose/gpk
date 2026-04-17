@@ -17,6 +17,7 @@ class Timeline extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(minuteTickerProvider);
     final asyncValue = ref.watch(routineProvider(Branch.cse, 1));
     return asyncValue.when(
       data: (routine) => Expanded(
@@ -141,7 +142,7 @@ class TimelineTile extends StatelessWidget {
                       ),
                       Spacer(),
                       Text(
-                        item.subjectID ?? "",
+                        item.subjectID ?? DateTime.now().toString(),
                         style: textTheme.labelSmall?.copyWith(
                           color:
                               (isActive

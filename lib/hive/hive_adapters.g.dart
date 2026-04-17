@@ -249,3 +249,84 @@ class RoutineScheduleAdapter extends TypeAdapter<RoutineSchedule> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+class UserPreferencesAdapter extends TypeAdapter<UserPreferences> {
+  @override
+  final typeId = 5;
+
+  @override
+  UserPreferences read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return UserPreferences(
+      isDarkMode: fields[0] == null ? false : fields[0] as bool,
+      selectedBranch: fields[1] == null ? Branch.cse : fields[1] as Branch,
+      selectedSemester: fields[2] == null ? 1 : (fields[2] as num).toInt(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, UserPreferences obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.isDarkMode)
+      ..writeByte(1)
+      ..write(obj.selectedBranch)
+      ..writeByte(2)
+      ..write(obj.selectedSemester);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is UserPreferencesAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class BranchAdapter extends TypeAdapter<Branch> {
+  @override
+  final typeId = 6;
+
+  @override
+  Branch read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return Branch.cse;
+      case 1:
+        return Branch.ce;
+      case 2:
+        return Branch.ft;
+      default:
+        return Branch.cse;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, Branch obj) {
+    switch (obj) {
+      case Branch.cse:
+        writer.writeByte(0);
+      case Branch.ce:
+        writer.writeByte(1);
+      case Branch.ft:
+        writer.writeByte(2);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BranchAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}

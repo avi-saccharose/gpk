@@ -41,7 +41,7 @@ final class SelectedDayProvider
   }
 }
 
-String _$selectedDayHash() => r'c0bf9932057bee6346dc82118730d087bad930e3';
+String _$selectedDayHash() => r'd143bf7b3ecd9a6506e8e326109bd3b53132f35c';
 
 abstract class _$SelectedDay extends $Notifier<DateTime> {
   DateTime build();
@@ -213,7 +213,7 @@ final class RoutineProvider
   }
 }
 
-String _$routineHash() => r'63997d4afc26e89b2a7f0325651c5809e304dd81';
+String _$routineHash() => r'b9c4ea88feafa082231457bae9007d6f97bfa431';
 
 final class RoutineFamily extends $Family
     with
@@ -233,3 +233,36 @@ final class RoutineFamily extends $Family
   @override
   String toString() => r'routineProvider';
 }
+
+@ProviderFor(minuteTicker)
+final minuteTickerProvider = MinuteTickerProvider._();
+
+final class MinuteTickerProvider
+    extends $FunctionalProvider<AsyncValue<void>, void, Stream<void>>
+    with $FutureModifier<void>, $StreamProvider<void> {
+  MinuteTickerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'minuteTickerProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$minuteTickerHash();
+
+  @$internal
+  @override
+  $StreamProviderElement<void> $createElement($ProviderPointer pointer) =>
+      $StreamProviderElement(pointer);
+
+  @override
+  Stream<void> create(Ref ref) {
+    return minuteTicker(ref);
+  }
+}
+
+String _$minuteTickerHash() => r'e6b0ede6cd8fe1734ce839f851e810abce752bda';
