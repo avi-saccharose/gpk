@@ -20,4 +20,16 @@ class SettingsRepository {
     await cacheService.write(cacheKey, preferences);
     return preferences;
   }
+
+  Future<UserPreferences> updateBranch(Branch branch) async {
+    final preferences = userPreferences.copyWith(selectedBranch: branch);
+    await cacheService.write(cacheKey, preferences);
+    return preferences;
+  }
+
+  Future<UserPreferences> updateSemester(int semester) async {
+    final preferences = userPreferences.copyWith(selectedSemester: semester);
+    await cacheService.write(cacheKey, preferences);
+    return preferences;
+  }
 }

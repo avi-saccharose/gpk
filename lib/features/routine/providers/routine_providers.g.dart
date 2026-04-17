@@ -157,7 +157,7 @@ final class RoutineRepositoryProvider
 String _$routineRepositoryHash() => r'706c21ba45935b10e29e8831cdd4c51088fbc5d6';
 
 @ProviderFor(routine)
-final routineProvider = RoutineFamily._();
+final routineProvider = RoutineProvider._();
 
 final class RoutineProvider
     extends
@@ -169,26 +169,19 @@ final class RoutineProvider
     with
         $FutureModifier<List<TimelineItem>>,
         $FutureProvider<List<TimelineItem>> {
-  RoutineProvider._({
-    required RoutineFamily super.from,
-    required (Branch, int) super.argument,
-  }) : super(
-         retry: null,
-         name: r'routineProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
+  RoutineProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'routineProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$routineHash();
-
-  @override
-  String toString() {
-    return r'routineProvider'
-        ''
-        '$argument';
-  }
 
   @$internal
   @override
@@ -198,41 +191,11 @@ final class RoutineProvider
 
   @override
   FutureOr<List<TimelineItem>> create(Ref ref) {
-    final argument = this.argument as (Branch, int);
-    return routine(ref, argument.$1, argument.$2);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is RoutineProvider && other.argument == argument;
-  }
-
-  @override
-  int get hashCode {
-    return argument.hashCode;
+    return routine(ref);
   }
 }
 
-String _$routineHash() => r'b9c4ea88feafa082231457bae9007d6f97bfa431';
-
-final class RoutineFamily extends $Family
-    with
-        $FunctionalFamilyOverride<FutureOr<List<TimelineItem>>, (Branch, int)> {
-  RoutineFamily._()
-    : super(
-        retry: null,
-        name: r'routineProvider',
-        dependencies: null,
-        $allTransitiveDependencies: null,
-        isAutoDispose: true,
-      );
-
-  RoutineProvider call(Branch branch, int semester) =>
-      RoutineProvider._(argument: (branch, semester), from: this);
-
-  @override
-  String toString() => r'routineProvider';
-}
+String _$routineHash() => r'3b456bd70c1c34d30fb8f9ea60b41eea8eeb070b';
 
 @ProviderFor(minuteTicker)
 final minuteTickerProvider = MinuteTickerProvider._();

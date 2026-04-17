@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
-import 'package:gpk_app/core/models/branch.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
 import 'package:gpk_app/core/utils/time_helper.dart';
 import 'package:gpk_app/features/routine/providers/routine_providers.dart';
+import 'package:gpk_app/features/syllabus/widgets/syllabus_detail_screen.dart';
 
 class Timeline extends ConsumerWidget {
   const Timeline({super.key});
@@ -18,7 +18,7 @@ class Timeline extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.watch(minuteTickerProvider);
-    final asyncValue = ref.watch(routineProvider(Branch.cse, 1));
+    final asyncValue = ref.watch(routineProvider);
     return asyncValue.when(
       data: (routine) => Expanded(
         child: ListView.builder(
@@ -27,10 +27,15 @@ class Timeline extends ConsumerWidget {
             final item = routine[index];
             final isActive = _isCurrentlyActive(item.startTime, item.endTime);
             final isLast = index == (routine.length - 1);
-            return TimelineTile(
-              item: routine[index],
-              isActive: isActive,
-              isLast: isLast,
+            return GestureDetector(
+              onTap: () {
+                print("clicked ${item.subjectID}");
+              },
+              child: TimelineTile(
+                item: routine[index],
+                isActive: isActive,
+                isLast: isLast,
+              ),
             );
           },
         ),

@@ -5,6 +5,7 @@ import 'package:gpk_app/core/providers/api_providers.dart';
 import 'package:gpk_app/features/routine/data/routine_repository.dart';
 import 'package:gpk_app/features/routine/models/day_enum.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
+import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'routine_providers.g.dart';
@@ -38,15 +39,14 @@ RoutineRepository routineRepository(Ref ref) {
   return RoutineRepository(cacheService, apiServer);
 }
 
-// TODO: move the args to a proivder
 // WARN: Handle empty value
 @riverpod
 Future<List<TimelineItem>> routine(
   Ref ref,
-  Branch branch,
-  int semester,
 ) async {
   final repository = ref.watch(routineRepositoryProvider);
+  final branch = ref.watch(settingsProvider).selectedBranch;
+  final semester = ref.watch(settingsProvider).selectedSemester;
   final day = ref.watch(selectedDayProvider).toDay;
   final routines = await repository.fetchRoutine(
     branch: branch,
