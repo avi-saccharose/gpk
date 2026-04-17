@@ -1,7 +1,10 @@
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
+import 'package:gpk_app/core/models/branch.dart';
 import 'package:gpk_app/core/providers/api_providers.dart';
 import 'package:gpk_app/features/routine/data/routine_repository.dart';
+import 'package:gpk_app/features/routine/models/day_enum.dart';
+import 'package:gpk_app/features/routine/models/timeline_item.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'routine_providers.g.dart';
@@ -33,4 +36,27 @@ RoutineRepository routineRepository(Ref ref) {
   final cacheService = ref.watch(routineCacheServiceProvider);
   final apiServer = ref.watch(apiClientProvider);
   return RoutineRepository(cacheService, apiServer);
+}
+
+// TODO: move the args to a proivder
+// WARN: Handle empty value
+@riverpod
+Future<List<TimelineItem>> routine(
+  Ref ref,
+  Branch branch,
+  int semester,
+) async {
+  final repository = ref.watch(routineRepositoryProvider);
+  final day = ref.watch(selectedDayProvider).toDay;
+  final routines = await repository.fetchRoutine(
+    branch: branch,
+    semester: semester,
+  );
+  final routine = routines[day] ?? [];
+  return routine;
+}
+
+@riverpod
+Stream<void> minuteTicker(Ref ref) {
+  return Stream.periodic(Duration(minutes: 1));
 }

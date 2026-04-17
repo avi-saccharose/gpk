@@ -116,8 +116,13 @@ abstract class _$SelectedMonth extends $Notifier<DateTime> {
 final calendarCacheServiceProvider = CalendarCacheServiceProvider._();
 
 final class CalendarCacheServiceProvider
-    extends $FunctionalProvider<CacheService, CacheService, CacheService>
-    with $Provider<CacheService> {
+    extends
+        $FunctionalProvider<
+          CacheService<dynamic>,
+          CacheService<dynamic>,
+          CacheService<dynamic>
+        >
+    with $Provider<CacheService<dynamic>> {
   CalendarCacheServiceProvider._()
     : super(
         from: null,
@@ -134,19 +139,20 @@ final class CalendarCacheServiceProvider
 
   @$internal
   @override
-  $ProviderElement<CacheService> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+  $ProviderElement<CacheService<dynamic>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
-  CacheService create(Ref ref) {
+  CacheService<dynamic> create(Ref ref) {
     return calendarCacheService(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(CacheService value) {
+  Override overrideWithValue(CacheService<dynamic> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<CacheService>(value),
+      providerOverride: $SyncValueProvider<CacheService<dynamic>>(value),
     );
   }
 }

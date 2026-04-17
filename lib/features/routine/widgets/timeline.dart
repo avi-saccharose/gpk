@@ -3,31 +3,43 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/models/branch.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
-import 'package:gpk_app/core/providers/routine_providers.dart';
 import 'package:gpk_app/core/utils/time_helper.dart';
 import 'package:gpk_app/features/routine/providers/routine_providers.dart';
 
 class Timeline extends ConsumerWidget {
   const Timeline({super.key});
 
+  bool _isCurrentlyActive(int start, int end) {
+    final now = DateTime.now();
+    final minutesNow = (now.hour * 60) + now.minute;
+    return minutesNow >= start && minutesNow <= end;
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final routine = ref.watch(routineProvider);
-    final activeIndex = ref.watch(activeRoutineIndexProvider);
-    return Expanded(
-      child: ListView.builder(
-        itemCount: routine.length,
-        itemBuilder: (context, index) {
-          final isLast = index == (routine.length - 1);
-          final isActive = index == activeIndex;
-
-          return TimelineTile(
-            item: routine[index],
-            isLast: isLast,
-            isActive: isActive,
-          );
-        },
+    final asyncValue = ref.watch(routineProvider(Branch.cse, 1));
+    return asyncValue.when(
+      data: (routine) => Expanded(
+        child: ListView.builder(
+          itemCount: routine.length,
+          itemBuilder: (context, index) {
+            final item = routine[index];
+            final isActive = _isCurrentlyActive(item.startTime, item.endTime);
+            final isLast = index == (routine.length - 1);
+            return TimelineTile(
+              item: routine[index],
+              isActive: isActive,
+              isLast: isLast,
+            );
+          },
+        ),
       ),
+
+      // TODO: Error Handling
+      error: (error, stackTrace) {
+        return Text('error ${error}');
+      },
+      loading: () => const CircularProgressIndicator(),
     );
   }
 }

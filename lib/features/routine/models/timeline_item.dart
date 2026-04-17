@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'timeline_item.g.dart';
+
+@JsonSerializable()
 class TimelineItem {
   final int startTime;
   final int endTime;
@@ -14,4 +19,9 @@ class TimelineItem {
     required this.instructorName,
     required this.iconUrl,
   });
+
+  factory TimelineItem.fromJson(Map<String, dynamic> json) =>
+      _$TimelineItemFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TimelineItemToJson(this);
 }

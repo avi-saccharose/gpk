@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/widgets/date_today.dart';
-import 'package:gpk_app/features/home/widgets/current_routine.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -18,7 +17,6 @@ class HomeScreen extends ConsumerWidget {
             gapH20,
             DateToday(),
             gapH20,
-            CurrentRoutine(),
           ],
         ),
       ),

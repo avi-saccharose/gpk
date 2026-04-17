@@ -41,7 +41,7 @@ final class SelectedDayProvider
   }
 }
 
-String _$selectedDayHash() => r'd143bf7b3ecd9a6506e8e326109bd3b53132f35c';
+String _$selectedDayHash() => r'c0bf9932057bee6346dc82118730d087bad930e3';
 
 abstract class _$SelectedDay extends $Notifier<DateTime> {
   DateTime build();
@@ -65,8 +65,13 @@ abstract class _$SelectedDay extends $Notifier<DateTime> {
 final routineCacheServiceProvider = RoutineCacheServiceProvider._();
 
 final class RoutineCacheServiceProvider
-    extends $FunctionalProvider<CacheService, CacheService, CacheService>
-    with $Provider<CacheService> {
+    extends
+        $FunctionalProvider<
+          CacheService<dynamic>,
+          CacheService<dynamic>,
+          CacheService<dynamic>
+        >
+    with $Provider<CacheService<dynamic>> {
   RoutineCacheServiceProvider._()
     : super(
         from: null,
@@ -83,19 +88,20 @@ final class RoutineCacheServiceProvider
 
   @$internal
   @override
-  $ProviderElement<CacheService> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+  $ProviderElement<CacheService<dynamic>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
-  CacheService create(Ref ref) {
+  CacheService<dynamic> create(Ref ref) {
     return routineCacheService(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(CacheService value) {
+  Override overrideWithValue(CacheService<dynamic> value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<CacheService>(value),
+      providerOverride: $SyncValueProvider<CacheService<dynamic>>(value),
     );
   }
 }
@@ -149,3 +155,81 @@ final class RoutineRepositoryProvider
 }
 
 String _$routineRepositoryHash() => r'706c21ba45935b10e29e8831cdd4c51088fbc5d6';
+
+@ProviderFor(routine)
+final routineProvider = RoutineFamily._();
+
+final class RoutineProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<TimelineItem>>,
+          List<TimelineItem>,
+          FutureOr<List<TimelineItem>>
+        >
+    with
+        $FutureModifier<List<TimelineItem>>,
+        $FutureProvider<List<TimelineItem>> {
+  RoutineProvider._({
+    required RoutineFamily super.from,
+    required (Branch, int) super.argument,
+  }) : super(
+         retry: null,
+         name: r'routineProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$routineHash();
+
+  @override
+  String toString() {
+    return r'routineProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<List<TimelineItem>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<TimelineItem>> create(Ref ref) {
+    final argument = this.argument as (Branch, int);
+    return routine(ref, argument.$1, argument.$2);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is RoutineProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$routineHash() => r'63997d4afc26e89b2a7f0325651c5809e304dd81';
+
+final class RoutineFamily extends $Family
+    with
+        $FunctionalFamilyOverride<FutureOr<List<TimelineItem>>, (Branch, int)> {
+  RoutineFamily._()
+    : super(
+        retry: null,
+        name: r'routineProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  RoutineProvider call(Branch branch, int semester) =>
+      RoutineProvider._(argument: (branch, semester), from: this);
+
+  @override
+  String toString() => r'routineProvider';
+}

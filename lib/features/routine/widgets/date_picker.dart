@@ -41,7 +41,7 @@ class DatePicker extends ConsumerWidget {
 
           return GestureDetector(
             onTap: () => {
-              routineRepository.fetchRoutine(branch: Branch.cse, semester: 1),
+              //routineRepository.fetchRoutine(branch: Branch.cse, semester: 1),
               if (!isWeekend)
                 ref.read(selectedDayProvider.notifier).update(date),
             },

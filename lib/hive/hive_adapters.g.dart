@@ -114,3 +114,138 @@ class EventGroupAdapter extends TypeAdapter<EventGroup> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+class DayAdapter extends TypeAdapter<Day> {
+  @override
+  final typeId = 2;
+
+  @override
+  Day read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return Day.monday;
+      case 1:
+        return Day.tuesday;
+      case 2:
+        return Day.wednesday;
+      case 3:
+        return Day.thursday;
+      case 4:
+        return Day.friday;
+      default:
+        return Day.monday;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, Day obj) {
+    switch (obj) {
+      case Day.monday:
+        writer.writeByte(0);
+      case Day.tuesday:
+        writer.writeByte(1);
+      case Day.wednesday:
+        writer.writeByte(2);
+      case Day.thursday:
+        writer.writeByte(3);
+      case Day.friday:
+        writer.writeByte(4);
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DayAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class TimelineItemAdapter extends TypeAdapter<TimelineItem> {
+  @override
+  final typeId = 3;
+
+  @override
+  TimelineItem read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return TimelineItem(
+      startTime: (fields[0] as num).toInt(),
+      endTime: (fields[1] as num).toInt(),
+      subjectName: fields[2] as String,
+      subjectID: fields[3] as String?,
+      instructorName: fields[4] as String?,
+      iconUrl: fields[5] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, TimelineItem obj) {
+    writer
+      ..writeByte(6)
+      ..writeByte(0)
+      ..write(obj.startTime)
+      ..writeByte(1)
+      ..write(obj.endTime)
+      ..writeByte(2)
+      ..write(obj.subjectName)
+      ..writeByte(3)
+      ..write(obj.subjectID)
+      ..writeByte(4)
+      ..write(obj.instructorName)
+      ..writeByte(5)
+      ..write(obj.iconUrl);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TimelineItemAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class RoutineScheduleAdapter extends TypeAdapter<RoutineSchedule> {
+  @override
+  final typeId = 4;
+
+  @override
+  RoutineSchedule read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return RoutineSchedule(
+      (fields[0] as Map).map(
+        (dynamic k, dynamic v) =>
+            MapEntry(k as Day, (v as List).cast<TimelineItem>()),
+      ),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, RoutineSchedule obj) {
+    writer
+      ..writeByte(1)
+      ..writeByte(0)
+      ..write(obj.scheduleMap);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is RoutineScheduleAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}

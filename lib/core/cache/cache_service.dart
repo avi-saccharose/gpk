@@ -1,23 +1,23 @@
 import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
-class CacheService {
+class CacheService<T> {
   final String boxName;
 
   CacheService(this.boxName);
 
-  Box get _box => Hive.box(boxName);
+  Box get _box => Hive.box<T>(boxName);
 
   Future<void> init() async {
     if (!Hive.isBoxOpen(boxName)) {
-      await Hive.openBox(boxName);
+      await Hive.openBox<T>(boxName);
     }
   }
 
-  Future<void> write<T>(String key, T data) async {
+  Future<void> write(String key, T data) async {
     await _box.put(key, data);
   }
 
-  T? get<T>(String key) {
+  T? get(String key) {
     return _box.get(key) as T?;
   }
 
