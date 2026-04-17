@@ -49,14 +49,14 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsProvider);
-    return MaterialApp(
+    return MaterialApp.router(
       themeMode: settings.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       darkTheme: ThemeData.dark(),
       theme: ThemeData(
         useMaterial3: true,
         colorSchemeSeed: Colors.blueAccent,
       ),
-      home: AppNavigation(),
+      routerConfig: AppRouter.goRouter,
     );
   }
 }

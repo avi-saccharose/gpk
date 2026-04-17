@@ -15,11 +15,11 @@ class SelectedDay extends _$SelectedDay {
   @override
   DateTime build() {
     // We skip weekends as we dont have routines for weekends
-    final date = DateTime.now().normalize();
+    var date = DateTime.now().normalize();
     if (date.weekday == DateTime.sunday) {
-      date.add(Duration(days: 1));
+      date = date.add(Duration(days: 1));
     } else if (date.weekday == DateTime.saturday) {
-      date.add(Duration(days: 2));
+      date = date.add(Duration(days: 2));
     }
     return date;
   }
