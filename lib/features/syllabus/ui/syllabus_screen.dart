@@ -5,6 +5,8 @@ class SyllabusScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text("Syllabus Screen"));
+    return Scaffold(
+      body: Center(child: Text("Syallbus screen")),
+    );
   }
 }

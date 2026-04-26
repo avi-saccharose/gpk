@@ -10,6 +10,7 @@ import 'package:gpk_app/features/routine/providers/routine_providers.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 import 'package:gpk_app/hive/hive_registrar.g.dart';
 import 'package:hive_ce_flutter/adapters.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -51,8 +52,16 @@ class MyApp extends ConsumerWidget {
     final settings = ref.watch(settingsProvider);
     return MaterialApp.router(
       themeMode: settings.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      darkTheme: ThemeData.dark(),
+      darkTheme: ThemeData(
+        useMaterial3: true,
+        colorSchemeSeed: Colors.indigo,
+        brightness: Brightness.dark,
+      ),
       theme: ThemeData(
+        actionIconTheme: ActionIconThemeData(
+          backButtonIconBuilder: (BuildContext context) =>
+              const HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft02),
+        ),
         useMaterial3: true,
         colorSchemeSeed: Colors.blueAccent,
       ),

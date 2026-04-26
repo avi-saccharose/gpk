@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/widgets/date_today.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -13,7 +14,7 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: Icon(Icons.settings),
+            icon: HugeIcon(icon: HugeIcons.strokeRoundedSettings05, size: 30.0),
             onPressed: () => context.push('/setting'),
           ),
         ],

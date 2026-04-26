@@ -4,7 +4,6 @@ import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
 import 'package:gpk_app/core/utils/time_helper.dart';
 import 'package:gpk_app/features/routine/providers/routine_providers.dart';
-import 'package:gpk_app/features/syllabus/widgets/syllabus_detail_screen.dart';
 
 class Timeline extends ConsumerWidget {
   const Timeline({super.key});

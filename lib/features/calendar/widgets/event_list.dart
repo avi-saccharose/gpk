@@ -113,6 +113,7 @@ class EventListItem extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     return Card(
+      // color: colorScheme.surface,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: 16,

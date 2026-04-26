@@ -9,9 +9,6 @@ class SyllabusDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Ideally, you'd use your state management (like Riverpod) here
-    // to fetch the course details using the courseId.
-
     return Scaffold(
       body: Column(
         children: [
@@ -27,4 +24,3 @@ class SyllabusDetailScreen extends StatelessWidget {
     );
   }
 }
-
