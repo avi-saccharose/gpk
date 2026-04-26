@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
 import 'package:gpk_app/core/utils/time_helper.dart';
@@ -26,15 +27,10 @@ class Timeline extends ConsumerWidget {
             final item = routine[index];
             final isActive = _isCurrentlyActive(item.startTime, item.endTime);
             final isLast = index == (routine.length - 1);
-            return GestureDetector(
-              onTap: () {
-                print("clicked ${item.subjectID}");
-              },
-              child: TimelineTile(
-                item: routine[index],
-                isActive: isActive,
-                isLast: isLast,
-              ),
+            return TimelineTile(
+              item: routine[index],
+              isActive: isActive,
+              isLast: isLast,
             );
           },
         ),
@@ -106,69 +102,72 @@ class TimelineTile extends StatelessWidget {
             ],
           ),
           Expanded(
-            child: Container(
-              margin: const EdgeInsets.only(bottom: Sizes.p20),
-              padding: const EdgeInsets.all(Sizes.p16),
-              decoration: BoxDecoration(
-                color: isActive
-                    ? colorScheme.primary
-                    : colorScheme.primaryContainer,
-                borderRadius: BorderRadius.circular(Sizes.p16),
-                // boxShadow: [
-                //   BoxShadow(
-                //     color: Colors.red.withValues(alpha: 0.09),
-                //     blurRadius: 10,
-                //     offset: const Offset(0, 4),
-                //   ),
-                //],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Image(
-                        width: Sizes.p24,
-                        height: Sizes.p24,
-                        image: AssetImage(item.iconUrl),
-                      ),
-                      gapW12,
-                      Text(
-                        item.subjectName,
-                        style: TextStyle(
-                          color: isActive
-                              ? colorScheme.onPrimary
-                              : colorScheme.onPrimaryContainer,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+            child: InkWell(
+              onTap: () => context.push("/syllabus/${item.subjectID}"),
+              child: Container(
+                margin: const EdgeInsets.only(bottom: Sizes.p20),
+                padding: const EdgeInsets.all(Sizes.p16),
+                decoration: BoxDecoration(
+                  color: isActive
+                      ? colorScheme.primary
+                      : colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(Sizes.p16),
+                  // boxShadow: [
+                  //   BoxShadow(
+                  //     color: Colors.red.withValues(alpha: 0.09),
+                  //     blurRadius: 10,
+                  //     offset: const Offset(0, 4),
+                  //   ),
+                  //],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Image(
+                          width: Sizes.p24,
+                          height: Sizes.p24,
+                          image: AssetImage(item.iconUrl),
                         ),
-                      ),
-                      Spacer(),
-                      Text(
-                        item.subjectID ?? DateTime.now().toString(),
-                        style: textTheme.labelSmall?.copyWith(
-                          color:
-                              (isActive
-                                      ? colorScheme.primary
-                                      : colorScheme.onPrimaryContainer)
-                                  .withValues(alpha: 0.8),
+                        gapW12,
+                        Text(
+                          item.subjectName,
+                          style: TextStyle(
+                            color: isActive
+                                ? colorScheme.onPrimary
+                                : colorScheme.onPrimaryContainer,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  gapH8,
-                  Text(
-                    item.instructorName ?? "",
-                    style: TextStyle(
-                      color:
-                          (isActive
-                                  ? colorScheme.onPrimary
-                                  : colorScheme.onPrimaryContainer)
-                              .withValues(alpha: 0.8),
+                        Spacer(),
+                        Text(
+                          item.subjectID ?? DateTime.now().toString(),
+                          style: textTheme.labelSmall?.copyWith(
+                            color:
+                                (isActive
+                                        ? colorScheme.primary
+                                        : colorScheme.onPrimaryContainer)
+                                    .withValues(alpha: 0.8),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    gapH8,
+                    Text(
+                      item.instructorName ?? "",
+                      style: TextStyle(
+                        color:
+                            (isActive
+                                    ? colorScheme.onPrimary
+                                    : colorScheme.onPrimaryContainer)
+                                .withValues(alpha: 0.8),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

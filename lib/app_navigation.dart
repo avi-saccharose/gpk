@@ -6,6 +6,7 @@ import 'package:gpk_app/features/home/ui/home_screen.dart';
 import 'package:gpk_app/features/routine/ui/routine_screen.dart';
 import 'package:gpk_app/features/settings/ui/settings_screen.dart';
 import 'package:gpk_app/features/syllabus/ui/syllabus_screen.dart';
+import 'package:gpk_app/features/syllabus/widgets/syllabus_detail_screen.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -73,6 +74,16 @@ class AppRouter {
               GoRoute(
                 path: syllabus,
                 builder: (context, state) => SyllabusScreen(),
+                routes: [
+                  GoRoute(
+                    path: ':subjectCode',
+                    builder: (context, state) {
+                      // WARN: handle invalid state
+                      final subjectCode = state.pathParameters['subjectCode']!;
+                      return SyllabusDetailScreen(subjectCode: subjectCode);
+                    },
+                  ),
+                ],
               ),
             ],
           ),
