@@ -43,8 +43,6 @@ class SyllabusScreen extends ConsumerWidget {
               },
               loading: () => CircularProgressIndicator(),
             ),
-            // uses expaned to work around column height error
-            // will have to use slivers if we want to add content after the grid
           ],
         ),
       ),
@@ -61,6 +59,8 @@ class SubjectsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // uses expaned to work around column height error
+    // will have to use slivers if we want to add content after the grid
     return Expanded(
       child: GridView.count(
         crossAxisCount: 2,

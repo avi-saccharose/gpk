@@ -20,7 +20,6 @@ class DatePicker extends ConsumerWidget {
       initialScrollOffset: selectedDay.day * itemWidth,
     );
 
-    final routineRepository = ref.watch(routineRepositoryProvider);
     return SizedBox(
       height: Sizes.p80,
       child: ListView.builder(
