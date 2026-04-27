@@ -7,4 +7,7 @@ enum Branch {
   final String code;
   final String displayName;
   const Branch(this.code, this.displayName);
+
+  @override
+  String toString() => code;
 }

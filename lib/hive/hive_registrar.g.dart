@@ -8,10 +8,13 @@ import 'package:gpk_app/hive/hive_adapters.dart';
 extension HiveRegistrar on HiveInterface {
   void registerAdapters() {
     registerAdapter(BranchAdapter());
+    registerAdapter(ChapterAdapter());
     registerAdapter(DayAdapter());
     registerAdapter(EventAdapter());
     registerAdapter(EventGroupAdapter());
     registerAdapter(RoutineScheduleAdapter());
+    registerAdapter(SubjectAdapter());
+    registerAdapter(SyllabusAdapter());
     registerAdapter(TimelineItemAdapter());
     registerAdapter(UserPreferencesAdapter());
   }
@@ -20,10 +23,13 @@ extension HiveRegistrar on HiveInterface {
 extension IsolatedHiveRegistrar on IsolatedHiveInterface {
   void registerAdapters() {
     registerAdapter(BranchAdapter());
+    registerAdapter(ChapterAdapter());
     registerAdapter(DayAdapter());
     registerAdapter(EventAdapter());
     registerAdapter(EventGroupAdapter());
     registerAdapter(RoutineScheduleAdapter());
+    registerAdapter(SubjectAdapter());
+    registerAdapter(SyllabusAdapter());
     registerAdapter(TimelineItemAdapter());
     registerAdapter(UserPreferencesAdapter());
   }

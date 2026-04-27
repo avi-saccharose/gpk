@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
+import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 
-class SyllabusScreen extends StatelessWidget {
+class SyllabusScreen extends ConsumerWidget {
   const SyllabusScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selectedBranch = ref.watch(settingsProvider).selectedBranch;
+    final selectedSemester = ref.watch(settingsProvider).selectedSemester;
     final List<String> items = [
       "maths",
       "science",
@@ -27,7 +31,7 @@ class SyllabusScreen extends StatelessWidget {
               style: TextStyle(color: Colors.grey, fontSize: 16),
             ),
             Text(
-              'CSE 2',
+              '$selectedBranch $selectedSemester',
               style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
             ),
             gapH20,

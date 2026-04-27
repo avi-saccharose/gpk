@@ -1,0 +1,1 @@
+typedef SubjectCode = String;

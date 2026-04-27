@@ -330,3 +330,125 @@ class BranchAdapter extends TypeAdapter<Branch> {
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
+
+class ChapterAdapter extends TypeAdapter<Chapter> {
+  @override
+  final typeId = 7;
+
+  @override
+  Chapter read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Chapter(
+      fields[0] as String,
+      (fields[1] as num).toInt(),
+      (fields[2] as List).cast<String>(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Chapter obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.chapterName)
+      ..writeByte(1)
+      ..write(obj.chapterMarks)
+      ..writeByte(2)
+      ..write(obj.subtopics);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ChapterAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class SubjectAdapter extends TypeAdapter<Subject> {
+  @override
+  final typeId = 8;
+
+  @override
+  Subject read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Subject(
+      fields[0] as String,
+      fields[1] as String,
+      (fields[2] as num).toInt(),
+    )..chapters = (fields[3] as List?)?.cast<Chapter>();
+  }
+
+  @override
+  void write(BinaryWriter writer, Subject obj) {
+    writer
+      ..writeByte(4)
+      ..writeByte(0)
+      ..write(obj.subjectName)
+      ..writeByte(1)
+      ..write(obj.subjectCode)
+      ..writeByte(2)
+      ..write(obj.totalMarks)
+      ..writeByte(3)
+      ..write(obj.chapters);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SubjectAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class SyllabusAdapter extends TypeAdapter<Syllabus> {
+  @override
+  final typeId = 9;
+
+  @override
+  Syllabus read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Syllabus(
+      fields[0] as Branch,
+      (fields[1] as num).toInt(),
+      (fields[2] as List).cast<Subject>(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Syllabus obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.branch)
+      ..writeByte(1)
+      ..write(obj.semester)
+      ..writeByte(2)
+      ..write(obj.subjects);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SyllabusAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}

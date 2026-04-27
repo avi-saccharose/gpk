@@ -1,14 +1,15 @@
 // Inside SyllabusDetailScreen.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 
-class SyllabusDetailScreen extends StatelessWidget {
+class SyllabusDetailScreen extends ConsumerWidget {
   final String subjectCode;
 
-  const SyllabusDetailScreen({Key? key, required this.subjectCode})
-    : super(key: key);
+  const SyllabusDetailScreen({super.key, required this.subjectCode});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(),
       body: Column(
