@@ -3,19 +3,18 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/app_navigation.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/models/user_preferences.dart';
-import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 import 'package:gpk_app/features/routine/models/routine_schedule.dart';
 import 'package:gpk_app/features/routine/providers/routine_providers.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 import 'package:gpk_app/features/syllabus/models/syllabus.dart';
+import 'package:gpk_app/features/syllabus/providers/syllabus_providers.dart';
 import 'package:gpk_app/hive/hive_registrar.g.dart';
 import 'package:hive_ce_flutter/adapters.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 void main() async {
-  Log.init();
   await Hive.initFlutter();
   Hive.registerAdapters();
 
@@ -45,6 +44,7 @@ void main() async {
         calendarCacheServiceProvider.overrideWithValue(calendarCacheService),
         routineCacheServiceProvider.overrideWithValue(routineCacheService),
         settingsCacheServiceProvider.overrideWithValue(settingsCacheService),
+        sylllabusCacheServiceProvider.overrideWithValue(syllabusCacheService),
       ],
       child: MyApp(),
     ),
