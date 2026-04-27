@@ -13,7 +13,7 @@ class RoutineBuilder {
       startTime: startTime,
       endTime: endTime,
       subjectName: subjectName,
-      subjectID: subjectID,
+      subjectCode: subjectID,
       instructorName: instructorName,
       iconUrl: iconUrl,
     );

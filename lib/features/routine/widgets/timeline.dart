@@ -103,7 +103,10 @@ class TimelineTile extends StatelessWidget {
           ),
           Expanded(
             child: InkWell(
-              onTap: () => context.push("/syllabus/${item.subjectID}"),
+              onTap: () => {
+                if (item.subjectCode != null)
+                  context.push("/syllabus/${item.subjectCode}"),
+              },
               child: Container(
                 margin: const EdgeInsets.only(bottom: Sizes.p20),
                 padding: const EdgeInsets.all(Sizes.p16),
@@ -144,7 +147,7 @@ class TimelineTile extends StatelessWidget {
                         ),
                         Spacer(),
                         Text(
-                          item.subjectID ?? DateTime.now().toString(),
+                          item.subjectCode ?? DateTime.now().toString(),
                           style: textTheme.labelSmall?.copyWith(
                             color:
                                 (isActive

@@ -7,7 +7,7 @@ class TimelineItem {
   final int startTime;
   final int endTime;
   final String subjectName;
-  final String? subjectID;
+  final String? subjectCode;
   final String? instructorName;
   final String iconUrl;
 
@@ -15,7 +15,7 @@ class TimelineItem {
     required this.startTime,
     required this.endTime,
     required this.subjectName,
-    required this.subjectID,
+    required this.subjectCode,
     required this.instructorName,
     required this.iconUrl,
   });

@@ -53,7 +53,7 @@ types:
         index: 4
   TimelineItem:
     typeId: 3
-    nextIndex: 6
+    nextIndex: 7
     fields:
       startTime:
         index: 0
@@ -61,12 +61,12 @@ types:
         index: 1
       subjectName:
         index: 2
-      subjectID:
-        index: 3
       instructorName:
         index: 4
       iconUrl:
         index: 5
+      subjectCode:
+        index: 6
   RoutineSchedule:
     typeId: 4
     nextIndex: 1

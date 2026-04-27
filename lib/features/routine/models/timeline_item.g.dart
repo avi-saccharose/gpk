@@ -10,7 +10,7 @@ TimelineItem _$TimelineItemFromJson(Map<String, dynamic> json) => TimelineItem(
   startTime: (json['startTime'] as num).toInt(),
   endTime: (json['endTime'] as num).toInt(),
   subjectName: json['subjectName'] as String,
-  subjectID: json['subjectID'] as String?,
+  subjectCode: json['subjectCode'] as String?,
   instructorName: json['instructorName'] as String?,
   iconUrl: json['iconUrl'] as String,
 );
@@ -20,7 +20,7 @@ Map<String, dynamic> _$TimelineItemToJson(TimelineItem instance) =>
       'startTime': instance.startTime,
       'endTime': instance.endTime,
       'subjectName': instance.subjectName,
-      'subjectID': instance.subjectID,
+      'subjectCode': instance.subjectCode,
       'instructorName': instance.instructorName,
       'iconUrl': instance.iconUrl,
     };

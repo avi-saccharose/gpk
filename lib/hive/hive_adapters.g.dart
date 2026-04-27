@@ -178,7 +178,7 @@ class TimelineItemAdapter extends TypeAdapter<TimelineItem> {
       startTime: (fields[0] as num).toInt(),
       endTime: (fields[1] as num).toInt(),
       subjectName: fields[2] as String,
-      subjectID: fields[3] as String?,
+      subjectCode: fields[6] as String?,
       instructorName: fields[4] as String?,
       iconUrl: fields[5] as String,
     );
@@ -194,12 +194,12 @@ class TimelineItemAdapter extends TypeAdapter<TimelineItem> {
       ..write(obj.endTime)
       ..writeByte(2)
       ..write(obj.subjectName)
-      ..writeByte(3)
-      ..write(obj.subjectID)
       ..writeByte(4)
       ..write(obj.instructorName)
       ..writeByte(5)
-      ..write(obj.iconUrl);
+      ..write(obj.iconUrl)
+      ..writeByte(6)
+      ..write(obj.subjectCode);
   }
 
   @override

@@ -41,7 +41,7 @@ final class SelectedDayProvider
   }
 }
 
-String _$selectedDayHash() => r'd143bf7b3ecd9a6506e8e326109bd3b53132f35c';
+String _$selectedDayHash() => r'5ea9e8391c031c4274ed58a026b23d3304dff738';
 
 abstract class _$SelectedDay extends $Notifier<DateTime> {
   DateTime build();
