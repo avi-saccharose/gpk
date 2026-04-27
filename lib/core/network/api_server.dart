@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:http/http.dart' as http;
 
 class ApiServer {
@@ -22,10 +23,12 @@ class ApiServer {
         },
       );
       if (response.statusCode == 200) return json.decode(response.body);
+      //TODO: This cascades to the generic catch(e);
       throw ApiException('server error: ${response.body}');
     } on http.ClientException catch (e) {
       throw ApiException('Network error: $e');
     } catch (e) {
+      Log.error("$e");
       throw ApiException('Unexpected error $e');
     }
   }
