@@ -149,7 +149,7 @@ class TimelineTile extends StatelessWidget {
                         ),
                         Spacer(),
                         Text(
-                          item.subjectCode ?? DateTime.now().toString(),
+                          item.subjectCode ?? "",
                           style: textTheme.labelSmall?.copyWith(
                             color:
                                 (isActive

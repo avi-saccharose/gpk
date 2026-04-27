@@ -34,7 +34,9 @@ class SyllabusScreen extends ConsumerWidget {
             gapH20,
 
             syllabus.when(
-              data: (data) => Placeholder(),
+              data: (data) => SubjectsGrid(
+                subjects: data.subjects,
+              ),
               error: (error, stackTrace) {
                 Log.error("fetch syllabus", error, stackTrace);
                 return Text("Error fetching syllabus");
@@ -112,7 +114,7 @@ class SubjectCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(Sizes.p16),
       ),
       child: InkWell(
-        onTap: () => context.push('/syllabus/${item.subjectName}'),
+        onTap: () => context.push('/syllabus/${item.subjectCode}'),
         borderRadius: BorderRadius.circular(Sizes.p16),
         child: Container(
           padding: const EdgeInsetsGeometry.all(Sizes.p20),

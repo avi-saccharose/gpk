@@ -137,4 +137,74 @@ final class SyllabusProvider
   }
 }
 
-String _$syllabusHash() => r'c973099de3d7c4649304f86af1826a1f62c3c48b';
+String _$syllabusHash() => r'570d4da450f07a16500c6cb4c4ec8f52fcd15ebf';
+
+@ProviderFor(subjectByCode)
+final subjectByCodeProvider = SubjectByCodeFamily._();
+
+final class SubjectByCodeProvider
+    extends
+        $FunctionalProvider<AsyncValue<Subject?>, Subject?, FutureOr<Subject?>>
+    with $FutureModifier<Subject?>, $FutureProvider<Subject?> {
+  SubjectByCodeProvider._({
+    required SubjectByCodeFamily super.from,
+    required SubjectCode super.argument,
+  }) : super(
+         retry: null,
+         name: r'subjectByCodeProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$subjectByCodeHash();
+
+  @override
+  String toString() {
+    return r'subjectByCodeProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<Subject?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Subject?> create(Ref ref) {
+    final argument = this.argument as SubjectCode;
+    return subjectByCode(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is SubjectByCodeProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$subjectByCodeHash() => r'99d6899605961a2f68c477dc91ab2cfa064a7a27';
+
+final class SubjectByCodeFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<Subject?>, SubjectCode> {
+  SubjectByCodeFamily._()
+    : super(
+        retry: null,
+        name: r'subjectByCodeProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  SubjectByCodeProvider call(SubjectCode subjectCode) =>
+      SubjectByCodeProvider._(argument: subjectCode, from: this);
+
+  @override
+  String toString() => r'subjectByCodeProvider';
+}

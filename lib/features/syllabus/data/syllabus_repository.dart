@@ -23,11 +23,11 @@ class SyllabusRepository {
       final dynamic response = await apiServer.fetch(
         "/syllabus/$branch/$semester",
       );
-      final syllabus = Syllabus.fromJson(response); // as Map<String, dynamic>);
+      final syllabus = Syllabus.fromJson(response as Map<String, dynamic>);
       cacheService.write(cacheKey, syllabus);
       return syllabus;
     } catch (E) {
-      Log.error("Fetching syllabus error");
+      Log.error("Fetching syllabus error for $branch $semester");
       rethrow;
     }
   }

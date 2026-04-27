@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:gpk_app/core/utils/app_log.dart';
@@ -15,18 +16,27 @@ class ApiServer {
     );
 
     try {
-      final response = await _client.get(
-        uri,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
+      final response = await _client
+          .get(
+            uri,
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+          )
+          .timeout(const Duration(seconds: 30)); // Timeout after 30 seconds
+      if (response.statusCode >= 200 && response.statusCode < 300) {
+        return json.decode(response.body);
+      }
+      throw ApiException(
+        'server error (${response.statusCode} : ${response.body})',
       );
-      if (response.statusCode == 200) return json.decode(response.body);
-      //TODO: This cascades to the generic catch(e);
-      throw ApiException('server error: ${response.body}');
     } on http.ClientException catch (e) {
       throw ApiException('Network error: $e');
+    } on TimeoutException {
+      throw ApiException('Request Timed out');
+    } on ApiException {
+      rethrow;
     } catch (e) {
       Log.error("$e");
       throw ApiException('Unexpected error $e');

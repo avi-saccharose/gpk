@@ -1,5 +1,6 @@
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/providers/api_providers.dart';
+import 'package:gpk_app/core/utils/typedefs.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 import 'package:gpk_app/features/syllabus/data/syllabus_repository.dart';
 import 'package:gpk_app/features/syllabus/models/syllabus.dart';
@@ -29,4 +30,13 @@ Future<Syllabus> syllabus(Ref ref) async {
     semester: semester,
   );
   return syllabus;
+}
+
+@riverpod
+Future<Subject?> subjectByCode(Ref ref, SubjectCode subjectCode) async {
+  final syllabus = await ref.watch(syllabusProvider.future);
+
+  return syllabus.subjects.firstWhere(
+    (subject) => subject.subjectCode == subjectCode,
+  );
 }
