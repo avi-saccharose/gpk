@@ -5,5 +5,5 @@ part 'api_providers.g.dart';
 
 @Riverpod(keepAlive: true)
 ApiServer apiClient(Ref ref) {
-  return ApiServer(baseUrl: "http://localhost:8787");
+  return ApiServer(baseUrl: "https://gpk-backend.avi-vivi.workers.dev");
 }
