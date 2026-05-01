@@ -24,7 +24,7 @@ jobs:
         run: flutter build apk --debug --verbose
 
       - name: Build Release APK
-        run: flutter build apk --release -verbose
+        run: flutter build apk --release --verbose
 
       - name: Publish Debug and Release Build
         uses: softprops/action-gh-release@v2
