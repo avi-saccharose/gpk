@@ -21,12 +21,12 @@ jobs:
         run: flutter pub get
 
       - name: Build Debug APK
-        run: flutter build apk --debug
+        run: flutter build apk --debug --verbose
 
       - name: Build Release APK
-        run: flutter build apk --release
+        run: flutter build apk --release -verbose
 
-      - name: Create or Update Release
+      - name: Publish Debug and Release Build
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
