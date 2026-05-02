@@ -76,7 +76,7 @@ class EventListDate extends StatelessWidget {
             height: 20,
             decoration: BoxDecoration(
               color: colorScheme.primary,
-              borderRadius: BorderRadius.circular(2),
+              borderRadius: BorderRadius.circular(3),
             ),
           ),
           gapW8,
@@ -112,7 +112,22 @@ class EventListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    return Card(
+    return Container(
+      margin: EdgeInsetsGeometry.symmetric(
+        vertical: Sizes.p8,
+        horizontal: Sizes.p16,
+      ),
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        borderRadius: BorderRadius.circular(Sizes.p16),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withValues(alpha: 0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
       // color: colorScheme.surface,
       child: Padding(
         padding: const EdgeInsets.symmetric(

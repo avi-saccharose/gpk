@@ -24,9 +24,20 @@ class CalendarWidget extends ConsumerWidget {
       return eventsMap?[day] ?? [];
     }
 
-    return Card(
-      color: colorScheme.surfaceContainerLow,
-      elevation: 1,
+    return Container(
+      margin: EdgeInsets.all(Sizes.p16),
+      decoration: BoxDecoration(
+        color: colorScheme.surface,
+        borderRadius: BorderRadius.circular(Sizes.p16),
+        boxShadow: [
+          BoxShadow(
+            color: colorScheme.shadow.withValues(alpha: 0.1),
+            blurRadius: 20,
+            offset: const Offset(0, 8),
+          ),
+        ],
+      ),
+      //color: colorScheme.surfaceContainerLow,
       child: TableCalendar(
         focusedDay: DateTime.now(),
         onDaySelected: (selectedDay, _) {

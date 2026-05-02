@@ -84,12 +84,25 @@ class BottomSheetItem extends StatelessWidget {
 
     return SizedBox(
       width: double.infinity,
-      child: Card(
-        margin: EdgeInsets.all(Sizes.p4),
-        color: colorScheme.primaryContainer,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+      child: Container(
+        margin: EdgeInsets.all(Sizes.p16),
+        decoration: BoxDecoration(
+          color: colorScheme.surface,
+          borderRadius: BorderRadius.circular(Sizes.p16),
+          boxShadow: [
+            BoxShadow(
+              color: colorScheme.shadow.withValues(alpha: 0.1),
+              blurRadius: 20,
+              offset: const Offset(0, 8),
+            ),
+          ],
         ),
+        // Card(
+        //   margin: EdgeInsets.all(Sizes.p4),
+        //   color: colorScheme.primaryContainer,
+        //   shape: RoundedRectangleBorder(
+        //     borderRadius: BorderRadius.circular(8),
+        //   ),
         child: Padding(
           padding: EdgeInsets.all(Sizes.p16),
           child: Column(
