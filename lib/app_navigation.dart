@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/app_shell_scaffold.dart';
 import 'package:gpk_app/features/calendar/ui/calendar_screen.dart';
+import 'package:gpk_app/features/faculty/ui/faculty_screen.dart';
 import 'package:gpk_app/features/home/ui/home_screen.dart';
 import 'package:gpk_app/features/routine/ui/routine_screen.dart';
 import 'package:gpk_app/features/settings/ui/settings_screen.dart';
@@ -37,7 +38,7 @@ class AppRouter {
 
   static final goRouter = GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: '/home',
+    initialLocation: home,
     routes: [
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -92,7 +93,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: faculty,
-                builder: (context, state) => Placeholder(),
+                builder: (context, state) => FacultyScreen(),
               ),
             ],
           ),

@@ -19,12 +19,8 @@ void main() async {
   Hive.registerAdapters();
 
   final calendarCacheService = CacheService<EventsMapList>("calendarBox");
-  final routineCacheService = CacheService<RoutineSchedule>(
-    "routineBox",
-  );
-
+  final routineCacheService = CacheService<RoutineSchedule>("routineBox");
   final settingsCacheService = CacheService<UserPreferences>("userBox");
-
   final syllabusCacheService = CacheService<Syllabus>("syllabusBox");
 
   await calendarCacheService.init();
@@ -65,6 +61,7 @@ class MyApp extends ConsumerWidget {
         brightness: Brightness.dark,
       ),
       theme: ThemeData(
+        fontFamily: "Inter",
         actionIconTheme: ActionIconThemeData(
           backButtonIconBuilder: (BuildContext context) =>
               const HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft02),
