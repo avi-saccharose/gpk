@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
+import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 import 'package:gpk_app/features/syllabus/models/syllabus.dart';
 import 'package:gpk_app/features/syllabus/providers/syllabus_providers.dart';
@@ -29,7 +30,7 @@ class SyllabusScreen extends ConsumerWidget {
             ),
             Text(
               '$selectedBranch $selectedSemester',
-              style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+              style: AppTextStyles.display,
             ),
             gapH20,
 
