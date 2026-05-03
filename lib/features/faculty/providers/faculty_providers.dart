@@ -6,7 +6,7 @@ part 'faculty_providers.g.dart';
 @riverpod
 List<Faculty> allFaculty(Ref ref) {
   return [
-    Faculty("Vikehtol", "BSC", "96129020202", 'vike@gmail.com', null),
+    Faculty("Vikehtol", "BSC", "9612572768", 'vike@gmail.com', null),
     Faculty("Puthu", "BSC", "23002003003", null, null),
     Faculty("Sofia", "MSC", "3939929939", 'sofia@gmail.com', null),
     Faculty("Pete", "MSC", "3939929939", 'pete@gmail.com', null),

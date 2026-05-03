@@ -3,14 +3,21 @@ import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/features/faculty/models/faculty.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class FacultyCard extends StatelessWidget {
-  const FacultyCard({
-    super.key,
-    required this.faculty,
-  });
+  const FacultyCard({super.key, required this.faculty});
 
   final Faculty faculty;
+
+  Future<void> _openWhatsApp(String number) async {
+    // Remove all non digits from the string
+    final phoneNumber = number.replaceAll(RegExp(r'\D'), '');
+    final Uri whatsappUrl = Uri.parse('https://wa.me/$phoneNumber');
+    try {
+      await launchUrl(whatsappUrl);
+    } catch (e) {}
+  }
 
   void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
@@ -58,6 +65,12 @@ class FacultyCard extends StatelessWidget {
                   leading: HugeIcon(icon: HugeIcons.strokeRoundedSmartPhone02),
                   title: const Text('Phone number'),
                   subtitle: Text(faculty.number ?? "Not available"),
+                  trailing: HugeIcon(icon: HugeIcons.strokeRoundedWhatsapp),
+                  onTap: () {
+                    if (faculty.number != null) {
+                      _openWhatsApp(faculty.number!);
+                    }
+                  },
                 ),
                 ListTile(
                   leading: HugeIcon(icon: HugeIcons.strokeRoundedMail01),
@@ -91,9 +104,7 @@ class FacultyCard extends StatelessWidget {
         child: Column(
           children: [
             CircleAvatar(
-              backgroundImage: AssetImage(
-                'assets/images/helen.jpeg',
-              ),
+              backgroundImage: AssetImage('assets/images/helen.jpeg'),
             ),
             gapH8,
             // Image(
@@ -123,9 +134,7 @@ class FacultyCard extends StatelessWidget {
               ),
               child: IconButton(
                 onPressed: () => _showBottomSheet(context),
-                icon: HugeIcon(
-                  icon: HugeIcons.strokeRoundedArrowRight01,
-                ),
+                icon: HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
               ),
             ),
           ],
