@@ -16,6 +16,7 @@ class ApiServer {
     );
 
     try {
+      Log.debug("ApiServer: Get $uri");
       final response = await _client
           .get(
             uri,

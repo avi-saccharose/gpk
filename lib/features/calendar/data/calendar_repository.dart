@@ -1,5 +1,6 @@
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/network/api_server.dart';
+import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 
 class CalendarRepository {
@@ -31,7 +32,7 @@ class CalendarRepository {
 
   Future<EventsMapList> getEvents({bool forceRefresh = false}) async {
     final events = await apiServer.fetch('/calendar/');
-    print(events);
+    Log.debug(events);
     cacheService.write(cacheKey, events);
     return events;
   }

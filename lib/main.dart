@@ -13,10 +13,13 @@ import 'package:gpk_app/features/syllabus/providers/syllabus_providers.dart';
 import 'package:gpk_app/hive/hive_registrar.g.dart';
 import 'package:hive_ce_flutter/adapters.dart';
 import 'package:hugeicons/hugeicons.dart';
+import 'package:path_provider/path_provider.dart';
 
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapters();
+  final dir = await getApplicationDocumentsDirectory();
+  print("🚨 HIVE FILES ARE HIDDEN HERE: ${dir.path} 🚨");
 
   final calendarCacheService = CacheService<EventsMapList>("calendarBox");
   final routineCacheService = CacheService<RoutineSchedule>("routineBox");
