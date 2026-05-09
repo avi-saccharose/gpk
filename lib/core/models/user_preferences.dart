@@ -1,20 +1,21 @@
 import 'package:gpk_app/core/models/branch.dart';
+import 'package:gpk_app/core/models/semester.dart';
 
 class UserPreferences {
   bool isDarkMode;
   Branch selectedBranch;
-  int selectedSemester;
+  Semester selectedSemester;
 
   UserPreferences({
     this.isDarkMode = false,
     this.selectedBranch = Branch.cse,
-    this.selectedSemester = 1,
+    this.selectedSemester = Semester.first,
   });
 
   UserPreferences copyWith({
     bool? isDarkMode,
     Branch? selectedBranch,
-    int? selectedSemester,
+    Semester? selectedSemester,
   }) {
     return UserPreferences(
       isDarkMode: isDarkMode ?? this.isDarkMode,

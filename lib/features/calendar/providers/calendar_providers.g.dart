@@ -245,7 +245,7 @@ final class CalendarEventsProvider
   }
 }
 
-String _$calendarEventsHash() => r'9756f9a41d379d1e3bedfa67816806a098154d3d';
+String _$calendarEventsHash() => r'a69d8421bffab786fc2d1e3612f03ec205fed8aa';
 
 @ProviderFor(monthlyEventsMap)
 final monthlyEventsMapProvider = MonthlyEventsMapProvider._();

@@ -28,16 +28,44 @@ enum EventGroup {
 
   ft1,
   ft2,
-  ft3,
-}
+  ft3
+  ;
 
-extension EventGroupColor on EventGroup {
+  String get display {
+    switch (this) {
+      case EventGroup.cse1:
+      case EventGroup.cse2:
+      case EventGroup.cse3:
+        return "cse";
+      case EventGroup.ce1:
+      case EventGroup.ce2:
+      case EventGroup.ce3:
+        return "ce";
+      case EventGroup.ft1:
+      case EventGroup.ft2:
+      case EventGroup.ft3:
+        return "ft";
+      default:
+        return "gpk";
+    }
+  }
+
   Color get color {
     switch (this) {
       case EventGroup.cse1:
-        return Colors.redAccent;
+      case EventGroup.cse2:
+      case EventGroup.cse3:
+        return Colors.red;
+      case EventGroup.ce1:
+      case EventGroup.ce2:
+      case EventGroup.ce3:
+        return Colors.blue;
+      case EventGroup.ft1:
+      case EventGroup.ft2:
+      case EventGroup.ft3:
+        return Colors.pink;
       default:
-        return Colors.grey;
+        return Colors.green;
     }
   }
 }

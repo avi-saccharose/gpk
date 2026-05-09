@@ -52,7 +52,8 @@ CalendarRepository calendarRepository(Ref ref) {
 Future<EventsMapList> calendarEvents(Ref ref) {
   final repo = ref.watch(calendarRepositoryProvider);
   final branch = ref.watch(settingsProvider).selectedBranch;
-  return repo.getEvents(branch);
+  final semester = ref.watch(settingsProvider).selectedSemester;
+  return repo.getEvents(branch, semester);
 }
 
 @riverpod

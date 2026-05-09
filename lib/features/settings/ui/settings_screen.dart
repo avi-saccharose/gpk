@@ -54,7 +54,7 @@ class SettingsScreen extends ConsumerWidget {
                 ButtonSegment(value: 5, label: Text("sem 5")),
                 ButtonSegment(value: 6, label: Text("sem 6")),
               ],
-              selected: {selectedSemester},
+              selected: {selectedSemester.value},
               onSelectionChanged: (Set<int> newSelectedSemester) {
                 ref
                     .read(settingsProvider.notifier)

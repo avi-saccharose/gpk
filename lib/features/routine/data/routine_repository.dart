@@ -1,5 +1,6 @@
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/models/branch.dart';
+import 'package:gpk_app/core/models/semester.dart';
 import 'package:gpk_app/core/network/api_server.dart';
 import 'package:gpk_app/features/routine/models/day_enum.dart';
 import 'package:gpk_app/features/routine/models/routine_schedule.dart';
@@ -10,7 +11,7 @@ class RoutineRepository {
   final ApiServer apiServer;
   Future<Map<Day, List<TimelineItem>>> fetchRoutine({
     required Branch branch,
-    required int semester,
+    required Semester semester,
   }) async {
     final String cacheKey = "${branch.code}$semester";
     final cachedRoutine = cacheService.get(

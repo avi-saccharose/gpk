@@ -4,6 +4,7 @@ import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/core/widgets/subtitle_text.dart';
+import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 
 class EventList extends ConsumerWidget {
@@ -40,6 +41,8 @@ class EventList extends ConsumerWidget {
                     (e) => EventListItem(
                       title: e.title,
                       description: e.description,
+                      group: e.group.display,
+                      color: e.group.color,
                     ),
                   ), //.toList(),
                 ],
@@ -106,10 +109,14 @@ class EventListDate extends StatelessWidget {
 class EventListItem extends StatelessWidget {
   final String title;
   final String description;
+  final String group;
+  final Color color;
   const EventListItem({
     super.key,
     required this.title,
     required this.description,
+    required this.group,
+    required this.color,
   });
 
   @override
@@ -143,6 +150,21 @@ class EventListItem extends StatelessWidget {
           children: [
             Row(
               children: [
+                Container(
+                  padding: EdgeInsetsGeometry.symmetric(
+                    vertical: Sizes.p4,
+                    horizontal: Sizes.p8,
+                  ),
+                  decoration: BoxDecoration(
+                    color: color.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(Sizes.p4),
+                  ),
+                  child: Text(
+                    group,
+                    style: TextStyle(color: color),
+                  ),
+                ),
+                gapW8,
                 Expanded(
                   child: Text(
                     title,

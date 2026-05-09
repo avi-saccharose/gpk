@@ -60,7 +60,9 @@ class UserPreferencesAdapter extends TypeAdapter<UserPreferences> {
     return UserPreferences(
       isDarkMode: fields[0] == null ? false : fields[0] as bool,
       selectedBranch: fields[1] == null ? Branch.cse : fields[1] as Branch,
-      selectedSemester: fields[2] == null ? 1 : (fields[2] as num).toInt(),
+      selectedSemester: fields[2] == null
+          ? Semester.first
+          : fields[2] as Semester,
     );
   }
 
@@ -449,6 +451,38 @@ class SyllabusAdapter extends TypeAdapter<Syllabus> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is SyllabusAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class SemesterAdapter extends TypeAdapter<Semester> {
+  @override
+  final typeId = 10;
+
+  @override
+  Semester read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Semester((fields[0] as num).toInt());
+  }
+
+  @override
+  void write(BinaryWriter writer, Semester obj) {
+    writer
+      ..writeByte(1)
+      ..writeByte(0)
+      ..write(obj.value);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SemesterAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

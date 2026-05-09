@@ -1,5 +1,6 @@
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/models/branch.dart';
+import 'package:gpk_app/core/models/semester.dart';
 import 'package:gpk_app/core/models/user_preferences.dart';
 import 'package:gpk_app/features/settings/repository/settings_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -37,8 +38,8 @@ class SettingsNotifier extends _$SettingsNotifier {
     state = preferences;
   }
 
-  Future<void> updateSemester(int semester) async {
-    final preferences = await _repository.updateSemester(semester);
+  Future<void> updateSemester(int value) async {
+    final preferences = await _repository.updateSemester(Semester(value));
     state = preferences;
   }
 }
