@@ -48,7 +48,7 @@ final class AllFacultyProvider
   }
 }
 
-String _$allFacultyHash() => r'1ed0c39289eae56f4032e77d4c28de0456083421';
+String _$allFacultyHash() => r'270ff2b6bb6106ec5c157590e2e032e313d02b54';
 
 @ProviderFor(SearchQuery)
 final searchQueryProvider = SearchQueryProvider._();
@@ -81,7 +81,7 @@ final class SearchQueryProvider extends $NotifierProvider<SearchQuery, String> {
   }
 }
 
-String _$searchQueryHash() => r'36beae7c4bc308a63fd3e198bef87de9f353d293';
+String _$searchQueryHash() => r'9470cf3ceb4bae11413ee4a15efaa05b1af72fac';
 
 abstract class _$SearchQuery extends $Notifier<String> {
   String build();

@@ -126,7 +126,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "${chapter.subtopics.length} Subtopics",
+                                      "${chapter.subTopics.length} Subtopics",
                                       style: TextStyle(color: Colors.grey[600]),
                                     ),
                                     const Padding(
@@ -149,7 +149,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                   ],
                                 ),
                               ),
-                              children: chapter.subtopics.map((subtopic) {
+                              children: chapter.subTopics.map((subtopic) {
                                 return ListTile(
                                   contentPadding: const EdgeInsetsGeometry.only(
                                     left: Sizes.p64,

@@ -32,8 +32,10 @@ class Subject {
 class Chapter {
   final String chapterName;
   final int chapterMarks;
-  final List<String> subtopics;
-  Chapter(this.chapterName, this.chapterMarks, this.subtopics);
+
+  @JsonKey(defaultValue: [])
+  final List<String> subTopics;
+  Chapter(this.chapterName, this.chapterMarks, this.subTopics);
 
   factory Chapter.fromJson(Map<String, dynamic> json) =>
       _$ChapterFromJson(json);

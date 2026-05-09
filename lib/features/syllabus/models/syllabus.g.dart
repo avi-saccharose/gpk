@@ -42,11 +42,11 @@ Map<String, dynamic> _$SubjectToJson(Subject instance) => <String, dynamic>{
 Chapter _$ChapterFromJson(Map<String, dynamic> json) => Chapter(
   json['chapterName'] as String,
   (json['chapterMarks'] as num).toInt(),
-  (json['subtopics'] as List<dynamic>).map((e) => e as String).toList(),
+  (json['subTopics'] as List<dynamic>?)?.map((e) => e as String).toList() ?? [],
 );
 
 Map<String, dynamic> _$ChapterToJson(Chapter instance) => <String, dynamic>{
   'chapterName': instance.chapterName,
   'chapterMarks': instance.chapterMarks,
-  'subtopics': instance.subtopics,
+  'subTopics': instance.subTopics,
 };

@@ -1,9 +1,8 @@
 import 'dart:collection';
 
 import 'package:gpk_app/core/cache/cache_service.dart';
-import 'package:gpk_app/features/calendar/data/calendar_api.dart';
+import 'package:gpk_app/core/providers/api_providers.dart';
 import 'package:gpk_app/features/calendar/data/calendar_repository.dart';
-import 'package:gpk_app/features/calendar/data/mock_calendar_api.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -39,18 +38,13 @@ CacheService calendarCacheService(Ref ref) {
 }
 
 @riverpod
-CalendarApi calendarApi(Ref ref) {
-  return MockCalendarApi();
-}
-
-@riverpod
 CalendarRepository calendarRepository(Ref ref) {
-  final api = ref.watch(calendarApiProvider);
+  final apiServer = ref.watch(apiClientProvider);
   final cacheService = ref.watch(
     calendarCacheServiceProvider,
   );
 
-  return CalendarRepository(api: api, cacheService: cacheService);
+  return CalendarRepository(apiServer: apiServer, cacheService: cacheService);
 }
 
 @riverpod

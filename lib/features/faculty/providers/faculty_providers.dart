@@ -18,9 +18,7 @@ List<Faculty> allFaculty(Ref ref) {
 @riverpod
 class SearchQuery extends _$SearchQuery {
   @override
-  String build() {
-    return "";
-  }
+  String build() => "";
 
   void set(String value) {
     state = value;

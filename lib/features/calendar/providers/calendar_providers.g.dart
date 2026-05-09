@@ -160,47 +160,6 @@ final class CalendarCacheServiceProvider
 String _$calendarCacheServiceHash() =>
     r'f78c358fded35fcebb977dd72745764aaca28ca6';
 
-@ProviderFor(calendarApi)
-final calendarApiProvider = CalendarApiProvider._();
-
-final class CalendarApiProvider
-    extends $FunctionalProvider<CalendarApi, CalendarApi, CalendarApi>
-    with $Provider<CalendarApi> {
-  CalendarApiProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'calendarApiProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$calendarApiHash();
-
-  @$internal
-  @override
-  $ProviderElement<CalendarApi> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
-
-  @override
-  CalendarApi create(Ref ref) {
-    return calendarApi(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(CalendarApi value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<CalendarApi>(value),
-    );
-  }
-}
-
-String _$calendarApiHash() => r'b6dbe50d1d7cb6dd990bdaeffa1fa75b85520ed0';
-
 @ProviderFor(calendarRepository)
 final calendarRepositoryProvider = CalendarRepositoryProvider._();
 
@@ -247,7 +206,7 @@ final class CalendarRepositoryProvider
 }
 
 String _$calendarRepositoryHash() =>
-    r'62e8fb46d9155c2e77f3f61504c322403ec6f437';
+    r'af2071432fffd560699612e18863fbaf23a2771f';
 
 @ProviderFor(calendarEvents)
 final calendarEventsProvider = CalendarEventsProvider._();

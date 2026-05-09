@@ -3,19 +3,29 @@
 # Check in to version control
 nextTypeId: 10
 types:
-  Event:
+  Branch:
     typeId: 0
-    nextIndex: 4
+    nextIndex: 3
     fields:
-      title:
+      cse:
         index: 0
-      group:
+      ce:
+        index: 1
+      ft:
         index: 2
-      description:
-        index: 3
-  EventGroup:
+  UserPreferences:
     typeId: 1
-    nextIndex: 13
+    nextIndex: 3
+    fields:
+      isDarkMode:
+        index: 0
+      selectedBranch:
+        index: 1
+      selectedSemester:
+        index: 2
+  EventGroup:
+    typeId: 2
+    nextIndex: 10
     fields:
       all:
         index: 0
@@ -32,13 +42,23 @@ types:
       ce3:
         index: 6
       ft1:
-        index: 10
+        index: 7
       ft2:
-        index: 11
+        index: 8
       ft3:
-        index: 12
+        index: 9
+  Event:
+    typeId: 3
+    nextIndex: 3
+    fields:
+      title:
+        index: 0
+      description:
+        index: 1
+      group:
+        index: 2
   Day:
-    typeId: 2
+    typeId: 4
     nextIndex: 5
     fields:
       monday:
@@ -52,8 +72,8 @@ types:
       friday:
         index: 4
   TimelineItem:
-    typeId: 3
-    nextIndex: 7
+    typeId: 5
+    nextIndex: 6
     fields:
       startTime:
         index: 0
@@ -61,38 +81,18 @@ types:
         index: 1
       subjectName:
         index: 2
+      subjectCode:
+        index: 3
       instructorName:
         index: 4
       iconUrl:
         index: 5
-      subjectCode:
-        index: 6
   RoutineSchedule:
-    typeId: 4
+    typeId: 6
     nextIndex: 1
     fields:
       scheduleMap:
         index: 0
-  UserPreferences:
-    typeId: 5
-    nextIndex: 3
-    fields:
-      isDarkMode:
-        index: 0
-      selectedBranch:
-        index: 1
-      selectedSemester:
-        index: 2
-  Branch:
-    typeId: 6
-    nextIndex: 3
-    fields:
-      cse:
-        index: 0
-      ce:
-        index: 1
-      ft:
-        index: 2
   Chapter:
     typeId: 7
     nextIndex: 3
@@ -101,7 +101,7 @@ types:
         index: 0
       chapterMarks:
         index: 1
-      subtopics:
+      subTopics:
         index: 2
   Subject:
     typeId: 8

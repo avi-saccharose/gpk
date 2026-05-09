@@ -29,7 +29,7 @@ class FacultyScreen extends ConsumerWidget {
             gapH20,
             SearchBar(
               onChanged: (value) => {
-                ref.read(searchQueryProvider.notifier).state = value,
+                ref.read(searchQueryProvider.notifier).set(value),
               },
             ),
             gapH20,

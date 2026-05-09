@@ -6,33 +6,34 @@ part of 'hive_adapters.dart';
 // AdaptersGenerator
 // **************************************************************************
 
-class EventAdapter extends TypeAdapter<Event> {
+class BranchAdapter extends TypeAdapter<Branch> {
   @override
   final typeId = 0;
 
   @override
-  Event read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return Event(
-      title: fields[0] as String,
-      description: fields[3] == null ? "" : fields[3] as String,
-      group: fields[2] == null ? EventGroup.all : fields[2] as EventGroup,
-    );
+  Branch read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return Branch.cse;
+      case 1:
+        return Branch.ce;
+      case 2:
+        return Branch.ft;
+      default:
+        return Branch.cse;
+    }
   }
 
   @override
-  void write(BinaryWriter writer, Event obj) {
-    writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.title)
-      ..writeByte(2)
-      ..write(obj.group)
-      ..writeByte(3)
-      ..write(obj.description);
+  void write(BinaryWriter writer, Branch obj) {
+    switch (obj) {
+      case Branch.cse:
+        writer.writeByte(0);
+      case Branch.ce:
+        writer.writeByte(1);
+      case Branch.ft:
+        writer.writeByte(2);
+    }
   }
 
   @override
@@ -41,14 +42,54 @@ class EventAdapter extends TypeAdapter<Event> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is EventAdapter &&
+      other is BranchAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class UserPreferencesAdapter extends TypeAdapter<UserPreferences> {
+  @override
+  final typeId = 1;
+
+  @override
+  UserPreferences read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return UserPreferences(
+      isDarkMode: fields[0] == null ? false : fields[0] as bool,
+      selectedBranch: fields[1] == null ? Branch.cse : fields[1] as Branch,
+      selectedSemester: fields[2] == null ? 1 : (fields[2] as num).toInt(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, UserPreferences obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.isDarkMode)
+      ..writeByte(1)
+      ..write(obj.selectedBranch)
+      ..writeByte(2)
+      ..write(obj.selectedSemester);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is UserPreferencesAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
 
 class EventGroupAdapter extends TypeAdapter<EventGroup> {
   @override
-  final typeId = 1;
+  final typeId = 2;
 
   @override
   EventGroup read(BinaryReader reader) {
@@ -67,11 +108,11 @@ class EventGroupAdapter extends TypeAdapter<EventGroup> {
         return EventGroup.ce2;
       case 6:
         return EventGroup.ce3;
-      case 10:
+      case 7:
         return EventGroup.ft1;
-      case 11:
+      case 8:
         return EventGroup.ft2;
-      case 12:
+      case 9:
         return EventGroup.ft3;
       default:
         return EventGroup.all;
@@ -96,11 +137,11 @@ class EventGroupAdapter extends TypeAdapter<EventGroup> {
       case EventGroup.ce3:
         writer.writeByte(6);
       case EventGroup.ft1:
-        writer.writeByte(10);
+        writer.writeByte(7);
       case EventGroup.ft2:
-        writer.writeByte(11);
+        writer.writeByte(8);
       case EventGroup.ft3:
-        writer.writeByte(12);
+        writer.writeByte(9);
     }
   }
 
@@ -115,9 +156,49 @@ class EventGroupAdapter extends TypeAdapter<EventGroup> {
           typeId == other.typeId;
 }
 
+class EventAdapter extends TypeAdapter<Event> {
+  @override
+  final typeId = 3;
+
+  @override
+  Event read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Event(
+      title: fields[0] as String,
+      description: fields[1] == null ? "" : fields[1] as String,
+      group: fields[2] == null ? EventGroup.all : fields[2] as EventGroup,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Event obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.title)
+      ..writeByte(1)
+      ..write(obj.description)
+      ..writeByte(2)
+      ..write(obj.group);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EventAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 class DayAdapter extends TypeAdapter<Day> {
   @override
-  final typeId = 2;
+  final typeId = 4;
 
   @override
   Day read(BinaryReader reader) {
@@ -166,7 +247,7 @@ class DayAdapter extends TypeAdapter<Day> {
 
 class TimelineItemAdapter extends TypeAdapter<TimelineItem> {
   @override
-  final typeId = 3;
+  final typeId = 5;
 
   @override
   TimelineItem read(BinaryReader reader) {
@@ -178,7 +259,7 @@ class TimelineItemAdapter extends TypeAdapter<TimelineItem> {
       startTime: (fields[0] as num).toInt(),
       endTime: (fields[1] as num).toInt(),
       subjectName: fields[2] as String,
-      subjectCode: fields[6] as String?,
+      subjectCode: fields[3] as String?,
       instructorName: fields[4] as String?,
       iconUrl: fields[5] as String,
     );
@@ -194,12 +275,12 @@ class TimelineItemAdapter extends TypeAdapter<TimelineItem> {
       ..write(obj.endTime)
       ..writeByte(2)
       ..write(obj.subjectName)
+      ..writeByte(3)
+      ..write(obj.subjectCode)
       ..writeByte(4)
       ..write(obj.instructorName)
       ..writeByte(5)
-      ..write(obj.iconUrl)
-      ..writeByte(6)
-      ..write(obj.subjectCode);
+      ..write(obj.iconUrl);
   }
 
   @override
@@ -215,7 +296,7 @@ class TimelineItemAdapter extends TypeAdapter<TimelineItem> {
 
 class RoutineScheduleAdapter extends TypeAdapter<RoutineSchedule> {
   @override
-  final typeId = 4;
+  final typeId = 6;
 
   @override
   RoutineSchedule read(BinaryReader reader) {
@@ -224,7 +305,7 @@ class RoutineScheduleAdapter extends TypeAdapter<RoutineSchedule> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return RoutineSchedule(
-      (fields[0] as Map).map(
+      (fields[0] as Map?)?.map(
         (dynamic k, dynamic v) =>
             MapEntry(k as Day, (v as List).cast<TimelineItem>()),
       ),
@@ -246,87 +327,6 @@ class RoutineScheduleAdapter extends TypeAdapter<RoutineSchedule> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is RoutineScheduleAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
-class UserPreferencesAdapter extends TypeAdapter<UserPreferences> {
-  @override
-  final typeId = 5;
-
-  @override
-  UserPreferences read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return UserPreferences(
-      isDarkMode: fields[0] == null ? false : fields[0] as bool,
-      selectedBranch: fields[1] == null ? Branch.cse : fields[1] as Branch,
-      selectedSemester: fields[2] == null ? 1 : (fields[2] as num).toInt(),
-    );
-  }
-
-  @override
-  void write(BinaryWriter writer, UserPreferences obj) {
-    writer
-      ..writeByte(3)
-      ..writeByte(0)
-      ..write(obj.isDarkMode)
-      ..writeByte(1)
-      ..write(obj.selectedBranch)
-      ..writeByte(2)
-      ..write(obj.selectedSemester);
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is UserPreferencesAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
-class BranchAdapter extends TypeAdapter<Branch> {
-  @override
-  final typeId = 6;
-
-  @override
-  Branch read(BinaryReader reader) {
-    switch (reader.readByte()) {
-      case 0:
-        return Branch.cse;
-      case 1:
-        return Branch.ce;
-      case 2:
-        return Branch.ft;
-      default:
-        return Branch.cse;
-    }
-  }
-
-  @override
-  void write(BinaryWriter writer, Branch obj) {
-    switch (obj) {
-      case Branch.cse:
-        writer.writeByte(0);
-      case Branch.ce:
-        writer.writeByte(1);
-      case Branch.ft:
-        writer.writeByte(2);
-    }
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is BranchAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
@@ -357,7 +357,7 @@ class ChapterAdapter extends TypeAdapter<Chapter> {
       ..writeByte(1)
       ..write(obj.chapterMarks)
       ..writeByte(2)
-      ..write(obj.subtopics);
+      ..write(obj.subTopics);
   }
 
   @override

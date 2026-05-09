@@ -1,10 +1,8 @@
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
-import 'package:gpk_app/features/calendar/data/calendar_api.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
-import 'package:http/http.dart' as http;
 
 // Class for handling api requests
-class MockCalendarApi implements CalendarApi {
+class MockCalendarApi {
   static const String calendarId = String.fromEnvironment('CALENDAR_ID');
   static const String apiKey = String.fromEnvironment("CALENDAR_API_KEY");
 
