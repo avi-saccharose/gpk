@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/app_navigation.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/models/user_preferences.dart';
+import 'package:gpk_app/core/network/api_server.dart';
+import 'package:gpk_app/core/providers/api_providers.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 import 'package:gpk_app/features/routine/models/routine_schedule.dart';
@@ -13,19 +15,17 @@ import 'package:gpk_app/features/syllabus/providers/syllabus_providers.dart';
 import 'package:gpk_app/hive/hive_registrar.g.dart';
 import 'package:hive_ce_flutter/adapters.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:path_provider/path_provider.dart';
 
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapters();
-  final dir = await getApplicationDocumentsDirectory();
-  print("🚨 HIVE FILES ARE HIDDEN HERE: ${dir.path} 🚨");
 
   final calendarCacheService = CacheService<EventsMapList>("calendarBox");
   final routineCacheService = CacheService<RoutineSchedule>("routineBox");
   final settingsCacheService = CacheService<UserPreferences>("userBox");
   final syllabusCacheService = CacheService<Syllabus>("syllabusBox");
 
+  final apiServer = ApiServer(baseUrl: 'http://localhost:8787');
   await calendarCacheService.init();
   await routineCacheService.init();
   await settingsCacheService.init();
@@ -40,6 +40,7 @@ void main() async {
   runApp(
     ProviderScope(
       overrides: [
+        apiClientProvider.overrideWithValue(apiServer),
         calendarCacheServiceProvider.overrideWithValue(calendarCacheService),
         routineCacheServiceProvider.overrideWithValue(routineCacheService),
         settingsCacheServiceProvider.overrideWithValue(settingsCacheService),

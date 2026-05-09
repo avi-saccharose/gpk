@@ -4,6 +4,7 @@ import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/providers/api_providers.dart';
 import 'package:gpk_app/features/calendar/data/calendar_repository.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
+import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'calendar_providers.g.dart';
@@ -50,7 +51,8 @@ CalendarRepository calendarRepository(Ref ref) {
 @riverpod
 Future<EventsMapList> calendarEvents(Ref ref) {
   final repo = ref.watch(calendarRepositoryProvider);
-  return repo.getEvents();
+  final branch = ref.watch(settingsProvider).selectedBranch;
+  return repo.getEvents(branch);
 }
 
 @riverpod
