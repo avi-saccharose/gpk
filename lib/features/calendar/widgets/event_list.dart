@@ -3,8 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
-import 'package:gpk_app/core/widgets/subtitle_text.dart';
-import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 
 class EventList extends ConsumerWidget {
@@ -54,7 +52,10 @@ class EventList extends ConsumerWidget {
       loading: () => CircularProgressIndicator(),
       error: (error, stackTrace) {
         Log.error("Fetching calendar failed", error, stackTrace);
-        return SubtitleText(text: "error fecthing data");
+        return Text(
+          "error fecthing data",
+          style: TextStyle(fontSize: 16, color: Colors.grey),
+        );
       },
     );
   }

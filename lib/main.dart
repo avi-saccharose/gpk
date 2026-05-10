@@ -6,7 +6,7 @@ import 'package:gpk_app/core/cache/cache_metadata_provider.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/models/user_preferences.dart';
 import 'package:gpk_app/core/network/api_server.dart';
-import 'package:gpk_app/core/providers/api_providers.dart';
+import 'package:gpk_app/core/network/api_provider.dart';
 import 'package:gpk_app/features/calendar/models/event_wrapper.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 import 'package:gpk_app/features/routine/models/routine_schedule.dart';

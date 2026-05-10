@@ -1,5 +1,5 @@
 import 'package:gpk_app/core/cache/cache_service.dart';
-import 'package:gpk_app/core/providers/api_providers.dart';
+import 'package:gpk_app/core/network/api_provider.dart';
 import 'package:gpk_app/core/utils/typedefs.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 import 'package:gpk_app/features/syllabus/data/syllabus_repository.dart';

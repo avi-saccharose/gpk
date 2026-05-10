@@ -1,9 +1,8 @@
 import 'dart:collection';
 
-import 'package:gpk_app/core/cache/cache_metadata.dart';
 import 'package:gpk_app/core/cache/cache_metadata_provider.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
-import 'package:gpk_app/core/providers/api_providers.dart';
+import 'package:gpk_app/core/network/api_provider.dart';
 import 'package:gpk_app/features/calendar/data/calendar_repository.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
