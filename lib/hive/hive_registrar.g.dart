@@ -12,6 +12,7 @@ extension HiveRegistrar on HiveInterface {
     registerAdapter(DayAdapter());
     registerAdapter(EventAdapter());
     registerAdapter(EventGroupAdapter());
+    registerAdapter(EventWrapperAdapter());
     registerAdapter(RoutineScheduleAdapter());
     registerAdapter(SemesterAdapter());
     registerAdapter(SubjectAdapter());
@@ -28,6 +29,7 @@ extension IsolatedHiveRegistrar on IsolatedHiveInterface {
     registerAdapter(DayAdapter());
     registerAdapter(EventAdapter());
     registerAdapter(EventGroupAdapter());
+    registerAdapter(EventWrapperAdapter());
     registerAdapter(RoutineScheduleAdapter());
     registerAdapter(SemesterAdapter());
     registerAdapter(SubjectAdapter());

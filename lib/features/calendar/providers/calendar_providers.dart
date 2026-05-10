@@ -1,5 +1,7 @@
 import 'dart:collection';
 
+import 'package:gpk_app/core/cache/cache_metadata.dart';
+import 'package:gpk_app/core/cache/cache_metadata_provider.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/providers/api_providers.dart';
 import 'package:gpk_app/features/calendar/data/calendar_repository.dart';
@@ -45,7 +47,12 @@ CalendarRepository calendarRepository(Ref ref) {
     calendarCacheServiceProvider,
   );
 
-  return CalendarRepository(apiServer: apiServer, cacheService: cacheService);
+  final cacheMetaData = ref.watch(cacheMetadataProvider);
+  return CalendarRepository(
+    apiServer: apiServer,
+    cacheService: cacheService,
+    cacheMetadata: cacheMetaData,
+  );
 }
 
 @riverpod

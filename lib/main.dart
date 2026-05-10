@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/app_navigation.dart';
+import 'package:gpk_app/core/cache/cache_metadata.dart';
+import 'package:gpk_app/core/cache/cache_metadata_provider.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/models/user_preferences.dart';
 import 'package:gpk_app/core/network/api_server.dart';
 import 'package:gpk_app/core/providers/api_providers.dart';
-import 'package:gpk_app/features/calendar/models/event.dart';
+import 'package:gpk_app/features/calendar/models/event_wrapper.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 import 'package:gpk_app/features/routine/models/routine_schedule.dart';
 import 'package:gpk_app/features/routine/providers/routine_providers.dart';
@@ -20,27 +22,30 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapters();
 
-  final calendarCacheService = CacheService<EventsMapList>("calendarBox");
+  final calendarCacheService = CacheService<EventWrapper>("calendarBox");
   final routineCacheService = CacheService<RoutineSchedule>("routineBox");
   final settingsCacheService = CacheService<UserPreferences>("userBox");
   final syllabusCacheService = CacheService<Syllabus>("syllabusBox");
+  final cacheMetaDataService = CacheMetadata("cacheMetadata");
 
   final apiServer = ApiServer(baseUrl: 'http://localhost:8787');
+  await cacheMetaDataService.init();
   await calendarCacheService.init();
   await routineCacheService.init();
   await settingsCacheService.init();
   await syllabusCacheService.init();
 
   //WARN: Remove during production
-  await routineCacheService.clearAll();
-  await calendarCacheService.clearAll();
-  await settingsCacheService.clearAll();
-  await syllabusCacheService.clearAll();
+  // await routineCacheService.clearAll();
+  // await calendarCacheService.clearAll();
+  // await settingsCacheService.clearAll();
+  // await syllabusCacheService.clearAll();
 
   runApp(
     ProviderScope(
       overrides: [
         apiClientProvider.overrideWithValue(apiServer),
+        cacheMetadataProvider.overrideWithValue(cacheMetaDataService),
         calendarCacheServiceProvider.overrideWithValue(calendarCacheService),
         routineCacheServiceProvider.overrideWithValue(routineCacheService),
         settingsCacheServiceProvider.overrideWithValue(settingsCacheService),

@@ -1,20 +1,26 @@
+import 'package:gpk_app/core/cache/cache_metadata.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/models/branch.dart';
 import 'package:gpk_app/core/models/semester.dart';
 import 'package:gpk_app/core/network/api_server.dart';
+import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
+import 'package:gpk_app/features/calendar/models/event_wrapper.dart';
 
 class CalendarRepository {
   final ApiServer apiServer;
   final CacheService cacheService;
+  final CacheMetadata cacheMetadata;
   final Duration cacheDuration;
+
   final String cacheKey = 'calendar_events';
 
   CalendarRepository({
     required this.apiServer,
     required this.cacheService,
-    this.cacheDuration = const Duration(days: 1),
+    required this.cacheMetadata,
+    this.cacheDuration = const Duration(hours: 5),
   });
 
   Future<(EventGroup, dynamic)> getEventsForCalendar(
@@ -36,7 +42,18 @@ class CalendarRepository {
     Semester semester, {
     bool forceRefresh = false,
   }) async {
-    final String cacheKey = 'calendar$branch';
+    final String cacheKey = 'calendar$branch${semester.year}';
+
+    if (!forceRefresh && cacheMetadata.isCacheValid(cacheKey, cacheDuration)) {
+      final cachedEvents = await cacheService.get(cacheKey);
+      if (cachedEvents != null) {
+        Log.info(
+          "Calendar Event: Returning cache (Age: $cacheDuration mins)",
+        );
+        return cachedEvents.events;
+      }
+    }
+
     final result = await Future.wait([
       getEventsForCalendar(
         null,
@@ -66,7 +83,9 @@ class CalendarRepository {
 
     addEvents(allEventsJson, allEventGroup);
     addEvents(branchEventsJson, branchEventGroup);
-    cacheService.write(cacheKey, events);
+    final eventsWrapper = EventWrapper(events);
+    cacheService.write(cacheKey, eventsWrapper);
+    cacheMetadata.updateCacheTimeStamp(cacheKey);
     return events;
   }
 }

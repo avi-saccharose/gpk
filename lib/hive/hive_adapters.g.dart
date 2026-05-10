@@ -47,9 +47,41 @@ class BranchAdapter extends TypeAdapter<Branch> {
           typeId == other.typeId;
 }
 
-class UserPreferencesAdapter extends TypeAdapter<UserPreferences> {
+class SemesterAdapter extends TypeAdapter<Semester> {
   @override
   final typeId = 1;
+
+  @override
+  Semester read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Semester((fields[0] as num).toInt());
+  }
+
+  @override
+  void write(BinaryWriter writer, Semester obj) {
+    writer
+      ..writeByte(1)
+      ..writeByte(0)
+      ..write(obj.value);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SemesterAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class UserPreferencesAdapter extends TypeAdapter<UserPreferences> {
+  @override
+  final typeId = 2;
 
   @override
   UserPreferences read(BinaryReader reader) {
@@ -91,7 +123,7 @@ class UserPreferencesAdapter extends TypeAdapter<UserPreferences> {
 
 class EventGroupAdapter extends TypeAdapter<EventGroup> {
   @override
-  final typeId = 2;
+  final typeId = 3;
 
   @override
   EventGroup read(BinaryReader reader) {
@@ -160,7 +192,7 @@ class EventGroupAdapter extends TypeAdapter<EventGroup> {
 
 class EventAdapter extends TypeAdapter<Event> {
   @override
-  final typeId = 3;
+  final typeId = 4;
 
   @override
   Event read(BinaryReader reader) {
@@ -198,9 +230,46 @@ class EventAdapter extends TypeAdapter<Event> {
           typeId == other.typeId;
 }
 
+class EventWrapperAdapter extends TypeAdapter<EventWrapper> {
+  @override
+  final typeId = 5;
+
+  @override
+  EventWrapper read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return EventWrapper(
+      (fields[1] as Map).map(
+        (dynamic k, dynamic v) =>
+            MapEntry(k as DateTime, (v as List).cast<Event>()),
+      ),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, EventWrapper obj) {
+    writer
+      ..writeByte(1)
+      ..writeByte(1)
+      ..write(obj.eventsMap);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is EventWrapperAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 class DayAdapter extends TypeAdapter<Day> {
   @override
-  final typeId = 4;
+  final typeId = 6;
 
   @override
   Day read(BinaryReader reader) {
@@ -249,7 +318,7 @@ class DayAdapter extends TypeAdapter<Day> {
 
 class TimelineItemAdapter extends TypeAdapter<TimelineItem> {
   @override
-  final typeId = 5;
+  final typeId = 7;
 
   @override
   TimelineItem read(BinaryReader reader) {
@@ -298,7 +367,7 @@ class TimelineItemAdapter extends TypeAdapter<TimelineItem> {
 
 class RoutineScheduleAdapter extends TypeAdapter<RoutineSchedule> {
   @override
-  final typeId = 6;
+  final typeId = 8;
 
   @override
   RoutineSchedule read(BinaryReader reader) {
@@ -335,7 +404,7 @@ class RoutineScheduleAdapter extends TypeAdapter<RoutineSchedule> {
 
 class ChapterAdapter extends TypeAdapter<Chapter> {
   @override
-  final typeId = 7;
+  final typeId = 9;
 
   @override
   Chapter read(BinaryReader reader) {
@@ -375,7 +444,7 @@ class ChapterAdapter extends TypeAdapter<Chapter> {
 
 class SubjectAdapter extends TypeAdapter<Subject> {
   @override
-  final typeId = 8;
+  final typeId = 10;
 
   @override
   Subject read(BinaryReader reader) {
@@ -417,7 +486,7 @@ class SubjectAdapter extends TypeAdapter<Subject> {
 
 class SyllabusAdapter extends TypeAdapter<Syllabus> {
   @override
-  final typeId = 9;
+  final typeId = 11;
 
   @override
   Syllabus read(BinaryReader reader) {
@@ -451,38 +520,6 @@ class SyllabusAdapter extends TypeAdapter<Syllabus> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is SyllabusAdapter &&
-          runtimeType == other.runtimeType &&
-          typeId == other.typeId;
-}
-
-class SemesterAdapter extends TypeAdapter<Semester> {
-  @override
-  final typeId = 10;
-
-  @override
-  Semester read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return Semester((fields[0] as num).toInt());
-  }
-
-  @override
-  void write(BinaryWriter writer, Semester obj) {
-    writer
-      ..writeByte(1)
-      ..writeByte(0)
-      ..write(obj.value);
-  }
-
-  @override
-  int get hashCode => typeId.hashCode;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      other is SemesterAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

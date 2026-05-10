@@ -206,7 +206,7 @@ final class CalendarRepositoryProvider
 }
 
 String _$calendarRepositoryHash() =>
-    r'af2071432fffd560699612e18863fbaf23a2771f';
+    r'43e3397600c6cf6f434e4d757923abe2c329f1e8';
 
 @ProviderFor(calendarEvents)
 final calendarEventsProvider = CalendarEventsProvider._();
@@ -245,7 +245,7 @@ final class CalendarEventsProvider
   }
 }
 
-String _$calendarEventsHash() => r'a69d8421bffab786fc2d1e3612f03ec205fed8aa';
+String _$calendarEventsHash() => r'b626cf8fa1c1fa75523e1974247a6fbd8d2ac403';
 
 @ProviderFor(monthlyEventsMap)
 final monthlyEventsMapProvider = MonthlyEventsMapProvider._();
