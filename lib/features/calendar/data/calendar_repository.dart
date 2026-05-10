@@ -1,10 +1,7 @@
-import 'dart:convert';
-
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/models/branch.dart';
 import 'package:gpk_app/core/models/semester.dart';
 import 'package:gpk_app/core/network/api_server.dart';
-import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
 
@@ -19,21 +16,6 @@ class CalendarRepository {
     required this.cacheService,
     this.cacheDuration = const Duration(days: 1),
   });
-
-  Future<EventsMapList> getCachedEvents() async {
-    final dynamic rawData = await cacheService.get(cacheKey);
-    if (rawData == null) {
-      return EventsMapList();
-    }
-    final EventsMapList typedData = EventsMapList();
-    (rawData as Map).forEach((key, value) {
-      if (key is DateTime && value is List) {
-        typedData[key] = value.cast<Event>();
-      }
-    });
-
-    return typedData;
-  }
 
   Future<(EventGroup, dynamic)> getEventsForCalendar(
     Branch? branch,
@@ -55,15 +37,19 @@ class CalendarRepository {
     bool forceRefresh = false,
   }) async {
     final String cacheKey = 'calendar$branch';
-    final (allEventGroup, allEventsJson) = await getEventsForCalendar(
-      null,
-      null,
-    );
-    final (branchEventGroup, branchEventsJson) = await getEventsForCalendar(
-      branch,
-      semester,
-    );
+    final result = await Future.wait([
+      getEventsForCalendar(
+        null,
+        null,
+      ),
+      getEventsForCalendar(
+        branch,
+        semester,
+      ),
+    ]);
 
+    final (allEventGroup, allEventsJson) = result[0];
+    final (branchEventGroup, branchEventsJson) = result[1];
     final events = EventsMapList(
       equals: (a, b) => a.isSameDay(b),
       hashCode: (key) => key.year * 10000 + key.month * 100 + key.day,
