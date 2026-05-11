@@ -4,6 +4,7 @@ import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/features/faculty/providers/faculty_providers.dart';
 import 'package:gpk_app/features/faculty/widgets/faculty_card.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class FacultyScreen extends ConsumerWidget {
   const FacultyScreen({super.key});
@@ -28,6 +29,13 @@ class FacultyScreen extends ConsumerWidget {
             ),
             gapH20,
             SearchBar(
+              elevation: WidgetStatePropertyAll(0),
+              backgroundColor: WidgetStatePropertyAll(Colors.grey[100]),
+              leading: HugeIcon(icon: HugeIcons.strokeRoundedSearch01),
+              padding: WidgetStatePropertyAll(
+                EdgeInsetsGeometry.symmetric(horizontal: Sizes.p16),
+              ),
+
               onChanged: (value) => {
                 ref.read(searchQueryProvider.notifier).set(value),
               },
