@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/text_styles.dart';
+import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -10,6 +11,7 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final String displayName = ref.watch(settingsProvider).displayName;
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -31,7 +33,7 @@ class HomeScreen extends ConsumerWidget {
                 style: AppTextStyles.label,
               ),
               Text(
-                "Avi",
+                displayName,
                 style: AppTextStyles.display,
               ),
               gapH20,

@@ -21,7 +21,7 @@ types:
         index: 0
   UserPreferences:
     typeId: 2
-    nextIndex: 3
+    nextIndex: 4
     fields:
       isDarkMode:
         index: 0
@@ -29,6 +29,8 @@ types:
         index: 1
       selectedSemester:
         index: 2
+      displayName:
+        index: 3
   EventGroup:
     typeId: 3
     nextIndex: 10
