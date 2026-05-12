@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
+import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/features/faculty/models/faculty.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -11,7 +12,9 @@ Future<void> openWhatsApp(String number) async {
   final Uri whatsappUrl = Uri.parse('https://wa.me/$phoneNumber');
   try {
     await launchUrl(whatsappUrl);
-  } catch (e) {}
+  } catch (error, stackTrace) {
+    Log.error("launch whatsapp", error, stackTrace);
+  }
 }
 
 void showFacultyBottomSheet(BuildContext context, Faculty faculty) {
