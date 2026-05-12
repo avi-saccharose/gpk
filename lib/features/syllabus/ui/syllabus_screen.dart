@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/core/utils/text_styles.dart';
+import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 import 'package:gpk_app/features/syllabus/models/syllabus.dart';
 import 'package:gpk_app/features/syllabus/providers/syllabus_providers.dart';
@@ -42,7 +43,7 @@ class SyllabusScreen extends ConsumerWidget {
                 Log.error("fetch syllabus", error, stackTrace);
                 return Text("Error fetching syllabus");
               },
-              loading: () => CircularProgressIndicator(),
+              loading: () => Center(child: ElasticWaveLoader()),
             ),
           ],
         ),

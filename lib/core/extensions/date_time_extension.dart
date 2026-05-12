@@ -14,6 +14,7 @@ extension DateTimeExtension on DateTime {
 
   // formatters
   String get dayNum => DateFormat.d().format(this);
+  String get dayMonth => DateFormat.yMEd().format(this);
   String get shortDay => DateFormat.E().format(this); // Mon
   String get shortDate => DateFormat.yMMMd().format(this); // 2026 Apr 32
   String get monthDate => DateFormat.MMMd().format(this); // Apr 2

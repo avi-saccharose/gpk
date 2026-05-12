@@ -14,54 +14,68 @@ class SettingsScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: Column(
-          children: [
-            Text(settingsNotifier.isDarkMode.toString()),
-            Switch(
-              value: settingsNotifier.isDarkMode,
-              onChanged: (value) =>
-                  ref.read(settingsProvider.notifier).updateTheme(value),
-            ),
-            SegmentedButton<Branch>(
-              segments: [
-                ButtonSegment(
-                  value: Branch.cse,
-                  label: Text("CSE"),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Column(
+            children: [
+              SizedBox(
+                width: 250,
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    label: Text("Name"),
+                  ),
+                  onSubmitted: (String text) {
+                    ref.read(settingsProvider.notifier).updateDisplayName(text);
+                  },
                 ),
-                ButtonSegment(
-                  value: Branch.ce,
-                  label: Text("CE"),
-                ),
-                ButtonSegment(
-                  value: Branch.ft,
-                  label: Text("FT"),
-                ),
-              ],
-              selected: {selectedBranch},
-              onSelectionChanged: (Set<Branch> newSelectedBranch) {
-                ref
-                    .read(settingsProvider.notifier)
-                    .updateBranch(newSelectedBranch.first);
-              },
-            ),
+              ),
+              Switch(
+                value: settingsNotifier.isDarkMode,
+                onChanged: (value) =>
+                    ref.read(settingsProvider.notifier).updateTheme(value),
+              ),
+              SegmentedButton<Branch>(
+                segments: [
+                  ButtonSegment(
+                    value: Branch.cse,
+                    label: Text("CSE"),
+                  ),
+                  ButtonSegment(
+                    value: Branch.ce,
+                    label: Text("CE"),
+                  ),
+                  ButtonSegment(
+                    value: Branch.ft,
+                    label: Text("FT"),
+                  ),
+                ],
+                selected: {selectedBranch},
+                onSelectionChanged: (Set<Branch> newSelectedBranch) {
+                  ref
+                      .read(settingsProvider.notifier)
+                      .updateBranch(newSelectedBranch.first);
+                },
+              ),
 
-            SegmentedButton<int>(
-              segments: [
-                ButtonSegment(value: 1, label: Text("sem 1")),
-                ButtonSegment(value: 2, label: Text("sem 2")),
-                ButtonSegment(value: 3, label: Text("sem 3")),
-                ButtonSegment(value: 4, label: Text("sem 4")),
-                ButtonSegment(value: 5, label: Text("sem 5")),
-                ButtonSegment(value: 6, label: Text("sem 6")),
-              ],
-              selected: {selectedSemester.value},
-              onSelectionChanged: (Set<int> newSelectedSemester) {
-                ref
-                    .read(settingsProvider.notifier)
-                    .updateSemester(newSelectedSemester.first);
-              },
-            ),
-          ],
+              SegmentedButton<int>(
+                segments: [
+                  ButtonSegment(value: 1, label: Text("sem 1")),
+                  ButtonSegment(value: 2, label: Text("sem 2")),
+                  ButtonSegment(value: 3, label: Text("sem 3")),
+                  ButtonSegment(value: 4, label: Text("sem 4")),
+                  ButtonSegment(value: 5, label: Text("sem 5")),
+                  ButtonSegment(value: 6, label: Text("sem 6")),
+                ],
+                selected: {selectedSemester.value},
+                onSelectionChanged: (Set<int> newSelectedSemester) {
+                  ref
+                      .read(settingsProvider.notifier)
+                      .updateSemester(newSelectedSemester.first);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

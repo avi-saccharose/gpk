@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
+import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 
 class EventList extends ConsumerWidget {
@@ -49,7 +50,7 @@ class EventList extends ConsumerWidget {
           ),
         );
       },
-      loading: () => CircularProgressIndicator(),
+      loading: () => Center(child: ElasticWaveLoader()),
       error: (error, stackTrace) {
         Log.error("Fetching calendar failed", error, stackTrace);
         return Text(
