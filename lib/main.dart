@@ -69,7 +69,7 @@ class MyApp extends ConsumerWidget {
       themeMode: settings.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       darkTheme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Colors.indigo,
+        colorSchemeSeed: Colors.white,
         brightness: Brightness.dark,
       ),
       theme: ThemeData(
@@ -79,7 +79,7 @@ class MyApp extends ConsumerWidget {
               const HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft02),
         ),
         useMaterial3: true,
-        colorSchemeSeed: Colors.blueAccent,
+        colorSchemeSeed: Colors.white,
       ),
       routerConfig: AppRouter.goRouter,
     );

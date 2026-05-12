@@ -3,7 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/app_navigation.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
+import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/core/utils/text_styles.dart';
+import 'package:gpk_app/core/widgets/loader.dart';
+import 'package:gpk_app/features/home/providers/home_providers.dart';
 import 'package:gpk_app/features/home/widgets/faculty_list.dart';
 import 'package:gpk_app/features/home/widgets/subjects_list.dart';
 import 'package:gpk_app/features/home/widgets/upcoming_events.dart';
@@ -52,63 +55,7 @@ class HomeScreen extends ConsumerWidget {
                     color: colorScheme.primary,
                   ),
                 ),
-                Card(
-                  elevation: 4,
-                  shadowColor: Colors.black.withValues(alpha: 0.4),
-                  surfaceTintColor: Colors.transparent,
-                  color: colorScheme
-                      .surface, //Colors.white.withValues(alpha: 0.9),
-                  child: Padding(
-                    padding: EdgeInsetsGeometry.all(16),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.format_quote),
-                        gapH8,
-                        Text(
-                          '"hello "',
-                          style: textTheme.bodyLarge?.copyWith(
-                            fontStyle: FontStyle.italic,
-                            fontSize: 18,
-                            height: 1.5,
-                            color: colorScheme.onSurface,
-                          ),
-                        ),
-                        gapH16,
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 24,
-                              height: 1,
-                              color: colorScheme.onSurface.withValues(
-                                alpha: 0.3,
-                              ),
-                            ),
-                            gapW8,
-                            Text(
-                              "Steve jobs",
-                              style: textTheme.labelLarge?.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color: colorScheme.onSurface.withValues(
-                                  alpha: 0.7,
-                                ),
-                              ),
-                            ),
-                            gapW8,
-                            Container(
-                              width: 24,
-                              height: 1,
-                              color: colorScheme.onSurface.withValues(
-                                alpha: 0.3,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                QuoteOfTheDay(),
                 gapH32,
                 SectionHeader(
                   title: "Upcoming Events",
@@ -138,6 +85,84 @@ class HomeScreen extends ConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class QuoteOfTheDay extends ConsumerWidget {
+  const QuoteOfTheDay({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
+    final data = ref.watch(getQuoteOfDayProvider);
+    return data.when(
+      data: (quote) => Card(
+        elevation: 4,
+        shadowColor: Colors.black.withValues(alpha: 0.4),
+        surfaceTintColor: Colors.transparent,
+        color: colorScheme.surface, //Colors.white.withValues(alpha: 0.9),
+        child: Padding(
+          padding: EdgeInsetsGeometry.all(16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(Icons.format_quote),
+              gapH8,
+              Text(
+                quote.quote,
+                style: textTheme.bodyLarge?.copyWith(
+                  fontStyle: FontStyle.italic,
+                  fontSize: 18,
+                  height: 1.5,
+                  color: colorScheme.onSurface,
+                ),
+              ),
+              gapH16,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 24,
+                    height: 1,
+                    color: colorScheme.onSurface.withValues(
+                      alpha: 0.3,
+                    ),
+                  ),
+                  gapW8,
+                  Text(
+                    quote.author,
+                    style: textTheme.labelLarge?.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: colorScheme.onSurface.withValues(
+                        alpha: 0.7,
+                      ),
+                    ),
+                  ),
+                  gapW8,
+                  Container(
+                    width: 24,
+                    height: 1,
+                    color: colorScheme.onSurface.withValues(
+                      alpha: 0.3,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      loading: () => Center(
+        child: ElasticWaveLoader(),
+      ),
+      error: (error, stackTrace) {
+        Log.error("loading quote", error, stackTrace);
+        return Text("error loading quote");
+      },
     );
   }
 }

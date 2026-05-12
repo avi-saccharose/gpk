@@ -1,5 +1,9 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
+import 'package:gpk_app/features/home/models/quote.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'home_providers.g.dart';
@@ -17,4 +21,16 @@ Future<Map<DateTime, List<Event>>> upcomingEventsMap(Ref ref) async {
       })
       .take(1);
   return Map<DateTime, List<Event>>.fromEntries(filteredMap);
+}
+
+@riverpod
+Future<Quote> getQuoteOfDay(Ref ref) async {
+  final String response = await rootBundle.loadString(
+    'assets/json/quotes.json',
+  );
+  final List<dynamic> data = jsonDecode(response);
+  List<Quote> quotes = data.map((json) => Quote.fromJson(json)).toList();
+  final date = DateTime.now();
+  final int index = date.difference(DateTime(date.year, 1, 1)).inDays + 1;
+  return quotes[index % quotes.length];
 }

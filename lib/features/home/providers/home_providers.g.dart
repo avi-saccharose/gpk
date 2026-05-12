@@ -48,4 +48,37 @@ final class UpcomingEventsMapProvider
   }
 }
 
-String _$upcomingEventsMapHash() => r'31b6923324c1df9ff114f3df86486cc50f7cf5a8';
+String _$upcomingEventsMapHash() => r'41bbb492ad2823e868ffdd2502d9a2bb9c7fe9fc';
+
+@ProviderFor(getQuoteOfDay)
+final getQuoteOfDayProvider = GetQuoteOfDayProvider._();
+
+final class GetQuoteOfDayProvider
+    extends $FunctionalProvider<AsyncValue<Quote>, Quote, FutureOr<Quote>>
+    with $FutureModifier<Quote>, $FutureProvider<Quote> {
+  GetQuoteOfDayProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getQuoteOfDayProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getQuoteOfDayHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<Quote> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Quote> create(Ref ref) {
+    return getQuoteOfDay(ref);
+  }
+}
+
+String _$getQuoteOfDayHash() => r'0d5abe29fc5a925c74cd924d69da1110d34a6219';
