@@ -12,8 +12,8 @@ class FacultyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Card(
-      color: Colors.white,
       elevation: 4,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(12),
@@ -49,7 +49,7 @@ class FacultyCard extends StatelessWidget {
 
             Container(
               decoration: BoxDecoration(
-                color: Colors.white70,
+                color: colorScheme.surface,
                 shape: BoxShape.circle,
               ),
               child: IconButton(

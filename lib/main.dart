@@ -32,10 +32,10 @@ void main() async {
   final syllabusCacheService = CacheService<Syllabus>("syllabusBox");
   final cacheMetaDataService = CacheMetadata("cacheMetadata");
 
-  // final apiServer = ApiServer(baseUrl: 'http://localhost:8787');
-  final apiServer = ApiServer(
-    baseUrl: 'https://gpk-backend.avi-vivi.workers.dev',
-  );
+  final apiServer = ApiServer(baseUrl: 'http://localhost:8787');
+  // final apiServer = ApiServer(
+  //   baseUrl: 'https://gpk-backend.avi-vivi.workers.dev',
+  // );
   await cacheMetaDataService.init();
   await calendarCacheService.init();
   await routineCacheService.init();

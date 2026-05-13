@@ -30,7 +30,6 @@ class FacultyScreen extends ConsumerWidget {
             gapH20,
             SearchBar(
               elevation: WidgetStatePropertyAll(0),
-              backgroundColor: WidgetStatePropertyAll(Colors.grey[100]),
               leading: HugeIcon(icon: HugeIcons.strokeRoundedSearch01),
               padding: WidgetStatePropertyAll(
                 EdgeInsetsGeometry.symmetric(horizontal: Sizes.p16),

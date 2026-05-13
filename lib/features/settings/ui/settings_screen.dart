@@ -206,6 +206,13 @@ class SettingsScreen extends ConsumerWidget {
                                 await ref
                                     .read(sylllabusCacheServiceProvider)
                                     .clearAll();
+
+                                ref.invalidate(calendarCacheServiceProvider);
+                                ref.invalidate(routineCacheServiceProvider);
+                                ref.invalidate(sylllabusCacheServiceProvider);
+
+                                Log.info("Clear cache");
+
                                 scaffold.showSnackBar(
                                   const SnackBar(
                                     content: Text("All caches cleared"),

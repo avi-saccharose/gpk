@@ -13,6 +13,8 @@ class SyllabusDetailScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     final subject = ref.watch(subjectByCodeProvider(subjectCode));
     return Scaffold(
       appBar: AppBar(),
@@ -32,7 +34,9 @@ class SyllabusDetailScreen extends ConsumerWidget {
                   children: [
                     Text(
                       subject?.subjectName ?? "",
-                      style: AppTextStyles.display,
+                      style: textTheme.headlineLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ), //AppTextStyles.display,
                     ),
                     Container(
                       padding: EdgeInsetsGeometry.symmetric(
@@ -71,7 +75,9 @@ class SyllabusDetailScreen extends ConsumerWidget {
                       padding: EdgeInsetsGeometry.all(16),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: Colors.white60,
+                        color: colorScheme.surfaceContainerHighest.withValues(
+                          alpha: 0.6,
+                        ),
                         borderRadius: BorderRadiusGeometry.only(
                           topLeft: Radius.circular(32),
                           topRight: Radius.circular(32),
@@ -84,7 +90,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
                           return Container(
                             margin: EdgeInsetsGeometry.only(bottom: Sizes.p16),
                             decoration: BoxDecoration(
-                              color: Colors.white60,
+                              color: colorScheme.surfaceContainerLowest,
                               borderRadius: BorderRadiusGeometry.circular(16),
                             ),
                             child: ExpansionTile(
@@ -96,17 +102,17 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.grey.shade900,
+                                  color: colorScheme.onSurfaceVariant,
                                 ),
                               ),
                               leading: Container(
                                 width: 44,
                                 height: 44,
                                 decoration: BoxDecoration(
-                                  color: Colors.grey.shade50,
+                                  color: colorScheme.surfaceContainerLowest,
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
-                                    color: Colors.grey.shade200,
+                                    color: colorScheme.onSurfaceVariant,
                                     width: 1.5,
                                   ),
                                 ),
@@ -114,7 +120,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                   child: Text(
                                     "${index + 1}",
                                     style: TextStyle(
-                                      color: Colors.grey.shade700,
+                                      color: colorScheme.onSurfaceVariant,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
@@ -127,7 +133,9 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                   children: [
                                     Text(
                                       "${chapter.subTopics.length} Subtopics",
-                                      style: TextStyle(color: Colors.grey[600]),
+                                      style: TextStyle(
+                                        color: colorScheme.onSurfaceVariant,
+                                      ),
                                     ),
                                     const Padding(
                                       padding:
@@ -157,14 +165,14 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                   leading: Icon(
                                     Icons.article_outlined,
                                     size: 20,
-                                    color: Colors.grey.shade400,
+                                    color: colorScheme.outlineVariant,
                                   ),
                                   title: Text(
                                     subtopic,
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.grey.shade500,
+                                      color: colorScheme.outlineVariant,
                                     ),
                                   ),
                                 );
