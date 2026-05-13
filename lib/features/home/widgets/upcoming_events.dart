@@ -56,8 +56,8 @@ class UpcomingEvents extends ConsumerWidget {
             : EventsList(eventsMap: data);
       },
       loading: () {
-        return Padding(
-          padding: const EdgeInsetsGeometry.only(top: 24),
+        return const Padding(
+          padding: EdgeInsetsGeometry.only(top: 24),
           child: Center(
             child: ElasticWaveLoader(),
           ),
@@ -125,7 +125,7 @@ class EventsList extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                "${date.dayMonth}",
+                date.dayMonth,
                 style: textTheme.bodySmall?.copyWith(
                   color: Theme.of(
                     context,

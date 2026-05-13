@@ -28,8 +28,8 @@ class SubjectsList extends ConsumerWidget {
           },
         ),
       ),
-      loading: () => Padding(
-        padding: const EdgeInsetsGeometry.only(top: 24),
+      loading: () => const Padding(
+        padding: EdgeInsetsGeometry.only(top: 24),
         child: Center(
           child: ElasticWaveLoader(),
         ),
@@ -76,7 +76,7 @@ class SubjectCard extends StatelessWidget {
               CircleAvatar(
                 backgroundColor: colorScheme.primaryContainer,
                 foregroundColor: colorScheme.onPrimaryContainer,
-                child: HugeIcon(icon: HugeIcons.strokeRoundedBacteria),
+                child: const HugeIcon(icon: HugeIcons.strokeRoundedBacteria),
               ),
               gapW16,
               Text(

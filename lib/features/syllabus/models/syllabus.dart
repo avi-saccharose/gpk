@@ -11,8 +11,11 @@ class Syllabus {
   List<Subject> subjects;
 
   Syllabus(this.branch, this.semester, this.subjects);
+
   factory Syllabus.fromJson(Map<String, dynamic> json) =>
       _$SyllabusFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SyllabusToJson(this);
 }
 
 @JsonSerializable()
@@ -26,6 +29,8 @@ class Subject {
 
   factory Subject.fromJson(Map<String, dynamic> json) =>
       _$SubjectFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SubjectToJson(this);
 }
 
 @JsonSerializable()
@@ -39,4 +44,6 @@ class Chapter {
 
   factory Chapter.fromJson(Map<String, dynamic> json) =>
       _$ChapterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ChapterToJson(this);
 }

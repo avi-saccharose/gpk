@@ -57,7 +57,7 @@ class EventList extends ConsumerWidget {
           ),
         );
       },
-      loading: () => Center(child: ElasticWaveLoader()),
+      loading: () => const Center(child: ElasticWaveLoader()),
       error: (error, stackTrace) {
         Log.error("Fetching calendar failed", error, stackTrace);
         return ErrorCard(
@@ -135,7 +135,7 @@ class EventListItem extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
-      margin: EdgeInsetsGeometry.symmetric(
+      margin: const EdgeInsetsGeometry.symmetric(
         vertical: Sizes.p8,
         horizontal: Sizes.p16,
       ),
@@ -162,7 +162,7 @@ class EventListItem extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding: EdgeInsetsGeometry.symmetric(
+                  padding: const EdgeInsetsGeometry.symmetric(
                     vertical: Sizes.p4,
                     horizontal: Sizes.p8,
                   ),

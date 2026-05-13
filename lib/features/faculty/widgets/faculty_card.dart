@@ -23,7 +23,7 @@ class FacultyCard extends StatelessWidget {
         padding: const EdgeInsets.all(Sizes.p12),
         child: Column(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               backgroundImage: AssetImage('assets/images/helen.jpeg'),
             ),
             gapH8,
@@ -45,7 +45,7 @@ class FacultyCard extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            Spacer(),
+            const Spacer(),
 
             Container(
               decoration: BoxDecoration(
@@ -54,7 +54,7 @@ class FacultyCard extends StatelessWidget {
               ),
               child: IconButton(
                 onPressed: () => showFacultyBottomSheet(context, faculty),
-                icon: HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
+                icon: const HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
               ),
             ),
           ],

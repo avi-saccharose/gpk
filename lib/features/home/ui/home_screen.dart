@@ -25,7 +25,7 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: HugeIcon(icon: HugeIcons.strokeRoundedSettings05, size: 30.0),
+            icon: const HugeIcon(icon: HugeIcons.strokeRoundedSettings05, size: 30.0),
             onPressed: () => context.push('/setting'),
           ),
         ],
@@ -33,12 +33,12 @@ class HomeScreen extends ConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 24),
+            padding: const EdgeInsetsGeometry.symmetric(horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 gapH20,
-                Text(
+                const Text(
                   "Hello",
                   style: AppTextStyles.label,
                 ),
@@ -55,31 +55,31 @@ class HomeScreen extends ConsumerWidget {
                     color: colorScheme.primary,
                   ),
                 ),
-                QuoteOfTheDay(),
+                const QuoteOfTheDay(),
                 gapH32,
-                SectionHeader(
+                const SectionHeader(
                   title: "Upcoming Events",
                   location: AppRouter.calendar,
                 ),
                 gapH8,
 
-                UpcomingEvents(),
+                const UpcomingEvents(),
                 gapH32,
-                SectionHeader(
+                const SectionHeader(
                   title: "Subjects",
                   location: AppRouter.syllabus,
                 ),
                 gapH8,
 
-                SubjectsList(),
+                const SubjectsList(),
                 gapH32,
-                SectionHeader(
+                const SectionHeader(
                   title: "Faculty",
                   location: AppRouter.faculty,
                 ),
                 gapH8,
 
-                FacultyList(),
+                const FacultyList(),
               ],
             ),
           ),
@@ -106,11 +106,11 @@ class QuoteOfTheDay extends ConsumerWidget {
         surfaceTintColor: Colors.transparent,
         color: colorScheme.surface, //Colors.white.withValues(alpha: 0.9),
         child: Padding(
-          padding: EdgeInsetsGeometry.all(16),
+          padding: const EdgeInsetsGeometry.all(16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.format_quote),
+              const Icon(Icons.format_quote),
               gapH8,
               Text(
                 quote.quote,
@@ -156,12 +156,12 @@ class QuoteOfTheDay extends ConsumerWidget {
           ),
         ),
       ),
-      loading: () => Center(
+      loading: () => const Center(
         child: ElasticWaveLoader(),
       ),
       error: (error, stackTrace) {
         Log.error("loading quote", error, stackTrace);
-        return Text("error loading quote");
+        return const Text("error loading quote");
       },
     );
   }
@@ -200,7 +200,7 @@ class SectionHeader extends StatelessWidget {
                 ),
               ),
               gapW4,
-              HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
+              const HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
             ],
           ),
         ),

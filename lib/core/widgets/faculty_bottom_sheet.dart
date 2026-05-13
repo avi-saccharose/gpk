@@ -28,7 +28,7 @@ void showFacultyBottomSheet(BuildContext context, Faculty faculty) {
             children: [
               Center(
                 child: Container(
-                  margin: EdgeInsetsGeometry.only(top: 8, bottom: 8),
+                  margin: const EdgeInsetsGeometry.only(top: 8, bottom: 8),
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
@@ -38,7 +38,7 @@ void showFacultyBottomSheet(BuildContext context, Faculty faculty) {
                 ),
               ),
               gapH12,
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 50,
                 backgroundImage: AssetImage('assets/images/helen.jpeg'),
               ),
@@ -60,10 +60,10 @@ void showFacultyBottomSheet(BuildContext context, Faculty faculty) {
               gapH24,
               const Divider(),
               ListTile(
-                leading: HugeIcon(icon: HugeIcons.strokeRoundedSmartPhone02),
+                leading: const HugeIcon(icon: HugeIcons.strokeRoundedSmartPhone02),
                 title: const Text('Phone number'),
                 subtitle: Text(faculty.number ?? "Not available"),
-                trailing: HugeIcon(icon: HugeIcons.strokeRoundedWhatsapp),
+                trailing: const HugeIcon(icon: HugeIcons.strokeRoundedWhatsapp),
                 onTap: () {
                   if (faculty.number != null) {
                     openWhatsApp(faculty.number!);
@@ -71,12 +71,12 @@ void showFacultyBottomSheet(BuildContext context, Faculty faculty) {
                 },
               ),
               ListTile(
-                leading: HugeIcon(icon: HugeIcons.strokeRoundedMail01),
+                leading: const HugeIcon(icon: HugeIcons.strokeRoundedMail01),
                 title: const Text("Email"),
                 subtitle: Text(faculty.email ?? "Not available"),
               ),
               ListTile(
-                leading: HugeIcon(icon: HugeIcons.strokeRoundedAddressBook),
+                leading: const HugeIcon(icon: HugeIcons.strokeRoundedAddressBook),
                 title: const Text('Address'),
                 subtitle: Text(faculty.address ?? "Not available"),
               ),

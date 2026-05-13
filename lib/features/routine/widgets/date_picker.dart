@@ -46,7 +46,7 @@ class DatePicker extends ConsumerWidget {
             child: Container(
               width: 55,
               margin: const EdgeInsets.symmetric(horizontal: 2),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 // color: Colors.grey,
               ),
               child: Column(

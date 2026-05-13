@@ -33,7 +33,7 @@ class SettingsScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SectionTitle(title: "PROFILE"),
+                const SectionTitle(title: "PROFILE"),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -42,7 +42,7 @@ class SettingsScreen extends ConsumerWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        prefixIcon: Icon(Icons.person_outlined),
+                        prefixIcon: const Icon(Icons.person_outlined),
                         label: const Text("Name"),
                       ),
                       onSubmitted: (String text) {
@@ -56,7 +56,7 @@ class SettingsScreen extends ConsumerWidget {
 
                 gapH24,
 
-                SectionTitle(
+                const SectionTitle(
                   title: "ACADEMIC INFORMATION",
                 ),
                 Card(
@@ -125,7 +125,7 @@ class SettingsScreen extends ConsumerWidget {
 
                 gapH24,
 
-                SectionTitle(
+                const SectionTitle(
                   title: "THEME",
                 ),
                 Card(
@@ -138,10 +138,10 @@ class SettingsScreen extends ConsumerWidget {
                             .read(settingsProvider.notifier)
                             .updateTheme(value ?? false);
                       },
-                      child: Column(
+                      child: const Column(
                         children: [
                           RadioListTile(
-                            title: const Row(
+                            title: Row(
                               children: [
                                 HugeIcon(icon: HugeIcons.strokeRoundedSun03),
                                 gapW8,
@@ -152,7 +152,7 @@ class SettingsScreen extends ConsumerWidget {
                           ),
                           Divider(),
                           RadioListTile(
-                            title: const Row(
+                            title: Row(
                               children: [
                                 HugeIcon(icon: HugeIcons.strokeRoundedMoon01),
                                 gapW8,
@@ -168,7 +168,7 @@ class SettingsScreen extends ConsumerWidget {
                 ),
 
                 gapH24,
-                SectionTitle(title: "APP DATA"),
+                const SectionTitle(title: "APP DATA"),
                 Card(
                   child: Padding(
                     padding: const EdgeInsetsGeometry.all(8),
@@ -187,7 +187,7 @@ class SettingsScreen extends ConsumerWidget {
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  Text(
+                                  const Text(
                                     "Clear cached data to refetch updated content",
                                     maxLines: 2,
                                   ),
@@ -219,7 +219,7 @@ class SettingsScreen extends ConsumerWidget {
                                   ),
                                 );
                               },
-                              child: Text('clear'),
+                              child: const Text('clear'),
                             ),
                           ],
                         ),
@@ -229,7 +229,7 @@ class SettingsScreen extends ConsumerWidget {
                 ),
 
                 gapH24,
-                SectionTitle(title: "ABOUT"),
+                const SectionTitle(title: "ABOUT"),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),

@@ -15,7 +15,7 @@ class AppShellScaffold extends StatelessWidget {
       extendBody: true,
       body: navigationShell,
       bottomNavigationBar: Container(
-        margin: EdgeInsets.all(Sizes.p16),
+        margin: const EdgeInsets.all(Sizes.p16),
         decoration: BoxDecoration(
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(Sizes.p32),
@@ -36,7 +36,7 @@ class AppShellScaffold extends StatelessWidget {
               initialLocation: index == navigationShell.currentIndex,
             ),
             type: BottomNavigationBarType.fixed,
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: HugeIcon(
                   icon: HugeIcons.strokeRoundedHome01,

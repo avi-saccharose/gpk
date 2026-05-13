@@ -25,7 +25,7 @@ class CalendarWidget extends ConsumerWidget {
     }
 
     return Container(
-      margin: EdgeInsets.all(Sizes.p16),
+      margin: const EdgeInsets.all(Sizes.p16),
       decoration: BoxDecoration(
         color: colorScheme.surface,
         borderRadius: BorderRadius.circular(Sizes.p16),

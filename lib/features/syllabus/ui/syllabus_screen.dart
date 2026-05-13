@@ -20,13 +20,13 @@ class SyllabusScreen extends ConsumerWidget {
     final syllabus = ref.watch(syllabusProvider);
     return SafeArea(
       child: Padding(
-        padding: EdgeInsetsGeometry.symmetric(horizontal: 24),
+        padding: const EdgeInsetsGeometry.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             gapH20,
 
-            Text(
+            const Text(
               "Syllabus",
               style: TextStyle(color: Colors.grey, fontSize: 16),
             ),
@@ -49,7 +49,7 @@ class SyllabusScreen extends ConsumerWidget {
                   },
                 );
               },
-              loading: () => Center(child: ElasticWaveLoader()),
+              loading: () => const Center(child: ElasticWaveLoader()),
             ),
           ],
         ),

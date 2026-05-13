@@ -48,7 +48,7 @@ class Timeline extends ConsumerWidget {
           },
         );
       },
-      loading: () => Center(child: const ElasticWaveLoader()),
+      loading: () => const Center(child: ElasticWaveLoader()),
     );
   }
 }
@@ -153,7 +153,7 @@ class TimelineTile extends StatelessWidget {
                             fontSize: 18,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           item.subjectCode ?? "",
                           style: textTheme.labelSmall?.copyWith(

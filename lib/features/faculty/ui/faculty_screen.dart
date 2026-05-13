@@ -19,19 +19,19 @@ class FacultyScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             gapH20,
-            Text(
+            const Text(
               "Academic",
               style: AppTextStyles.label,
             ),
-            Text(
+            const Text(
               "Faculty",
               style: AppTextStyles.display,
             ),
             gapH20,
             SearchBar(
-              elevation: WidgetStatePropertyAll(0),
-              leading: HugeIcon(icon: HugeIcons.strokeRoundedSearch01),
-              padding: WidgetStatePropertyAll(
+              elevation: const WidgetStatePropertyAll(0),
+              leading: const HugeIcon(icon: HugeIcons.strokeRoundedSearch01),
+              padding: const WidgetStatePropertyAll(
                 EdgeInsetsGeometry.symmetric(horizontal: Sizes.p16),
               ),
 
@@ -42,7 +42,7 @@ class FacultyScreen extends ConsumerWidget {
             gapH20,
             Expanded(
               child: faculties.isEmpty
-                  ? Center(
+                  ? const Center(
                       child: Text("No faculty found"),
                     )
                   : GridView.builder(

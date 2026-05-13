@@ -27,7 +27,7 @@ class EventsBottomSheet extends StatelessWidget {
           // Drag Handle
           Center(
             child: Container(
-              margin: EdgeInsetsGeometry.only(top: 8, bottom: 8),
+              margin: const EdgeInsetsGeometry.only(top: 8, bottom: 8),
               width: 40,
               height: 4,
               decoration: BoxDecoration(
@@ -85,7 +85,7 @@ class BottomSheetItem extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Container(
-        margin: EdgeInsets.all(Sizes.p16),
+        margin: const EdgeInsets.all(Sizes.p16),
         decoration: BoxDecoration(
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(Sizes.p16),
@@ -104,7 +104,7 @@ class BottomSheetItem extends StatelessWidget {
         //     borderRadius: BorderRadius.circular(8),
         //   ),
         child: Padding(
-          padding: EdgeInsets.all(Sizes.p16),
+          padding: const EdgeInsets.all(Sizes.p16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,

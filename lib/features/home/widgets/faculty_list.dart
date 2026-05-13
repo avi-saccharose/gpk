@@ -34,7 +34,7 @@ class FacultyList extends ConsumerWidget {
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       child: HugeIcon(icon: HugeIcons.strokeRoundedUser02),
                     ),
                     gapH8,

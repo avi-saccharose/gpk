@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/core/utils/typedefs.dart';
 import 'package:gpk_app/features/syllabus/providers/syllabus_providers.dart';
 
@@ -25,7 +24,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   "Subject Detail",
                   style: TextStyle(color: Colors.grey, fontSize: 16),
                 ),
@@ -39,7 +38,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
                       ), //AppTextStyles.display,
                     ),
                     Container(
-                      padding: EdgeInsetsGeometry.symmetric(
+                      padding: const EdgeInsetsGeometry.symmetric(
                         vertical: Sizes.p4,
                         horizontal: Sizes.p8,
                       ),
@@ -49,7 +48,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
                       ),
                       child: Text(
                         subject!.subjectCode,
-                        style: TextStyle(color: Colors.pink),
+                        style: const TextStyle(color: Colors.pink),
                       ),
                     ),
                   ],
@@ -57,14 +56,14 @@ class SyllabusDetailScreen extends ConsumerWidget {
                 gapH8,
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       "Total marks: ",
                       style: TextStyle(color: Colors.grey, fontSize: Sizes.p16),
                     ),
                     gapW4,
                     Text(
                       "${subject.totalMarks}",
-                      style: TextStyle(fontSize: Sizes.p16),
+                      style: const TextStyle(fontSize: Sizes.p16),
                     ),
                   ],
                 ),
@@ -72,13 +71,13 @@ class SyllabusDetailScreen extends ConsumerWidget {
                 if (subject.chapters != null) ...[
                   Expanded(
                     child: Container(
-                      padding: EdgeInsetsGeometry.all(16),
+                      padding: const EdgeInsetsGeometry.all(16),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: colorScheme.surfaceContainerHighest.withValues(
                           alpha: 0.6,
                         ),
-                        borderRadius: BorderRadiusGeometry.only(
+                        borderRadius: const BorderRadiusGeometry.only(
                           topLeft: Radius.circular(32),
                           topRight: Radius.circular(32),
                         ),
@@ -88,7 +87,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
                         itemBuilder: (context, index) {
                           final chapter = subject.chapters![index];
                           return Container(
-                            margin: EdgeInsetsGeometry.only(bottom: Sizes.p16),
+                            margin: const EdgeInsetsGeometry.only(bottom: Sizes.p16),
                             decoration: BoxDecoration(
                               color: colorScheme.surfaceContainerLowest,
                               borderRadius: BorderRadiusGeometry.circular(16),
@@ -138,10 +137,9 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                       ),
                                     ),
                                     const Padding(
-                                      padding:
-                                          const EdgeInsetsGeometry.symmetric(
-                                            horizontal: Sizes.p8,
-                                          ),
+                                      padding: EdgeInsetsGeometry.symmetric(
+                                        horizontal: Sizes.p8,
+                                      ),
                                       child: Text(
                                         ".",
                                         style: TextStyle(color: Colors.grey),
@@ -149,7 +147,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                     ),
                                     Text(
                                       "${chapter.chapterMarks} Marks",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: Colors.deepPurple,
                                         fontWeight: FontWeight.w600,
                                       ),
@@ -188,7 +186,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
             ),
           ),
         ),
-        loading: () => Center(
+        loading: () => const Center(
           child: CircularProgressIndicator(),
         ),
         error: (error, stackTrace) {

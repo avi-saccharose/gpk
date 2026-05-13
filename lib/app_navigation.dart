@@ -48,7 +48,7 @@ class AppRouter {
           StatefulShellBranch(
             navigatorKey: _shellNavigatorHomeKey,
             routes: [
-              GoRoute(path: home, builder: (context, state) => HomeScreen()),
+              GoRoute(path: home, builder: (context, state) => const HomeScreen()),
             ],
           ),
           StatefulShellBranch(
@@ -56,7 +56,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: calendar,
-                builder: (context, state) => CalendarScreen(),
+                builder: (context, state) => const CalendarScreen(),
               ),
             ],
           ),
@@ -65,7 +65,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: routine,
-                builder: (context, state) => RoutineScreen(),
+                builder: (context, state) => const RoutineScreen(),
               ),
             ],
           ),
@@ -74,7 +74,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: syllabus,
-                builder: (context, state) => SyllabusScreen(),
+                builder: (context, state) => const SyllabusScreen(),
                 routes: [
                   GoRoute(
                     path: ':subjectCode',
@@ -93,7 +93,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: faculty,
-                builder: (context, state) => FacultyScreen(),
+                builder: (context, state) => const FacultyScreen(),
               ),
             ],
           ),
@@ -102,7 +102,7 @@ class AppRouter {
       GoRoute(
         path: setting,
         parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) => SettingsScreen(),
+        builder: (context, state) => const SettingsScreen(),
       ),
     ],
   );

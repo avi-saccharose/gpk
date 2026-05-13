@@ -66,7 +66,9 @@ class _ElasticWaveLoaderState extends State<ElasticWaveLoader>
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF667EEA).withOpacity(0.4 * value),
+                      color: const Color(
+                        0xFF667EEA,
+                      ).withValues(alpha: 0.4 * value),
                       blurRadius: 12,
                       spreadRadius: 2,
                     ),
