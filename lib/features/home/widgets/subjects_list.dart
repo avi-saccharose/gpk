@@ -15,8 +15,6 @@ class SubjectsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
     final syllabus = ref.watch(syllabusProvider);
     return syllabus.when(
       data: (syllabus) => SizedBox(
@@ -41,7 +39,7 @@ class SubjectsList extends ConsumerWidget {
         return ErrorCard(
           message: "failed loading subjects",
           retry: () {
-            ref.refresh(syllabusProvider.future);
+            ref.invalidate(syllabusProvider);
           },
         );
       },

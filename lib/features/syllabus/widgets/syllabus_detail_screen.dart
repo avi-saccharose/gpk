@@ -59,7 +59,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
                     ),
                     gapW4,
                     Text(
-                      "${subject!.totalMarks}",
+                      "${subject.totalMarks}",
                       style: TextStyle(fontSize: Sizes.p16),
                     ),
                   ],

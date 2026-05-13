@@ -22,7 +22,6 @@ class SettingsScreen extends ConsumerWidget {
     final isDarkMode = settingsNotifier.isDarkMode;
 
     final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
 
     const branches = [Branch.cse, Branch.ce, Branch.ft];
     return Scaffold(

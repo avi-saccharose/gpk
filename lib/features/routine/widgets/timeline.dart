@@ -44,7 +44,7 @@ class Timeline extends ConsumerWidget {
         return ErrorCard(
           message: "Failed fetching routine",
           retry: () {
-            ref.refresh(routineProvider.future);
+            ref.invalidate(routineProvider);
           },
         );
       },

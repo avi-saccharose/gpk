@@ -68,7 +68,7 @@ class UpcomingEvents extends ConsumerWidget {
         return ErrorCard(
           message: "Failed loading events",
           retry: () {
-            ref.refresh(upcomingEventsMapProvider.future);
+            ref.invalidate(upcomingEventsMapProvider);
           },
         );
       },

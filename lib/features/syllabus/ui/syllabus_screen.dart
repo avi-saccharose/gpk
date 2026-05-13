@@ -45,7 +45,7 @@ class SyllabusScreen extends ConsumerWidget {
                 return ErrorCard(
                   message: "Failed fetching syllabus",
                   retry: () {
-                    ref.refresh(syllabusProvider.future);
+                    ref.invalidate(syllabusProvider);
                   },
                 );
               },

@@ -29,7 +29,7 @@ class EventList extends ConsumerWidget {
         return Expanded(
           child: RefreshIndicator(
             onRefresh: () async {
-              await ref.refresh(monthlyEventsProvider.future);
+              ref.invalidate(monthlyEventsProvider);
             },
             child: ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(),
@@ -63,7 +63,7 @@ class EventList extends ConsumerWidget {
         return ErrorCard(
           message: "Failed fetching calendar events",
           retry: () {
-            ref.refresh(monthlyEventsProvider);
+            ref.invalidate(monthlyEventsProvider);
           },
         );
       },
