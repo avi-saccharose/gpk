@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
+import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
 import 'package:gpk_app/core/utils/time_helper.dart';
@@ -38,10 +39,14 @@ class Timeline extends ConsumerWidget {
         ),
       ),
 
-      // TODO: Error Handling
       error: (error, stackTrace) {
         Log.error("Fetching routine", error, stackTrace);
-        return Text('error Fetching rotuine');
+        return ErrorCard(
+          message: "Failed fetching routine",
+          retry: () {
+            ref.refresh(routineProvider.future);
+          },
+        );
       },
       loading: () => Center(child: const ElasticWaveLoader()),
     );

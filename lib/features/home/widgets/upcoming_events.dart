@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
+import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
 import 'package:gpk_app/features/home/providers/home_providers.dart';
@@ -64,7 +65,12 @@ class UpcomingEvents extends ConsumerWidget {
       },
       error: (error, stackTrace) {
         Log.error("montlhy events", error, stackTrace);
-        return Text("Error fetching events");
+        return ErrorCard(
+          message: "Failed loading events",
+          retry: () {
+            ref.refresh(upcomingEventsMapProvider.future);
+          },
+        );
       },
     );
   }

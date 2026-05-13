@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gpk_app/app_navigation.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
+import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/syllabus/models/syllabus.dart';
 import 'package:gpk_app/features/syllabus/providers/syllabus_providers.dart';
@@ -14,6 +15,8 @@ class SubjectsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
     final syllabus = ref.watch(syllabusProvider);
     return syllabus.when(
       data: (syllabus) => SizedBox(
@@ -35,7 +38,12 @@ class SubjectsList extends ConsumerWidget {
       ),
       error: (error, stackTrace) {
         Log.error("subjects list", error, stackTrace);
-        return Text("Error loading subjects");
+        return ErrorCard(
+          message: "failed loading subjects",
+          retry: () {
+            ref.refresh(syllabusProvider.future);
+          },
+        );
       },
     );
   }

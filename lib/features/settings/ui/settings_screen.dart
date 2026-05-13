@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gpk_app/core/constants/app_config.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/models/branch.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
+import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
+import 'package:gpk_app/features/routine/providers/routine_providers.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
+import 'package:gpk_app/features/syllabus/providers/syllabus_providers.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -192,7 +196,23 @@ class SettingsScreen extends ConsumerWidget {
                               ),
                             ),
                             FilledButton(
-                              onPressed: () {},
+                              onPressed: () async {
+                                final scaffold = ScaffoldMessenger.of(context);
+                                await ref
+                                    .read(calendarCacheServiceProvider)
+                                    .clearAll();
+                                await ref
+                                    .read(routineCacheServiceProvider)
+                                    .clearAll();
+                                await ref
+                                    .read(sylllabusCacheServiceProvider)
+                                    .clearAll();
+                                scaffold.showSnackBar(
+                                  const SnackBar(
+                                    content: Text("All caches cleared"),
+                                  ),
+                                );
+                              },
                               child: Text('clear'),
                             ),
                           ],
@@ -213,8 +233,8 @@ class SettingsScreen extends ConsumerWidget {
                           leading: const HugeIcon(
                             icon: HugeIcons.strokeRoundedBadgeInfo,
                           ),
-                          title: Text("Version"),
-                          subtitle: Text('1.0.0'),
+                          title: const Text("Version"),
+                          subtitle: Text(AppConfig.displayVersion),
                         ),
                         const Divider(),
                         ListTile(
@@ -234,16 +254,14 @@ class SettingsScreen extends ConsumerWidget {
                           ),
                           title: const Text("Github"),
                           subtitle: const Text(
-                            "https://github.com/avi-saccharose/gpk",
+                            AppConfig.repoUrl,
                           ),
                           onTap: () async {
-                            final Uri url = Uri.parse(
-                              'https://github.com/avi-saccharose/gpk',
-                            );
+                            final Uri url = Uri.parse(AppConfig.repoUrl);
                             try {
                               await launchUrl(url);
                             } catch (error, stackTrace) {
-                              Log.error("launch whatsapp", error, stackTrace);
+                              Log.error("launch Github", error, stackTrace);
                             }
                           },
                         ),

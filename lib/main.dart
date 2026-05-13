@@ -4,6 +4,7 @@ import 'package:gpk_app/app_navigation.dart';
 import 'package:gpk_app/core/cache/cache_metadata.dart';
 import 'package:gpk_app/core/cache/cache_metadata_provider.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
+import 'package:gpk_app/core/constants/app_config.dart';
 import 'package:gpk_app/core/models/user_preferences.dart';
 import 'package:gpk_app/core/network/api_server.dart';
 import 'package:gpk_app/core/network/api_provider.dart';
@@ -19,6 +20,9 @@ import 'package:hive_ce_flutter/adapters.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await AppConfig.init();
   await Hive.initFlutter();
   Hive.registerAdapters();
 

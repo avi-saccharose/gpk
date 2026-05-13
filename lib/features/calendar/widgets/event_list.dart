@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
+import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 
@@ -26,36 +27,44 @@ class EventList extends ConsumerWidget {
           );
         }
         return Expanded(
-          child: ListView.builder(
-            itemCount: eventsList.length,
-            itemBuilder: (context, index) {
-              final date = eventsList[index].key;
-              final isToday = date.isToday;
-              final entries = eventsList[index].value;
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  EventListDate(date: date, isToday: isToday),
-                  ...entries.map(
-                    (e) => EventListItem(
-                      title: e.title,
-                      description: e.description,
-                      group: e.group.display,
-                      color: e.group.color,
-                    ),
-                  ), //.toList(),
-                ],
-              );
+          child: RefreshIndicator(
+            onRefresh: () async {
+              await ref.refresh(monthlyEventsProvider.future);
             },
+            child: ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(),
+              itemCount: eventsList.length,
+              itemBuilder: (context, index) {
+                final date = eventsList[index].key;
+                final isToday = date.isToday;
+                final entries = eventsList[index].value;
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    EventListDate(date: date, isToday: isToday),
+                    ...entries.map(
+                      (e) => EventListItem(
+                        title: e.title,
+                        description: e.description,
+                        group: e.group.display,
+                        color: e.group.color,
+                      ),
+                    ), //.toList(),
+                  ],
+                );
+              },
+            ),
           ),
         );
       },
       loading: () => Center(child: ElasticWaveLoader()),
       error: (error, stackTrace) {
         Log.error("Fetching calendar failed", error, stackTrace);
-        return Text(
-          "error fecthing data",
-          style: TextStyle(fontSize: 16, color: Colors.grey),
+        return ErrorCard(
+          message: "Failed fetching calendar events",
+          retry: () {
+            ref.refresh(monthlyEventsProvider);
+          },
         );
       },
     );
