@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gpk_app/core/app_theme.dart';
 import 'package:gpk_app/core/cache/cache_metadata.dart';
 import 'package:gpk_app/core/cache/cache_metadata_provider.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
@@ -72,20 +73,17 @@ class MyApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     return MaterialApp.router(
       themeMode: settings.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-      darkTheme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.white,
-        brightness: Brightness.dark,
-      ),
-      theme: ThemeData(
-        fontFamily: 'Inter',
-        actionIconTheme: ActionIconThemeData(
-          backButtonIconBuilder: (BuildContext context) =>
-              const HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft02),
-        ),
-        useMaterial3: true,
-        colorSchemeSeed: Colors.white,
-      ),
+      darkTheme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme,
+      // theme: ThemeData(
+      //   fontFamily: 'Inter',
+      //   actionIconTheme: ActionIconThemeData(
+      //     backButtonIconBuilder: (BuildContext context) =>
+      //         const HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft02),
+      //   ),
+      //   useMaterial3: true,
+      //   colorSchemeSeed: Colors.white,
+      // ),
       routerConfig: router,
     );
   }
