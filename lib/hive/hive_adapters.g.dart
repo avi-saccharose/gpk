@@ -96,13 +96,14 @@ class UserPreferencesAdapter extends TypeAdapter<UserPreferences> {
           ? Semester.first
           : fields[2] as Semester,
       displayName: fields[3] == null ? "User" : fields[3] as String,
+      completedOnboarding: fields[4] == null ? false : fields[4] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, UserPreferences obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.isDarkMode)
       ..writeByte(1)
@@ -110,7 +111,9 @@ class UserPreferencesAdapter extends TypeAdapter<UserPreferences> {
       ..writeByte(2)
       ..write(obj.selectedSemester)
       ..writeByte(3)
-      ..write(obj.displayName);
+      ..write(obj.displayName)
+      ..writeByte(4)
+      ..write(obj.completedOnboarding);
   }
 
   @override

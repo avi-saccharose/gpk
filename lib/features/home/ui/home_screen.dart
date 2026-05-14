@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gpk_app/app_navigation.dart';
+import 'package:gpk_app/routing/app_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/core/utils/text_styles.dart';
@@ -25,7 +25,10 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: const HugeIcon(icon: HugeIcons.strokeRoundedSettings05, size: 30.0),
+            icon: const HugeIcon(
+              icon: HugeIcons.strokeRoundedSettings05,
+              size: 30.0,
+            ),
             onPressed: () => context.push('/setting'),
           ),
         ],
@@ -59,7 +62,7 @@ class HomeScreen extends ConsumerWidget {
                 gapH32,
                 const SectionHeader(
                   title: "Upcoming Events",
-                  location: AppRouter.calendar,
+                  location: AppRoutes.calendar,
                 ),
                 gapH8,
 
@@ -67,7 +70,7 @@ class HomeScreen extends ConsumerWidget {
                 gapH32,
                 const SectionHeader(
                   title: "Subjects",
-                  location: AppRouter.syllabus,
+                  location: AppRoutes.syllabus,
                 ),
                 gapH8,
 
@@ -75,7 +78,7 @@ class HomeScreen extends ConsumerWidget {
                 gapH32,
                 const SectionHeader(
                   title: "Faculty",
-                  location: AppRouter.faculty,
+                  location: AppRoutes.faculty,
                 ),
                 gapH8,
 

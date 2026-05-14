@@ -41,7 +41,7 @@ final class SelectedDayProvider
   }
 }
 
-String _$selectedDayHash() => r'5ea9e8391c031c4274ed58a026b23d3304dff738';
+String _$selectedDayHash() => r'64878abdca482b26709a1951d1bc0c43a832c09d';
 
 abstract class _$SelectedDay extends $Notifier<DateTime> {
   DateTime build();
@@ -228,4 +228,4 @@ final class MinuteTickerProvider
   }
 }
 
-String _$minuteTickerHash() => r'e6b0ede6cd8fe1734ce839f851e810abce752bda';
+String _$minuteTickerHash() => r'a3f7946f2adee3003703408ad19eae33ec76906b';

@@ -16,6 +16,7 @@ class SettingsRepository {
   Branch get selectedBranch => userPreferences.selectedBranch;
   Semester get selectedSemester => userPreferences.selectedSemester;
   String get displayName => userPreferences.displayName;
+  bool get completedOnboarding => userPreferences.completedOnboarding;
 
   Future<UserPreferences> updateTheme(bool isDarkMode) async {
     final preferences = userPreferences.copyWith(isDarkMode: isDarkMode);
@@ -37,6 +38,12 @@ class SettingsRepository {
 
   Future<UserPreferences> updateDisplayName(String name) async {
     final preferences = userPreferences.copyWith(displayName: name);
+    await cacheService.write(cacheKey, preferences);
+    return preferences;
+  }
+
+  Future<UserPreferences> completeOnboarding() async {
+    final preferences = userPreferences.copyWith(completedOnboarding: true);
     await cacheService.write(cacheKey, preferences);
     return preferences;
   }

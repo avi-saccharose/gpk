@@ -1,33 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/app_shell_scaffold.dart';
+import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/features/calendar/ui/calendar_screen.dart';
 import 'package:gpk_app/features/faculty/ui/faculty_screen.dart';
 import 'package:gpk_app/features/home/ui/home_screen.dart';
+import 'package:gpk_app/features/onboarding/ui/onboarding_screen.dart';
 import 'package:gpk_app/features/routine/ui/routine_screen.dart';
+import 'package:gpk_app/features/settings/providers/settings_providers.dart';
 import 'package:gpk_app/features/settings/ui/settings_screen.dart';
 import 'package:gpk_app/features/syllabus/ui/syllabus_screen.dart';
 import 'package:gpk_app/features/syllabus/widgets/syllabus_detail_screen.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class AppRouter {
-  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+part 'app_router.g.dart';
 
-  static final _shellNavigatorHomeKey = GlobalKey<NavigatorState>(
-    debugLabel: "Home",
-  );
-  static final _shellNavigatorCalendarKey = GlobalKey<NavigatorState>(
-    debugLabel: "Calendar",
-  );
-  static final _shellNavigatorRoutineKey = GlobalKey<NavigatorState>(
-    debugLabel: "Routine",
-  );
-  static final _shellNavigatorSyllabusKey = GlobalKey<NavigatorState>(
-    debugLabel: "Syllabus",
-  );
-  static final _shellNavigatorFacultyKey = GlobalKey<NavigatorState>(
-    debugLabel: "Faculty",
-  );
+final rootNavigatorKey = GlobalKey<NavigatorState>();
 
+final shellNavigatorHomeKey = GlobalKey<NavigatorState>(debugLabel: "Home");
+final shellNavigatorCalendarKey = GlobalKey<NavigatorState>(
+  debugLabel: "Calendar",
+);
+final shellNavigatorRoutineKey = GlobalKey<NavigatorState>(
+  debugLabel: "Routine",
+);
+final shellNavigatorSyllabusKey = GlobalKey<NavigatorState>(
+  debugLabel: "Syllabus",
+);
+final shellNavigatorFacultyKey = GlobalKey<NavigatorState>(
+  debugLabel: "Faculty",
+);
+
+class AppRoutes {
+  static const onBoarding = '/onBoarding';
   static const home = '/home';
   static const routine = '/routine';
   static const calendar = '/calendar';
@@ -35,45 +40,64 @@ class AppRouter {
   static const syllabus = '/syllabus';
   static const subject = '/subject';
   static const setting = '/setting';
+}
 
-  static final goRouter = GoRouter(
-    navigatorKey: _rootNavigatorKey,
-    initialLocation: home,
+@riverpod
+GoRouter router(Ref ref) {
+  final onboarding = ref.watch(settingsProvider);
+  return GoRouter(
+    navigatorKey: rootNavigatorKey,
+    initialLocation: AppRoutes.home,
+    redirect: (context, state) {
+      final bool completed = onboarding.completedOnboarding;
+      Log.info("completedOnboarding: $completed");
+      if (!completed) {
+        return AppRoutes.onBoarding;
+      }
+      return null;
+    },
     routes: [
+      GoRoute(
+        path: AppRoutes.onBoarding,
+        builder: (context, state) => const OnboardingScreen(),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return AppShellScaffold(navigationShell: navigationShell);
         },
         branches: [
           StatefulShellBranch(
-            navigatorKey: _shellNavigatorHomeKey,
+            navigatorKey: shellNavigatorHomeKey,
             routes: [
-              GoRoute(path: home, builder: (context, state) => const HomeScreen()),
+              GoRoute(
+                path: AppRoutes.home,
+                builder: (context, state) => const HomeScreen(),
+              ),
             ],
           ),
           StatefulShellBranch(
-            navigatorKey: _shellNavigatorCalendarKey,
+            navigatorKey: shellNavigatorCalendarKey,
             routes: [
               GoRoute(
-                path: calendar,
+                path: AppRoutes.calendar,
                 builder: (context, state) => const CalendarScreen(),
               ),
             ],
           ),
           StatefulShellBranch(
-            navigatorKey: _shellNavigatorRoutineKey,
+            navigatorKey: shellNavigatorRoutineKey,
             routes: [
               GoRoute(
-                path: routine,
+                path: AppRoutes.routine,
                 builder: (context, state) => const RoutineScreen(),
               ),
             ],
           ),
           StatefulShellBranch(
-            navigatorKey: _shellNavigatorSyllabusKey,
+            navigatorKey: shellNavigatorSyllabusKey,
             routes: [
               GoRoute(
-                path: syllabus,
+                path: AppRoutes.syllabus,
                 builder: (context, state) => const SyllabusScreen(),
                 routes: [
                   GoRoute(
@@ -89,10 +113,10 @@ class AppRouter {
             ],
           ),
           StatefulShellBranch(
-            navigatorKey: _shellNavigatorFacultyKey,
+            navigatorKey: shellNavigatorFacultyKey,
             routes: [
               GoRoute(
-                path: faculty,
+                path: AppRoutes.faculty,
                 builder: (context, state) => const FacultyScreen(),
               ),
             ],
@@ -100,8 +124,8 @@ class AppRouter {
         ],
       ),
       GoRoute(
-        path: setting,
-        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.setting,
+        parentNavigatorKey: rootNavigatorKey,
         builder: (context, state) => const SettingsScreen(),
       ),
     ],

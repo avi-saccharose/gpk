@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gpk_app/app_navigation.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/syllabus/models/syllabus.dart';
 import 'package:gpk_app/features/syllabus/providers/syllabus_providers.dart';
+import 'package:gpk_app/routing/app_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class SubjectsList extends ConsumerWidget {
@@ -66,7 +66,7 @@ class SubjectCard extends StatelessWidget {
       color: colorScheme.surface, //Colors.white.withValues(alpha: 0.9),
       child: InkWell(
         onTap: () {
-          context.go("${AppRouter.syllabus}/${subject.subjectCode}");
+          context.go("${AppRoutes.syllabus}/${subject.subjectCode}");
         },
         child: Padding(
           padding: const EdgeInsets.all(16),

@@ -47,4 +47,9 @@ class SettingsNotifier extends _$SettingsNotifier {
     final preference = await _repository.updateDisplayName(name);
     state = preference;
   }
+
+  Future<void> completeOnboarding() async {
+    final preference = await _repository.completeOnboarding();
+    state = preference;
+  }
 }
