@@ -32,10 +32,10 @@ class DatePicker extends ConsumerWidget {
           final bool isSelected = date.isSameDay(selectedDay);
 
           final Color color = isWeekend
-              ? colorScheme.onSurface.withValues(alpha: 0.6)
+              ? colorScheme.onSurface.withValues(alpha: 0.38)
               : isSelected
               ? colorScheme.primary
-              : colorScheme.outline;
+              : colorScheme.onSurface;
 
           return GestureDetector(
             onTap: () => {

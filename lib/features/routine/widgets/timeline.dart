@@ -32,7 +32,7 @@ class Timeline extends ConsumerWidget {
             final isLast = index == (routine.length - 1);
             return TimelineTile(
               item: routine[index],
-              isActive: isActive,
+              isActive: isLast,
               isLast: isLast,
             );
           },
@@ -84,7 +84,7 @@ class TimelineTile extends StatelessWidget {
               Text(
                 displayTime(item.endTime),
                 style: textTheme.labelLarge?.copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.6),
+                  color: colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -118,24 +118,18 @@ class TimelineTile extends StatelessWidget {
               child: Container(
                 margin: const EdgeInsets.only(bottom: Sizes.p20),
                 padding: const EdgeInsets.all(Sizes.p16),
+
                 decoration: BoxDecoration(
+                  border: BoxBorder.all(color: colorScheme.outline),
                   color: isActive
-                      ? colorScheme.primary
-                      : colorScheme.primaryContainer,
+                      ? colorScheme.primaryContainer
+                      : colorScheme.surface,
                   borderRadius: BorderRadius.circular(Sizes.p16),
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.red.withValues(alpha: 0.09),
-                  //     blurRadius: 10,
-                  //     offset: const Offset(0, 4),
-                  //   ),
-                  //],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image(
                           width: Sizes.p24,
@@ -147,8 +141,8 @@ class TimelineTile extends StatelessWidget {
                           item.subjectName,
                           style: TextStyle(
                             color: isActive
-                                ? colorScheme.onPrimary
-                                : colorScheme.onPrimaryContainer,
+                                ? colorScheme.onPrimaryContainer
+                                : colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                           ),
@@ -157,11 +151,11 @@ class TimelineTile extends StatelessWidget {
                         Text(
                           item.subjectCode ?? '',
                           style: textTheme.labelSmall?.copyWith(
-                            color:
-                                (isActive
-                                        ? colorScheme.primary
-                                        : colorScheme.onPrimaryContainer)
-                                    .withValues(alpha: 0.8),
+                            color: (isActive
+                                ? colorScheme.onPrimaryContainer.withValues(
+                                    alpha: 0.6,
+                                  )
+                                : colorScheme.onSurfaceVariant),
                           ),
                         ),
                       ],
@@ -170,11 +164,11 @@ class TimelineTile extends StatelessWidget {
                     Text(
                       item.instructorName ?? '',
                       style: TextStyle(
-                        color:
-                            (isActive
-                                    ? colorScheme.onPrimary
-                                    : colorScheme.onPrimaryContainer)
-                                .withValues(alpha: 0.8),
+                        color: (isActive
+                            ? colorScheme.onPrimaryContainer.withValues(
+                                alpha: 0.6,
+                              )
+                            : colorScheme.onSurfaceVariant),
                       ),
                     ),
                   ],
