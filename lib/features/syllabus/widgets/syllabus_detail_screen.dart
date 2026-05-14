@@ -24,18 +24,24 @@ class SyllabusDetailScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                Text(
                   'Subject Detail',
-                  style: TextStyle(color: Colors.grey, fontSize: 16),
+                  style: TextStyle(
+                    color: colorScheme.onSurfaceVariant,
+                    fontSize: 16,
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      subject?.subjectName ?? '',
-                      style: textTheme.headlineLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ), //AppTextStyles.display,
+                    Flexible(
+                      child: Text(
+                        subject?.subjectName ?? '',
+                        style: textTheme.headlineLarge?.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: colorScheme.onSurface,
+                        ), //AppTextStyles.display,
+                      ),
                     ),
                     Container(
                       padding: const EdgeInsetsGeometry.symmetric(
@@ -56,9 +62,12 @@ class SyllabusDetailScreen extends ConsumerWidget {
                 gapH8,
                 Row(
                   children: [
-                    const Text(
+                    Text(
                       'Total marks: ',
-                      style: TextStyle(color: Colors.grey, fontSize: Sizes.p16),
+                      style: TextStyle(
+                        color: colorScheme.onSurfaceVariant,
+                        fontSize: Sizes.p16,
+                      ),
                     ),
                     gapW4,
                     Text(
@@ -70,27 +79,28 @@ class SyllabusDetailScreen extends ConsumerWidget {
                 gapH8,
                 if (subject.chapters != null) ...[
                   Expanded(
-                    child: Container(
-                      padding: const EdgeInsetsGeometry.all(16),
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: colorScheme.surfaceContainerHighest.withValues(
-                          alpha: 0.6,
+                    child: Card.outlined(
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: colorScheme.outline,
                         ),
-                        borderRadius: const BorderRadiusGeometry.only(
-                          topLeft: Radius.circular(32),
-                          topRight: Radius.circular(32),
-                        ),
+                        borderRadius: BorderRadiusGeometry.circular(12),
                       ),
                       child: ListView.builder(
                         itemCount: subject.chapters!.length,
                         itemBuilder: (context, index) {
                           final chapter = subject.chapters![index];
                           return Container(
-                            margin: const EdgeInsetsGeometry.only(bottom: Sizes.p16),
+                            margin: const EdgeInsetsGeometry.symmetric(
+                              horizontal: Sizes.p16,
+                              vertical: Sizes.p8,
+                            ),
                             decoration: BoxDecoration(
-                              color: colorScheme.surfaceContainerLowest,
+                              color: colorScheme.surfaceContainerHigh,
                               borderRadius: BorderRadiusGeometry.circular(16),
+                              border: Border.all(
+                                color: colorScheme.outline,
+                              ),
                             ),
                             child: ExpansionTile(
                               shape: const Border(),
@@ -101,25 +111,23 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: colorScheme.onSurfaceVariant,
+                                  color: colorScheme.onSurface,
                                 ),
                               ),
                               leading: Container(
                                 width: 44,
                                 height: 44,
                                 decoration: BoxDecoration(
-                                  color: colorScheme.surfaceContainerLowest,
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    color: colorScheme.onSurfaceVariant,
-                                    width: 1.5,
+                                  color: colorScheme.primary.withValues(
+                                    alpha: 0.12,
                                   ),
+                                  borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Center(
                                   child: Text(
                                     '${index + 1}',
                                     style: TextStyle(
-                                      color: colorScheme.onSurfaceVariant,
+                                      color: colorScheme.primary,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
                                     ),
@@ -147,8 +155,8 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                     ),
                                     Text(
                                       '${chapter.chapterMarks} Marks',
-                                      style: const TextStyle(
-                                        color: Colors.deepPurple,
+                                      style: TextStyle(
+                                        color: colorScheme.onSurfaceVariant,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
@@ -157,20 +165,21 @@ class SyllabusDetailScreen extends ConsumerWidget {
                               ),
                               children: chapter.subTopics.map((subtopic) {
                                 return ListTile(
+                                  titleAlignment: ListTileTitleAlignment.top,
                                   contentPadding: const EdgeInsetsGeometry.only(
                                     left: Sizes.p64,
                                   ),
                                   leading: Icon(
                                     Icons.article_outlined,
                                     size: 20,
-                                    color: colorScheme.outlineVariant,
+                                    color: colorScheme.onSurfaceVariant,
                                   ),
                                   title: Text(
                                     subtopic,
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
-                                      color: colorScheme.outlineVariant,
+                                      color: colorScheme.onSurfaceVariant,
                                     ),
                                   ),
                                 );

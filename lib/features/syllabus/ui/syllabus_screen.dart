@@ -18,6 +18,9 @@ class SyllabusScreen extends ConsumerWidget {
     final selectedBranch = ref.watch(settingsProvider).selectedBranch;
     final selectedSemester = ref.watch(settingsProvider).selectedSemester;
     final syllabus = ref.watch(syllabusProvider);
+
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsetsGeometry.symmetric(horizontal: 24),
@@ -26,13 +29,19 @@ class SyllabusScreen extends ConsumerWidget {
           children: [
             gapH20,
 
-            const Text(
+            Text(
               'Syllabus',
-              style: TextStyle(color: Colors.grey, fontSize: 16),
+              style: TextStyle(
+                color: colorScheme.onSurfaceVariant,
+                fontSize: 16,
+              ),
             ),
             Text(
               '$selectedBranch $selectedSemester',
-              style: AppTextStyles.display,
+              style: textTheme.headlineLarge?.copyWith(
+                color: colorScheme.onSurface,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             gapH20,
 
