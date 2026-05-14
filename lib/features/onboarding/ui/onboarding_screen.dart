@@ -97,8 +97,8 @@ class OnboardingScreen extends ConsumerWidget {
                               prefixIcon: const Icon(Icons.person_outlined),
                               label: const Text('Name'),
                             ),
-                            onChanged: (String text) {
-                              ref
+                            onChanged: (String text) async {
+                              await ref
                                   .read(settingsProvider.notifier)
                                   .updateDisplayName(text);
                             },
@@ -122,8 +122,8 @@ class OnboardingScreen extends ConsumerWidget {
                                   (branch) => ChoiceChip(
                                     label: Text('$branch'),
                                     selected: selectedBranch == branch,
-                                    onSelected: (_) {
-                                      ref
+                                    onSelected: (_) async {
+                                      await ref
                                           .read(settingsProvider.notifier)
                                           .updateBranch(branch);
                                     },
@@ -152,8 +152,8 @@ class OnboardingScreen extends ConsumerWidget {
                                 return ChoiceChip(
                                   label: Text('Sem $sem'),
                                   selected: selectedSemester.value == sem,
-                                  onSelected: (_) {
-                                    ref
+                                  onSelected: (_) async {
+                                    await ref
                                         .read(settingsProvider.notifier)
                                         .updateSemester(sem);
                                   },

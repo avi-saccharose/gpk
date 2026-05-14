@@ -32,7 +32,7 @@ class RoutineRepository {
               .toList(),
       };
 
-      cacheService.write(cacheKey, RoutineSchedule(routineMap));
+      await cacheService.write(cacheKey, RoutineSchedule(routineMap));
 
       return routineMap;
     } catch (E) {

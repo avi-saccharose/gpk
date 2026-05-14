@@ -19,6 +19,7 @@ class _ElasticWaveLoaderState extends State<ElasticWaveLoader>
       return AnimationController(
         vsync: this,
         duration: const Duration(milliseconds: 1200),
+        // ignore: discarded_futures
       )..repeat(reverse: true, period: Duration(milliseconds: 1200 + i * 150));
     });
   }

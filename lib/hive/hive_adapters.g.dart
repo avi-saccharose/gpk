@@ -95,7 +95,7 @@ class UserPreferencesAdapter extends TypeAdapter<UserPreferences> {
       selectedSemester: fields[2] == null
           ? Semester.first
           : fields[2] as Semester,
-      displayName: fields[3] == null ? "User" : fields[3] as String,
+      displayName: fields[3] == null ? 'User' : fields[3] as String,
       completedOnboarding: fields[4] == null ? false : fields[4] as bool,
     );
   }
@@ -208,7 +208,7 @@ class EventAdapter extends TypeAdapter<Event> {
     };
     return Event(
       title: fields[0] as String,
-      description: fields[1] == null ? "" : fields[1] as String,
+      description: fields[1] == null ? '' : fields[1] as String,
       group: fields[2] == null ? EventGroup.all : fields[2] as EventGroup,
     );
   }

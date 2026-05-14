@@ -25,7 +25,7 @@ class SyllabusRepository {
         '/syllabus/$branch/$semester',
       );
       final syllabus = Syllabus.fromJson(response as Map<String, dynamic>);
-      cacheService.write(cacheKey, syllabus);
+      await cacheService.write(cacheKey, syllabus);
       return syllabus;
     } catch (e) {
       Log.error('Fetching syllabus error for $branch $semester', e);

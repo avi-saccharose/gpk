@@ -36,7 +36,6 @@ class CalendarRepository {
     return (group, data['events']);
   }
 
-  // TODO: Very ugly code that does multiple things at once
   Future<EventsMapList> getEvents(
     Branch branch,
     Semester semester, {
@@ -84,8 +83,8 @@ class CalendarRepository {
     addEvents(allEventsJson, allEventGroup);
     addEvents(branchEventsJson, branchEventGroup);
     final eventsWrapper = EventWrapper(events);
-    cacheService.write(cacheKey, eventsWrapper);
-    cacheMetadata.updateCacheTimeStamp(cacheKey);
+    await cacheService.write(cacheKey, eventsWrapper);
+    await cacheMetadata.updateCacheTimeStamp(cacheKey);
     return events;
   }
 }

@@ -81,4 +81,4 @@ final class GetQuoteOfDayProvider
   }
 }
 
-String _$getQuoteOfDayHash() => r'0d5abe29fc5a925c74cd924d69da1110d34a6219';
+String _$getQuoteOfDayHash() => r'e98befcf6107472870bcf34ff12522c777f7b9b4';

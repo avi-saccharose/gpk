@@ -28,6 +28,7 @@ class FacultyList extends ConsumerWidget {
             margin: const EdgeInsetsGeometry.only(right: 16),
             child: InkWell(
               onTap: () {
+                // ignore: discarded_futures
                 showFacultyBottomSheet(context, item);
               },
               child: Padding(

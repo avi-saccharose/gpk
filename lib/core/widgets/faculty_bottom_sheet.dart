@@ -69,9 +69,9 @@ Future<void> showFacultyBottomSheet(
                 title: const Text('Phone number'),
                 subtitle: Text(faculty.number ?? 'Not available'),
                 trailing: const HugeIcon(icon: HugeIcons.strokeRoundedWhatsapp),
-                onTap: () {
+                onTap: () async {
                   if (faculty.number != null) {
-                    openWhatsApp(faculty.number!);
+                    await openWhatsApp(faculty.number!);
                   }
                 },
               ),
