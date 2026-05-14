@@ -13,12 +13,15 @@ Future<void> openWhatsApp(String number) async {
   try {
     await launchUrl(whatsappUrl);
   } catch (error, stackTrace) {
-    Log.error("launch whatsapp", error, stackTrace);
+    Log.error('launch whatsapp', error, stackTrace);
   }
 }
 
-void showFacultyBottomSheet(BuildContext context, Faculty faculty) {
-  showModalBottomSheet(
+Future<void> showFacultyBottomSheet(
+  BuildContext context,
+  Faculty faculty,
+) async {
+  await showModalBottomSheet(
     context: context,
     builder: (context) {
       return SafeArea(
@@ -60,9 +63,11 @@ void showFacultyBottomSheet(BuildContext context, Faculty faculty) {
               gapH24,
               const Divider(),
               ListTile(
-                leading: const HugeIcon(icon: HugeIcons.strokeRoundedSmartPhone02),
+                leading: const HugeIcon(
+                  icon: HugeIcons.strokeRoundedSmartPhone02,
+                ),
                 title: const Text('Phone number'),
-                subtitle: Text(faculty.number ?? "Not available"),
+                subtitle: Text(faculty.number ?? 'Not available'),
                 trailing: const HugeIcon(icon: HugeIcons.strokeRoundedWhatsapp),
                 onTap: () {
                   if (faculty.number != null) {
@@ -72,13 +77,15 @@ void showFacultyBottomSheet(BuildContext context, Faculty faculty) {
               ),
               ListTile(
                 leading: const HugeIcon(icon: HugeIcons.strokeRoundedMail01),
-                title: const Text("Email"),
-                subtitle: Text(faculty.email ?? "Not available"),
+                title: const Text('Email'),
+                subtitle: Text(faculty.email ?? 'Not available'),
               ),
               ListTile(
-                leading: const HugeIcon(icon: HugeIcons.strokeRoundedAddressBook),
+                leading: const HugeIcon(
+                  icon: HugeIcons.strokeRoundedAddressBook,
+                ),
                 title: const Text('Address'),
-                subtitle: Text(faculty.address ?? "Not available"),
+                subtitle: Text(faculty.address ?? 'Not available'),
               ),
             ],
           ),

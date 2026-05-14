@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
+import 'package:gpk_app/core/utils/time_helper.dart';
 import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
-import 'package:gpk_app/core/utils/time_helper.dart';
 import 'package:gpk_app/features/routine/providers/routine_providers.dart';
 
 class Timeline extends ConsumerWidget {
@@ -40,9 +40,9 @@ class Timeline extends ConsumerWidget {
       ),
 
       error: (error, stackTrace) {
-        Log.error("Fetching routine", error, stackTrace);
+        Log.error('Fetching routine', error, stackTrace);
         return ErrorCard(
-          message: "Failed fetching routine",
+          message: 'Failed fetching routine',
           retry: () {
             ref.invalidate(routineProvider);
           },
@@ -113,7 +113,7 @@ class TimelineTile extends StatelessWidget {
             child: InkWell(
               onTap: () => {
                 if (item.subjectCode != null)
-                  context.push("/syllabus/${item.subjectCode}"),
+                  context.push('/syllabus/${item.subjectCode}'),
               },
               child: Container(
                 margin: const EdgeInsets.only(bottom: Sizes.p20),
@@ -155,7 +155,7 @@ class TimelineTile extends StatelessWidget {
                         ),
                         const Spacer(),
                         Text(
-                          item.subjectCode ?? "",
+                          item.subjectCode ?? '',
                           style: textTheme.labelSmall?.copyWith(
                             color:
                                 (isActive
@@ -168,7 +168,7 @@ class TimelineTile extends StatelessWidget {
                     ),
                     gapH8,
                     Text(
-                      item.instructorName ?? "",
+                      item.instructorName ?? '',
                       style: TextStyle(
                         color:
                             (isActive

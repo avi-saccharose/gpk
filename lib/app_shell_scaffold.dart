@@ -41,25 +41,25 @@ class AppShellScaffold extends StatelessWidget {
                 icon: HugeIcon(
                   icon: HugeIcons.strokeRoundedHome01,
                 ), //Icon(Icons.home_outlined),
-                label: "Home",
+                label: 'Home',
               ),
 
               BottomNavigationBarItem(
                 icon: HugeIcon(icon: HugeIcons.strokeRoundedCalendar02),
-                label: "Calendar",
+                label: 'Calendar',
               ),
               BottomNavigationBarItem(
                 icon: HugeIcon(icon: HugeIcons.strokeRoundedTimelineList),
-                label: "Routine",
+                label: 'Routine',
               ),
 
               BottomNavigationBarItem(
                 icon: HugeIcon(icon: HugeIcons.strokeRoundedBooks02),
-                label: "Syllabus",
+                label: 'Syllabus',
               ),
               BottomNavigationBarItem(
                 icon: HugeIcon(icon: HugeIconsStrokeRounded.bookUser),
-                label: "Faculty",
+                label: 'Faculty',
               ),
             ],
           ),

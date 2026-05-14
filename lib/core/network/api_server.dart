@@ -16,7 +16,7 @@ class ApiServer {
     );
 
     try {
-      Log.debug("ApiServer: Get $uri");
+      Log.debug('ApiServer: Get $uri');
       final response = await _client
           .get(
             uri,
@@ -39,7 +39,7 @@ class ApiServer {
     } on ApiException {
       rethrow;
     } catch (e) {
-      Log.error("$e");
+      Log.error('$e');
       throw ApiException('Unexpected error $e');
     }
   }

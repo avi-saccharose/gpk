@@ -9,7 +9,7 @@ class Event {
   final EventGroup group;
   Event({
     required this.title,
-    this.description = "",
+    this.description = '',
     this.group = EventGroup.all,
   });
 
@@ -36,17 +36,17 @@ enum EventGroup {
       case EventGroup.cse1:
       case EventGroup.cse2:
       case EventGroup.cse3:
-        return "cse";
+        return 'cse';
       case EventGroup.ce1:
       case EventGroup.ce2:
       case EventGroup.ce3:
-        return "ce";
+        return 'ce';
       case EventGroup.ft1:
       case EventGroup.ft2:
       case EventGroup.ft3:
-        return "ft";
+        return 'ft';
       default:
-        return "gpk";
+        return 'gpk';
     }
   }
 

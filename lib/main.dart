@@ -5,8 +5,8 @@ import 'package:gpk_app/core/cache/cache_metadata_provider.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/constants/app_config.dart';
 import 'package:gpk_app/core/models/user_preferences.dart';
-import 'package:gpk_app/core/network/api_server.dart';
 import 'package:gpk_app/core/network/api_provider.dart';
+import 'package:gpk_app/core/network/api_server.dart';
 import 'package:gpk_app/features/calendar/models/event_wrapper.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 import 'package:gpk_app/features/routine/models/routine_schedule.dart';
@@ -26,11 +26,11 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapters();
 
-  final calendarCacheService = CacheService<EventWrapper>("calendarBox");
-  final routineCacheService = CacheService<RoutineSchedule>("routineBox");
-  final settingsCacheService = CacheService<UserPreferences>("userBox");
-  final syllabusCacheService = CacheService<Syllabus>("syllabusBox");
-  final cacheMetaDataService = CacheMetadata("cacheMetadata");
+  final calendarCacheService = CacheService<EventWrapper>('calendarBox');
+  final routineCacheService = CacheService<RoutineSchedule>('routineBox');
+  final settingsCacheService = CacheService<UserPreferences>('userBox');
+  final syllabusCacheService = CacheService<Syllabus>('syllabusBox');
+  final cacheMetaDataService = CacheMetadata('cacheMetadata');
 
   //final apiServer = ApiServer(baseUrl: 'http://localhost:8787');
   final apiServer = ApiServer(
@@ -78,7 +78,7 @@ class MyApp extends ConsumerWidget {
         brightness: Brightness.dark,
       ),
       theme: ThemeData(
-        fontFamily: "Inter",
+        fontFamily: 'Inter',
         actionIconTheme: ActionIconThemeData(
           backButtonIconBuilder: (BuildContext context) =>
               const HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft02),

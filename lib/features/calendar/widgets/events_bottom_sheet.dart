@@ -43,7 +43,7 @@ class EventsBottomSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Events",
+                  'Events',
                   style: textTheme.headlineSmall,
                 ),
                 gapH4,
@@ -74,7 +74,7 @@ class BottomSheetItem extends StatelessWidget {
   const BottomSheetItem({
     super.key,
     required this.title,
-    this.description = "",
+    this.description = '',
   });
 
   @override

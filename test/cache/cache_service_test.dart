@@ -23,13 +23,13 @@ void main() {
   });
 
   test('test cache service', () async {
-    await cacheService.write("darkMode", true);
-    expect(true, cacheService.get("darkMode"));
+    await cacheService.write('darkMode', true);
+    expect(true, cacheService.get('darkMode'));
   });
 
   test('test update value', () async {
-    await cacheService.write("key", 1);
-    await cacheService.write("key", "value");
-    expect("value", cacheService.get("key"));
+    await cacheService.write('key', 1);
+    await cacheService.write('key', 'value');
+    expect('value', cacheService.get('key'));
   });
 }

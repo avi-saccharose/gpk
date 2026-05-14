@@ -6,19 +6,19 @@ part 'faculty_providers.g.dart';
 @riverpod
 List<Faculty> allFaculty(Ref ref) {
   return [
-    Faculty("Vikehtol", "BSC", "9612572768", 'vike@gmail.com', null),
-    Faculty("Puthu", "BSC", "23002003003", null, null),
-    Faculty("Sofia", "MSC", "3939929939", 'sofia@gmail.com', null),
-    Faculty("Pete", "MSC", "3939929939", 'pete@gmail.com', null),
-    Faculty("Neisa", "MSC", "3939929939", null, null),
-    Faculty("Yeben", "MSC", "3939929939", null, null),
+    Faculty('Vikehtol', 'BSC', '9612572768', 'vike@gmail.com', null),
+    Faculty('Puthu', 'BSC', '23002003003', null, null),
+    Faculty('Sofia', 'MSC', '3939929939', 'sofia@gmail.com', null),
+    Faculty('Pete', 'MSC', '3939929939', 'pete@gmail.com', null),
+    Faculty('Neisa', 'MSC', '3939929939', null, null),
+    Faculty('Yeben', 'MSC', '3939929939', null, null),
   ];
 }
 
 @riverpod
 class SearchQuery extends _$SearchQuery {
   @override
-  String build() => "";
+  String build() => '';
 
   void set(String value) {
     state = value;

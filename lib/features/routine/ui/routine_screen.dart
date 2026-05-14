@@ -27,7 +27,7 @@ class RoutineScreen extends StatelessWidget {
               ),
             ),
             Text(
-              "Today",
+              'Today',
               style: textTheme.headlineLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: colorScheme.onSurface,

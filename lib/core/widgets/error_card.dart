@@ -41,7 +41,7 @@ class ErrorCard extends StatelessWidget {
               FilledButton.tonalIcon(
                 onPressed: retry,
                 icon: const HugeIcon(icon: HugeIcons.strokeRoundedRefresh01),
-                label: const Text("retry"),
+                label: const Text('retry'),
                 style: FilledButton.styleFrom(
                   backgroundColor: colorScheme.errorContainer,
                   foregroundColor: colorScheme.onErrorContainer,

@@ -41,7 +41,7 @@ class UpcomingEvents extends ConsumerWidget {
                         ),
                         gapH12,
                         Text(
-                          "No Upcoming Events",
+                          'No Upcoming Events',
                           style: textTheme.bodyLarge?.copyWith(
                             color: colorScheme.onSurface.withValues(
                               alpha: 0.4,
@@ -64,9 +64,9 @@ class UpcomingEvents extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) {
-        Log.error("montlhy events", error, stackTrace);
+        Log.error('montlhy events', error, stackTrace);
         return ErrorCard(
-          message: "Failed loading events",
+          message: 'Failed loading events',
           retry: () {
             ref.invalidate(upcomingEventsMapProvider);
           },

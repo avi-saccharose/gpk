@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gpk_app/routing/app_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/core/utils/text_styles.dart';
@@ -11,6 +10,7 @@ import 'package:gpk_app/features/home/widgets/faculty_list.dart';
 import 'package:gpk_app/features/home/widgets/subjects_list.dart';
 import 'package:gpk_app/features/home/widgets/upcoming_events.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
+import 'package:gpk_app/routing/app_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -42,7 +42,7 @@ class HomeScreen extends ConsumerWidget {
               children: [
                 gapH20,
                 const Text(
-                  "Hello",
+                  'Hello',
                   style: AppTextStyles.label,
                 ),
                 Text(
@@ -51,7 +51,7 @@ class HomeScreen extends ConsumerWidget {
                 ),
                 gapH20,
                 Text(
-                  "Quote of the day",
+                  'Quote of the day',
                   style: textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.5,
@@ -61,7 +61,7 @@ class HomeScreen extends ConsumerWidget {
                 const QuoteOfTheDay(),
                 gapH32,
                 const SectionHeader(
-                  title: "Upcoming Events",
+                  title: 'Upcoming Events',
                   location: AppRoutes.calendar,
                 ),
                 gapH8,
@@ -69,7 +69,7 @@ class HomeScreen extends ConsumerWidget {
                 const UpcomingEvents(),
                 gapH32,
                 const SectionHeader(
-                  title: "Subjects",
+                  title: 'Subjects',
                   location: AppRoutes.syllabus,
                 ),
                 gapH8,
@@ -77,7 +77,7 @@ class HomeScreen extends ConsumerWidget {
                 const SubjectsList(),
                 gapH32,
                 const SectionHeader(
-                  title: "Faculty",
+                  title: 'Faculty',
                   location: AppRoutes.faculty,
                 ),
                 gapH8,
@@ -163,8 +163,8 @@ class QuoteOfTheDay extends ConsumerWidget {
         child: ElasticWaveLoader(),
       ),
       error: (error, stackTrace) {
-        Log.error("loading quote", error, stackTrace);
-        return const Text("error loading quote");
+        Log.error('loading quote', error, stackTrace);
+        return const Text('error loading quote');
       },
     );
   }

@@ -35,5 +35,5 @@ String displayTime(int time) {
   String formattedHour = hour.toString().padLeft(2, '0');
   String formattedMinute = minutes.toString().padLeft(2, '0');
 
-  return "$formattedHour:$formattedMinute";
+  return '$formattedHour:$formattedMinute';
 }

@@ -1,7 +1,7 @@
 enum Branch {
-  cse("CSE", "Computer Science and Engineering"),
-  ce("CE", "Civil Engineering"),
-  ft("FT", "Fashion technology")
+  cse('CSE', 'Computer Science and Engineering'),
+  ce('CE', 'Civil Engineering'),
+  ft('FT', 'Fashion technology')
   ;
 
   final String code;

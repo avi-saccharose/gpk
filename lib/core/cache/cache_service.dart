@@ -11,17 +11,17 @@ class CacheService<T> {
   Future<void> init() async {
     if (!Hive.isBoxOpen(boxName)) {
       await Hive.openBox<T>(boxName);
-      Log.info("init cache: $boxName");
+      Log.info('init cache: $boxName');
     }
   }
 
   Future<void> write(String key, T data) async {
-    Log.info("writing $key to $boxName");
+    Log.info('writing $key to $boxName');
     await _box.put(key, data);
   }
 
   T? get(String key) {
-    Log.debug("get cache: $key");
+    Log.debug('get cache: $key');
     return _box.get(key) as T?;
   }
 

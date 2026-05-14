@@ -11,7 +11,7 @@ class UserPreferences {
     this.isDarkMode = false,
     this.selectedBranch = Branch.cse,
     this.selectedSemester = Semester.first,
-    this.displayName = "User",
+    this.displayName = 'User',
     this.completedOnboarding = false,
   });
 

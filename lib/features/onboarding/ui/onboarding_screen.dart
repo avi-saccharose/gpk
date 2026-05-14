@@ -22,8 +22,8 @@ class OnboardingScreen extends ConsumerWidget {
       body: IntroductionScreen(
         pages: [
           PageViewModel(
-            title: "Welcome",
-            body: "Your student companion app",
+            title: 'Welcome',
+            body: 'Your student companion app',
             image: const SafeArea(
               child: Icon(Icons.school, size: 120),
             ),
@@ -46,7 +46,7 @@ class OnboardingScreen extends ConsumerWidget {
 
                 const SizedBox(height: 20),
                 Text(
-                  "PROFILE SETUP",
+                  'PROFILE SETUP',
                   style: textTheme.headlineSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: colorScheme.onSurface,
@@ -54,7 +54,7 @@ class OnboardingScreen extends ConsumerWidget {
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "you can change these later anytime",
+                  'you can change these later anytime',
                   style: textTheme.bodyMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
@@ -66,7 +66,7 @@ class OnboardingScreen extends ConsumerWidget {
               child: Column(
                 children: [
                   Text(
-                    "USER INFORMATION",
+                    'USER INFORMATION',
                     style: textTheme.labelLarge?.copyWith(
                       fontWeight: FontWeight.w600,
                       color: colorScheme.primary,
@@ -82,7 +82,7 @@ class OnboardingScreen extends ConsumerWidget {
                         children: [
                           gapH12,
                           Text(
-                            "Name",
+                            'Name',
                             style: textTheme.titleSmall?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -95,7 +95,7 @@ class OnboardingScreen extends ConsumerWidget {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               prefixIcon: const Icon(Icons.person_outlined),
-                              label: const Text("Name"),
+                              label: const Text('Name'),
                             ),
                             onChanged: (String text) {
                               ref
@@ -108,7 +108,7 @@ class OnboardingScreen extends ConsumerWidget {
                           gapH12,
 
                           Text(
-                            "Branch",
+                            'Branch',
                             style: textTheme.titleSmall?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -120,7 +120,7 @@ class OnboardingScreen extends ConsumerWidget {
                             children: [Branch.cse, Branch.ce, Branch.ft]
                                 .map(
                                   (branch) => ChoiceChip(
-                                    label: Text("$branch"),
+                                    label: Text('$branch'),
                                     selected: selectedBranch == branch,
                                     onSelected: (_) {
                                       ref
@@ -135,7 +135,7 @@ class OnboardingScreen extends ConsumerWidget {
                           const Divider(),
                           gapH12,
                           Text(
-                            "Semester",
+                            'Semester',
                             style: textTheme.titleSmall?.copyWith(
                               fontWeight: FontWeight.w600,
                             ),
@@ -170,11 +170,9 @@ class OnboardingScreen extends ConsumerWidget {
             ),
           ),
         ],
-
-        showSkipButton: false,
         showBackButton: true,
         back: const HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft01),
-        done: const Text("Done"),
+        done: const Text('Done'),
         next: const HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
         onDone: () async {
           await ref.read(settingsProvider.notifier).completeOnboarding();

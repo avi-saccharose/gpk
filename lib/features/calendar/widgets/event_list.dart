@@ -20,7 +20,7 @@ class EventList extends ConsumerWidget {
         // final eventsList = eventsMap.entries.toList();
         if (eventsList.isEmpty) {
           return Text(
-            "no events",
+            'no events',
             style: textTheme.bodyLarge?.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),
@@ -59,9 +59,9 @@ class EventList extends ConsumerWidget {
       },
       loading: () => const Center(child: ElasticWaveLoader()),
       error: (error, stackTrace) {
-        Log.error("Fetching calendar failed", error, stackTrace);
+        Log.error('Fetching calendar failed', error, stackTrace);
         return ErrorCard(
-          message: "Failed fetching calendar events",
+          message: 'Failed fetching calendar events',
           retry: () {
             ref.invalidate(monthlyEventsProvider);
           },

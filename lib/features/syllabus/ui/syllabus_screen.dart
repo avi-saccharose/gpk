@@ -27,7 +27,7 @@ class SyllabusScreen extends ConsumerWidget {
             gapH20,
 
             const Text(
-              "Syllabus",
+              'Syllabus',
               style: TextStyle(color: Colors.grey, fontSize: 16),
             ),
             Text(
@@ -41,9 +41,9 @@ class SyllabusScreen extends ConsumerWidget {
                 subjects: data.subjects,
               ),
               error: (error, stackTrace) {
-                Log.error("fetch syllabus", error, stackTrace);
+                Log.error('fetch syllabus', error, stackTrace);
                 return ErrorCard(
-                  message: "Failed fetching syllabus",
+                  message: 'Failed fetching syllabus',
                   retry: () {
                     ref.invalidate(syllabusProvider);
                   },

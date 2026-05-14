@@ -35,9 +35,9 @@ class SubjectsList extends ConsumerWidget {
         ),
       ),
       error: (error, stackTrace) {
-        Log.error("subjects list", error, stackTrace);
+        Log.error('subjects list', error, stackTrace);
         return ErrorCard(
-          message: "failed loading subjects",
+          message: 'failed loading subjects',
           retry: () {
             ref.invalidate(syllabusProvider);
           },
@@ -66,12 +66,11 @@ class SubjectCard extends StatelessWidget {
       color: colorScheme.surface, //Colors.white.withValues(alpha: 0.9),
       child: InkWell(
         onTap: () {
-          context.go("${AppRoutes.syllabus}/${subject.subjectCode}");
+          context.go('${AppRoutes.syllabus}/${subject.subjectCode}');
         },
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               CircleAvatar(
                 backgroundColor: colorScheme.primaryContainer,

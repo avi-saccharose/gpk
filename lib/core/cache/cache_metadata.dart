@@ -9,17 +9,17 @@ class CacheMetadata {
   Future<void> init() async {
     if (!Hive.isBoxOpen(_boxName)) {
       await Hive.openBox<String>(_boxName);
-      Log.info("init Box: $_boxName");
+      Log.info('init Box: $_boxName');
     }
   }
 
   Future<void> updateCacheTimeStamp(String keyName) async {
-    final timeStampKey = "${keyName}_timestamp";
+    final timeStampKey = '${keyName}_timestamp';
     await _metadataBox.put(timeStampKey, DateTime.now().toIso8601String());
   }
 
   bool isCacheValid(String keyName, Duration maxAge) {
-    final timeStampKey = "${keyName}_timestamp";
+    final timeStampKey = '${keyName}_timestamp';
     final cachedTimeStamp = _metadataBox.get(timeStampKey);
     if (cachedTimeStamp == null) {
       return false;
@@ -29,7 +29,7 @@ class CacheMetadata {
       final age = DateTime.now().difference(cacheTime);
       return age < maxAge;
     } catch (e) {
-      Log.error("CacheMetadata: Error parsing date", e);
+      Log.error('CacheMetadata: Error parsing date', e);
       return false;
     }
   }

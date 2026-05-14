@@ -20,11 +20,11 @@ class FacultyScreen extends ConsumerWidget {
           children: [
             gapH20,
             const Text(
-              "Academic",
+              'Academic',
               style: AppTextStyles.label,
             ),
             const Text(
-              "Faculty",
+              'Faculty',
               style: AppTextStyles.display,
             ),
             gapH20,
@@ -43,7 +43,7 @@ class FacultyScreen extends ConsumerWidget {
             Expanded(
               child: faculties.isEmpty
                   ? const Center(
-                      child: Text("No faculty found"),
+                      child: Text('No faculty found'),
                     )
                   : GridView.builder(
                       gridDelegate:

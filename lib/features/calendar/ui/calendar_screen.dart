@@ -21,9 +21,9 @@ class CalendarScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             gapH20,
-            const Text("Calendar", style: AppTextStyles.label),
+            const Text('Calendar', style: AppTextStyles.label),
             Text(
-              "$selectedBranch $selectedSemester",
+              '$selectedBranch $selectedSemester',
               style: AppTextStyles.display,
             ),
             gapH20,

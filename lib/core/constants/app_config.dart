@@ -4,7 +4,7 @@ class AppConfig {
   AppConfig._();
 
   static late PackageInfo _packageInfo;
-  static const String repoUrl = "https://github.com/avi-saccharose/gpk";
+  static const String repoUrl = 'https://github.com/avi-saccharose/gpk';
 
   static Future<void> init() async {
     _packageInfo = await PackageInfo.fromPlatform();

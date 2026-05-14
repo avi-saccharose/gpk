@@ -43,6 +43,7 @@ class CalendarWidget extends ConsumerWidget {
         onDaySelected: (selectedDay, _) {
           final events = getEventsForDay(selectedDay);
           if (events.isNotEmpty) {
+            // ignore: discarded_futures
             showModalBottomSheet<void>(
               context: context,
               builder: (BuildContext context) => EventsBottomSheet(
@@ -56,7 +57,7 @@ class CalendarWidget extends ConsumerWidget {
         onPageChanged: (newFocusedDay) {
           ref.read(selectedMonthProvider.notifier).set(newFocusedDay);
         },
-        firstDay: DateTime.utc(2025, 05, 01),
+        firstDay: DateTime.utc(2025, 05),
         lastDay: DateTime.utc(2050, 05, 31),
         eventLoader: getEventsForDay,
 

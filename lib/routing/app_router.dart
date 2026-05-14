@@ -17,18 +17,18 @@ part 'app_router.g.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
 
-final shellNavigatorHomeKey = GlobalKey<NavigatorState>(debugLabel: "Home");
+final shellNavigatorHomeKey = GlobalKey<NavigatorState>(debugLabel: 'Home');
 final shellNavigatorCalendarKey = GlobalKey<NavigatorState>(
-  debugLabel: "Calendar",
+  debugLabel: 'Calendar',
 );
 final shellNavigatorRoutineKey = GlobalKey<NavigatorState>(
-  debugLabel: "Routine",
+  debugLabel: 'Routine',
 );
 final shellNavigatorSyllabusKey = GlobalKey<NavigatorState>(
-  debugLabel: "Syllabus",
+  debugLabel: 'Syllabus',
 );
 final shellNavigatorFacultyKey = GlobalKey<NavigatorState>(
-  debugLabel: "Faculty",
+  debugLabel: 'Faculty',
 );
 
 class AppRoutes {
@@ -50,7 +50,7 @@ GoRouter router(Ref ref) {
     initialLocation: AppRoutes.home,
     redirect: (context, state) {
       final bool completed = onboarding.completedOnboarding;
-      Log.info("completedOnboarding: $completed");
+      Log.info('completedOnboarding: $completed');
       if (!completed) {
         return AppRoutes.onBoarding;
       }

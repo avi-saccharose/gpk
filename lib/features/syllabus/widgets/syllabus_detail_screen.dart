@@ -25,14 +25,14 @@ class SyllabusDetailScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Subject Detail",
+                  'Subject Detail',
                   style: TextStyle(color: Colors.grey, fontSize: 16),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      subject?.subjectName ?? "",
+                      subject?.subjectName ?? '',
                       style: textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.w600,
                       ), //AppTextStyles.display,
@@ -57,12 +57,12 @@ class SyllabusDetailScreen extends ConsumerWidget {
                 Row(
                   children: [
                     const Text(
-                      "Total marks: ",
+                      'Total marks: ',
                       style: TextStyle(color: Colors.grey, fontSize: Sizes.p16),
                     ),
                     gapW4,
                     Text(
-                      "${subject.totalMarks}",
+                      '${subject.totalMarks}',
                       style: const TextStyle(fontSize: Sizes.p16),
                     ),
                   ],
@@ -117,7 +117,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                 ),
                                 child: Center(
                                   child: Text(
-                                    "${index + 1}",
+                                    '${index + 1}',
                                     style: TextStyle(
                                       color: colorScheme.onSurfaceVariant,
                                       fontWeight: FontWeight.bold,
@@ -131,7 +131,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                 child: Row(
                                   children: [
                                     Text(
-                                      "${chapter.subTopics.length} Subtopics",
+                                      '${chapter.subTopics.length} Subtopics',
                                       style: TextStyle(
                                         color: colorScheme.onSurfaceVariant,
                                       ),
@@ -141,12 +141,12 @@ class SyllabusDetailScreen extends ConsumerWidget {
                                         horizontal: Sizes.p8,
                                       ),
                                       child: Text(
-                                        ".",
+                                        '.',
                                         style: TextStyle(color: Colors.grey),
                                       ),
                                     ),
                                     Text(
-                                      "${chapter.chapterMarks} Marks",
+                                      '${chapter.chapterMarks} Marks',
                                       style: const TextStyle(
                                         color: Colors.deepPurple,
                                         fontWeight: FontWeight.w600,
@@ -192,7 +192,7 @@ class SyllabusDetailScreen extends ConsumerWidget {
         error: (error, stackTrace) {
           Log.error(subjectCode, error, stackTrace);
           return Center(
-            child: Text("error loading subject: $error"),
+            child: Text('error loading subject: $error'),
           );
         },
       ),
