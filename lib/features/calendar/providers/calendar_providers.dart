@@ -54,12 +54,12 @@ CalendarRepository calendarRepository(Ref ref) {
   );
 }
 
-@riverpod
-Future<EventsMapList> calendarEvents(Ref ref) {
+@Riverpod(keepAlive: true)
+Future<EventsMapList> calendarEvents(Ref ref) async {
   final repo = ref.watch(calendarRepositoryProvider);
   final branch = ref.watch(settingsProvider).selectedBranch;
   final semester = ref.watch(settingsProvider).selectedSemester;
-  return repo.getEvents(branch, semester);
+  return await repo.getEvents(branch, semester);
 }
 
 @riverpod

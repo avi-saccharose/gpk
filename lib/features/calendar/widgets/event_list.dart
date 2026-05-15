@@ -61,7 +61,7 @@ class EventList extends ConsumerWidget {
         return ErrorCard(
           message: 'Failed fetching calendar events',
           retry: () {
-            ref.invalidate(monthlyEventsProvider);
+            ref.invalidate(calendarEventsProvider);
           },
         );
       },

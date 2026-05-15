@@ -4,6 +4,7 @@ class AppTheme {
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
+      fontFamily: 'inter',
       scaffoldBackgroundColor: const Color(0xFFEAEFF8),
       dividerColor: const Color(0xFFE3E8F5),
       colorScheme: const ColorScheme.light(
@@ -16,10 +17,15 @@ class AppTheme {
         outlineVariant: Color(0xFFBCC6DC),
         primaryContainer: Color(0xFFC6D5FB),
         onPrimaryContainer: Color(0xFF0A1535),
+        error: Color(0xFFBA1A1A),
+        onError: Color(0xFFFFFFFF),
+        errorContainer: Color(0xFFFFDAD6),
+        onErrorContainer: Color(0xFF410002),
       ),
       appBarTheme: const AppBarTheme(
         backgroundColor: Color(0xFFEAEFF8),
       ),
+
       searchBarTheme: SearchBarThemeData(
         backgroundColor: WidgetStateProperty.all(const Color(0xFFFFFFFF)),
         elevation: const WidgetStatePropertyAll(0),
@@ -33,6 +39,7 @@ class AppTheme {
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
+      fontFamily: 'inter',
       dividerColor: const Color(0xFF32415F),
       scaffoldBackgroundColor: const Color(0xFF1B2232),
       // scaffoldBackgroundColor: Color(0xFF10141E),
@@ -46,11 +53,16 @@ class AppTheme {
         outlineVariant: Color(0xFF32415F),
         primaryContainer: Color(0xFF324677),
         onPrimaryContainer: Color(0xFFDCE5FF),
+        error: Color(0xFFFFB4AB), // A softer, readable pastel red
+        onError: Color(0xFF690005),
+        errorContainer: Color(0xFF93000A),
+        onErrorContainer: Color(0xFFFFDAD6),
       ),
 
       appBarTheme: const AppBarTheme(
         backgroundColor: Color(0xFF1B2232),
       ),
+
       searchBarTheme: const SearchBarThemeData(
         // The elevated dark slate background
         backgroundColor: WidgetStatePropertyAll(Color(0xFF26324A)),

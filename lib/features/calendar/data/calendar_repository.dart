@@ -36,14 +36,10 @@ class CalendarRepository {
     return (group, data['events']);
   }
 
-  Future<EventsMapList> getEvents(
-    Branch branch,
-    Semester semester, {
-    bool forceRefresh = false,
-  }) async {
+  Future<EventsMapList> getEvents(Branch branch, Semester semester) async {
     final String cacheKey = 'calendar$branch${semester.year}';
 
-    if (!forceRefresh && cacheMetadata.isCacheValid(cacheKey, cacheDuration)) {
+    if (cacheMetadata.isCacheValid(cacheKey, cacheDuration)) {
       final cachedEvents = await cacheService.get(cacheKey);
       if (cachedEvents != null) {
         Log.info(

@@ -18,7 +18,6 @@ import 'package:gpk_app/features/syllabus/providers/syllabus_providers.dart';
 import 'package:gpk_app/hive/hive_registrar.g.dart';
 import 'package:gpk_app/routing/app_router.dart';
 import 'package:hive_ce_flutter/adapters.dart';
-import 'package:hugeicons/hugeicons.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -6,6 +6,7 @@ import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
+import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 import 'package:gpk_app/features/home/providers/home_providers.dart';
 import 'package:hugeicons/hugeicons.dart';
 
@@ -64,7 +65,7 @@ class UpcomingEvents extends ConsumerWidget {
         return ErrorCard(
           message: 'Failed loading events',
           retry: () {
-            ref.invalidate(upcomingEventsMapProvider);
+            ref.invalidate(calendarEventsProvider);
           },
         );
       },
