@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/features/faculty/models/faculty.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:url_launcher/url_launcher.dart';

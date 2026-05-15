@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/core/widgets/faculty_bottom_sheet.dart';
 import 'package:gpk_app/features/faculty/models/faculty.dart';
 import 'package:hugeicons/hugeicons.dart';
