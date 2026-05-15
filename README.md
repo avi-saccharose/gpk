@@ -1,4 +1,4 @@
-# gpk_app
+# Campus Hub
 
 Student app for Government Polytechnic Kohima
 
@@ -32,6 +32,7 @@ flutter run -d android
 
 ## 🙏 Acknowledgments
 
+* [quotes.json](assets/json/quotes.json) taken from [daily-motivation](https://github.com/AtaGowani/daily-motivation/)
 * Icons provided by [Icons8](https://icons8.com)
 
 ## License
