@@ -28,6 +28,9 @@ class CalendarWidget extends ConsumerWidget {
       margin: const EdgeInsets.all(Sizes.p16),
       decoration: BoxDecoration(
         color: colorScheme.surface,
+        border: Border.all(
+          color: colorScheme.outline,
+        ),
         borderRadius: BorderRadius.circular(Sizes.p16),
         boxShadow: [
           BoxShadow(
@@ -110,7 +113,7 @@ class CalendarWidget extends ConsumerWidget {
           ),
           decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(color: colorScheme.outlineVariant, width: 0.5),
+              bottom: BorderSide(color: colorScheme.outline, width: 0.5),
             ),
           ),
           headerMargin: const EdgeInsets.only(bottom: 8.0),

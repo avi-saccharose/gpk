@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/features/calendar/widgets/calendar_widget.dart';
 import 'package:gpk_app/features/calendar/widgets/event_list.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
@@ -13,6 +12,8 @@ class CalendarScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedBranch = ref.watch(settingsProvider).selectedBranch;
     final selectedSemester = ref.watch(settingsProvider).selectedSemester;
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -21,10 +22,18 @@ class CalendarScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             gapH20,
-            const Text('Calendar', style: AppTextStyles.label),
+            Text(
+              'Calendar',
+              style: TextStyle(
+                fontSize: 16,
+                color: colorScheme.onSurfaceVariant,
+              ),
+            ),
             Text(
               '$selectedBranch $selectedSemester',
-              style: AppTextStyles.display,
+              style: textTheme.headlineLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+              ),
             ),
             gapH20,
             const CalendarWidget(),
