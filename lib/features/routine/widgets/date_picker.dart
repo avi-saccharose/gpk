@@ -4,6 +4,7 @@ import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/core/utils/time_helper.dart';
 import 'package:gpk_app/features/routine/providers/routine_providers.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class DatePicker extends ConsumerWidget {
   const DatePicker({super.key});
@@ -14,16 +15,17 @@ class DatePicker extends ConsumerWidget {
     final dates = getDaysListInMonth(selectedDay.year, selectedDay.month);
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    const itemWidth = 55.0;
-
-    final scrollController = ScrollController(
-      initialScrollOffset: selectedDay.day * itemWidth,
-    );
+    // const itemWidth = 55.0;
+    //
+    // final scrollController = ScrollController(
+    //   initialScrollOffset: selectedDay.day * itemWidth,
+    // );
 
     return SizedBox(
       height: Sizes.p80,
-      child: ListView.builder(
-        controller: scrollController,
+      child: ScrollablePositionedList.builder(
+        // controller: scrollController,
+        initialScrollIndex: selectedDay.day - 1,
         scrollDirection: Axis.horizontal,
         itemCount: dates.length,
         itemBuilder: (context, index) {

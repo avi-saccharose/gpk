@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:gpk_app/core/cache/cache_metadata.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
@@ -13,8 +15,6 @@ class CalendarRepository {
   final CacheService cacheService;
   final CacheMetadata cacheMetadata;
   final Duration cacheDuration;
-
-  final String cacheKey = 'calendar_events';
 
   CalendarRepository({
     required this.apiServer,
@@ -62,25 +62,39 @@ class CalendarRepository {
 
     final (allEventGroup, allEventsJson) = result[0];
     final (branchEventGroup, branchEventsJson) = result[1];
-    final events = EventsMapList(
-      equals: (a, b) => a.isSameDay(b),
-      hashCode: (key) => key.year * 10000 + key.month * 100 + key.day,
+
+    // final events = EventsMapList(
+    //   equals: (a, b) => a.isSameDay(b),
+    //   hashCode: (key) => key.year * 10000 + key.month * 100 + key.day,
+    // );
+
+    // We need to preserve sort
+    final sortedEvents = SplayTreeMap<DateTime, List<Event>>(
+      (DateTime a, DateTime b) => a.compareTo(b),
     );
 
     void addEvents(List<dynamic> eventJson, EventGroup group) {
       for (final item in eventJson) {
         final date = DateTime.parse(item['startTime']).normalize();
         final event = Event(title: item['title'], group: group);
-        events.putIfAbsent(date, () => []);
-        events[date]!.add(event);
+        sortedEvents.putIfAbsent(date, () => []);
+        sortedEvents[date]!.add(event);
       }
     }
 
     addEvents(allEventsJson, allEventGroup);
     addEvents(branchEventsJson, branchEventGroup);
-    final eventsWrapper = EventWrapper(events);
+
+    // and then convert it back to linkedHashMap
+    final eventsMap = EventsMapList(
+      equals: (a, b) => a.isSameDay(b),
+      hashCode: (key) => key.year * 10000 + key.month * 100 + key.day,
+    )..addAll(sortedEvents);
+
+    final eventsWrapper = EventWrapper(eventsMap);
     await cacheService.write(cacheKey, eventsWrapper);
     await cacheMetadata.updateCacheTimeStamp(cacheKey);
-    return events;
+
+    return eventsMap;
   }
 }

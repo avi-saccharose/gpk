@@ -7,6 +7,7 @@ import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
 import 'package:gpk_app/features/calendar/widgets/event_list_item.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class EventList extends ConsumerWidget {
   const EventList({super.key});
@@ -27,14 +28,24 @@ class EventList extends ConsumerWidget {
             ),
           );
         }
+        final today = DateTime.now().normalize();
+        final scrollController = ItemScrollController();
+        final targetIndex = eventsList.indexWhere((map) {
+          return !map.key.isBefore(today);
+        });
+
+        Log.info('Calendar Event offset: $targetIndex');
+
         return Expanded(
           child: RefreshIndicator(
             onRefresh: () async {
               ref.invalidate(monthlyEventsProvider);
             },
-            child: ListView.builder(
+            child: ScrollablePositionedList.builder(
               physics: const AlwaysScrollableScrollPhysics(),
               itemCount: eventsList.length,
+              itemScrollController: scrollController,
+              initialScrollIndex: targetIndex == -1 ? 0 : targetIndex,
               itemBuilder: (context, index) {
                 final date = eventsList[index].key;
                 final isToday = date.isToday;
