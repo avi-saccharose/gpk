@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/features/faculty/providers/faculty_providers.dart';
 import 'package:gpk_app/features/faculty/widgets/faculty_card.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -12,6 +11,8 @@ class FacultyScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final faculties = ref.watch(filteredFacultyProvider);
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -20,18 +21,24 @@ class FacultyScreen extends ConsumerWidget {
           children: [
             gapH20,
             Text(
-              "Academic",
-              style: AppTextStyles.label,
+              'Academic',
+              style: TextStyle(
+                fontSize: 16,
+                color: colorScheme.onSurfaceVariant,
+              ),
             ),
             Text(
-              "Faculty",
-              style: AppTextStyles.display,
+              'Faculty',
+              style: textTheme.headlineLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: colorScheme.onSurface,
+              ),
             ),
             gapH20,
             SearchBar(
-              elevation: WidgetStatePropertyAll(0),
-              leading: HugeIcon(icon: HugeIcons.strokeRoundedSearch01),
-              padding: WidgetStatePropertyAll(
+              elevation: const WidgetStatePropertyAll(0),
+              leading: const HugeIcon(icon: HugeIcons.strokeRoundedSearch01),
+              padding: const WidgetStatePropertyAll(
                 EdgeInsetsGeometry.symmetric(horizontal: Sizes.p16),
               ),
 
@@ -42,8 +49,8 @@ class FacultyScreen extends ConsumerWidget {
             gapH20,
             Expanded(
               child: faculties.isEmpty
-                  ? Center(
-                      child: Text("No faculty found"),
+                  ? const Center(
+                      child: Text('No faculty found'),
                     )
                   : GridView.builder(
                       gridDelegate:

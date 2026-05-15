@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/features/faculty/models/faculty.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -13,14 +12,19 @@ Future<void> openWhatsApp(String number) async {
   try {
     await launchUrl(whatsappUrl);
   } catch (error, stackTrace) {
-    Log.error("launch whatsapp", error, stackTrace);
+    Log.error('launch whatsapp', error, stackTrace);
   }
 }
 
-void showFacultyBottomSheet(BuildContext context, Faculty faculty) {
-  showModalBottomSheet(
+Future<void> showFacultyBottomSheet(
+  BuildContext context,
+  Faculty faculty,
+) async {
+  await showModalBottomSheet(
     context: context,
     builder: (context) {
+      final colorScheme = Theme.of(context).colorScheme;
+      final textTheme = Theme.of(context).textTheme;
       return SafeArea(
         child: Padding(
           padding: const EdgeInsetsGeometry.all(Sizes.p16),
@@ -28,24 +32,24 @@ void showFacultyBottomSheet(BuildContext context, Faculty faculty) {
             children: [
               Center(
                 child: Container(
-                  margin: EdgeInsetsGeometry.only(top: 8, bottom: 8),
+                  margin: const EdgeInsetsGeometry.only(top: 8, bottom: 8),
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.grey[600],
+                    color: colorScheme.onSurface,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
               ),
               gapH12,
-              CircleAvatar(
+              const CircleAvatar(
                 radius: 50,
                 backgroundImage: AssetImage('assets/images/helen.jpeg'),
               ),
 
               Text(
                 faculty.name,
-                style: AppTextStyles.bodyLarge,
+                style: textTheme.titleLarge,
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -53,32 +57,38 @@ void showFacultyBottomSheet(BuildContext context, Faculty faculty) {
               gapH4,
               Text(
                 faculty.qualification,
-                style: AppTextStyles.labelSmall,
+                style: textTheme.labelMedium?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
               gapH24,
               const Divider(),
               ListTile(
-                leading: HugeIcon(icon: HugeIcons.strokeRoundedSmartPhone02),
+                leading: const HugeIcon(
+                  icon: HugeIcons.strokeRoundedSmartPhone02,
+                ),
                 title: const Text('Phone number'),
-                subtitle: Text(faculty.number ?? "Not available"),
-                trailing: HugeIcon(icon: HugeIcons.strokeRoundedWhatsapp),
-                onTap: () {
+                subtitle: Text(faculty.number ?? 'Not available'),
+                trailing: const HugeIcon(icon: HugeIcons.strokeRoundedWhatsapp),
+                onTap: () async {
                   if (faculty.number != null) {
-                    openWhatsApp(faculty.number!);
+                    await openWhatsApp(faculty.number!);
                   }
                 },
               ),
               ListTile(
-                leading: HugeIcon(icon: HugeIcons.strokeRoundedMail01),
-                title: const Text("Email"),
-                subtitle: Text(faculty.email ?? "Not available"),
+                leading: const HugeIcon(icon: HugeIcons.strokeRoundedMail01),
+                title: const Text('Email'),
+                subtitle: Text(faculty.email ?? 'Not available'),
               ),
               ListTile(
-                leading: HugeIcon(icon: HugeIcons.strokeRoundedAddressBook),
+                leading: const HugeIcon(
+                  icon: HugeIcons.strokeRoundedAddressBook,
+                ),
                 title: const Text('Address'),
-                subtitle: Text(faculty.address ?? "Not available"),
+                subtitle: Text(faculty.address ?? 'Not available'),
               ),
             ],
           ),

@@ -21,7 +21,7 @@ types:
         index: 0
   UserPreferences:
     typeId: 2
-    nextIndex: 4
+    nextIndex: 5
     fields:
       isDarkMode:
         index: 0
@@ -31,6 +31,8 @@ types:
         index: 2
       displayName:
         index: 3
+      completedOnboarding:
+        index: 4
   EventGroup:
     typeId: 3
     nextIndex: 10

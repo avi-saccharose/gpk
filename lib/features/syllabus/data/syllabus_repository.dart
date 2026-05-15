@@ -15,20 +15,20 @@ class SyllabusRepository {
     required Branch branch,
     required Semester semester,
   }) async {
-    final cacheKey = "${branch.code}$semester";
+    final cacheKey = '${branch.code}$semester';
     final cachedSyllabus = cacheService.get(cacheKey);
 
     if (cachedSyllabus != null) return cachedSyllabus;
 
     try {
       final dynamic response = await apiServer.fetch(
-        "/syllabus/$branch/$semester",
+        '/syllabus/$branch/$semester',
       );
       final syllabus = Syllabus.fromJson(response as Map<String, dynamic>);
-      cacheService.write(cacheKey, syllabus);
+      await cacheService.write(cacheKey, syllabus);
       return syllabus;
     } catch (e) {
-      Log.error("Fetching syllabus error for $branch $semester", e);
+      Log.error('Fetching syllabus error for $branch $semester', e);
       rethrow;
     }
   }

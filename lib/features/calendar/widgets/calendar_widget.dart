@@ -25,9 +25,12 @@ class CalendarWidget extends ConsumerWidget {
     }
 
     return Container(
-      margin: EdgeInsets.all(Sizes.p16),
+      margin: const EdgeInsets.all(Sizes.p16),
       decoration: BoxDecoration(
         color: colorScheme.surface,
+        border: Border.all(
+          color: colorScheme.outline,
+        ),
         borderRadius: BorderRadius.circular(Sizes.p16),
         boxShadow: [
           BoxShadow(
@@ -43,6 +46,7 @@ class CalendarWidget extends ConsumerWidget {
         onDaySelected: (selectedDay, _) {
           final events = getEventsForDay(selectedDay);
           if (events.isNotEmpty) {
+            // ignore: discarded_futures
             showModalBottomSheet<void>(
               context: context,
               builder: (BuildContext context) => EventsBottomSheet(
@@ -56,7 +60,7 @@ class CalendarWidget extends ConsumerWidget {
         onPageChanged: (newFocusedDay) {
           ref.read(selectedMonthProvider.notifier).set(newFocusedDay);
         },
-        firstDay: DateTime.utc(2025, 05, 01),
+        firstDay: DateTime.utc(2025, 05),
         lastDay: DateTime.utc(2050, 05, 31),
         eventLoader: getEventsForDay,
 
@@ -109,7 +113,7 @@ class CalendarWidget extends ConsumerWidget {
           ),
           decoration: BoxDecoration(
             border: Border(
-              bottom: BorderSide(color: colorScheme.outlineVariant, width: 0.5),
+              bottom: BorderSide(color: colorScheme.outline, width: 0.5),
             ),
           ),
           headerMargin: const EdgeInsets.only(bottom: 8.0),

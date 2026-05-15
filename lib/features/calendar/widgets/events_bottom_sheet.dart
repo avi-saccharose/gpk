@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
+import 'package:gpk_app/features/calendar/widgets/event_list_item.dart';
 
 class EventsBottomSheet extends StatelessWidget {
   final List<Event> events;
@@ -27,11 +28,14 @@ class EventsBottomSheet extends StatelessWidget {
           // Drag Handle
           Center(
             child: Container(
-              margin: EdgeInsetsGeometry.only(top: 8, bottom: 8),
+              margin: const EdgeInsetsGeometry.only(
+                top: Sizes.p12,
+                bottom: Sizes.p12,
+              ),
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey[600],
+                color: colorScheme.onSurface,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -43,7 +47,7 @@ class EventsBottomSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Events",
+                  'Events',
                   style: textTheme.headlineSmall,
                 ),
                 gapH4,
@@ -55,77 +59,19 @@ class EventsBottomSheet extends StatelessWidget {
                 ),
                 gapH12,
                 for (var event in events)
-                  BottomSheetItem(
-                    title: event.title,
-                    description: event.description,
+                  SizedBox(
+                    width: double.infinity,
+                    child: EventListItem(event: event),
                   ),
+                // BottomSheetItem(
+                //   title: event.title,
+                //   description: event.description,
+                //   group: event.group,
+                // ),
               ],
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class BottomSheetItem extends StatelessWidget {
-  final String title;
-  final String description;
-  const BottomSheetItem({
-    super.key,
-    required this.title,
-    this.description = "",
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
-
-    return SizedBox(
-      width: double.infinity,
-      child: Container(
-        margin: EdgeInsets.all(Sizes.p16),
-        decoration: BoxDecoration(
-          color: colorScheme.surface,
-          borderRadius: BorderRadius.circular(Sizes.p16),
-          boxShadow: [
-            BoxShadow(
-              color: colorScheme.shadow.withValues(alpha: 0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 8),
-            ),
-          ],
-        ),
-        // Card(
-        //   margin: EdgeInsets.all(Sizes.p4),
-        //   color: colorScheme.primaryContainer,
-        //   shape: RoundedRectangleBorder(
-        //     borderRadius: BorderRadius.circular(8),
-        //   ),
-        child: Padding(
-          padding: EdgeInsets.all(Sizes.p16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                title,
-                style: textTheme.titleMedium?.copyWith(
-                  color: colorScheme.onPrimaryContainer,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              gapH4,
-              Text(
-                description,
-                style: textTheme.bodyMedium?.copyWith(
-                  color: colorScheme.onPrimaryContainer.withValues(alpha: 0.6),
-                ),
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }

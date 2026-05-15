@@ -16,9 +16,9 @@ class SelectedDay extends _$SelectedDay {
     // We skip weekends as we dont have routines for weekends
     var date = DateTime.now().normalize();
     if (date.weekday == DateTime.sunday) {
-      date = date.add(Duration(days: 1));
+      date = date.add(const Duration(days: 1));
     } else if (date.weekday == DateTime.saturday) {
-      date = date.add(Duration(days: 2));
+      date = date.add(const Duration(days: 2));
     }
     return date;
   }
@@ -57,5 +57,5 @@ Future<List<TimelineItem>> routine(
 
 @riverpod
 Stream<void> minuteTicker(Ref ref) {
-  return Stream.periodic(Duration(minutes: 1));
+  return Stream.periodic(const Duration(minutes: 1));
 }

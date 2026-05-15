@@ -3,10 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
+import 'package:gpk_app/core/utils/time_helper.dart';
 import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/routine/models/timeline_item.dart';
-import 'package:gpk_app/core/utils/time_helper.dart';
 import 'package:gpk_app/features/routine/providers/routine_providers.dart';
 
 class Timeline extends ConsumerWidget {
@@ -40,15 +40,15 @@ class Timeline extends ConsumerWidget {
       ),
 
       error: (error, stackTrace) {
-        Log.error("Fetching routine", error, stackTrace);
+        Log.error('Fetching routine', error, stackTrace);
         return ErrorCard(
-          message: "Failed fetching routine",
+          message: 'Failed fetching routine',
           retry: () {
             ref.invalidate(routineProvider);
           },
         );
       },
-      loading: () => Center(child: const ElasticWaveLoader()),
+      loading: () => const Center(child: ElasticWaveLoader()),
     );
   }
 }
@@ -84,7 +84,7 @@ class TimelineTile extends StatelessWidget {
               Text(
                 displayTime(item.endTime),
                 style: textTheme.labelLarge?.copyWith(
-                  color: colorScheme.onSurface.withValues(alpha: 0.6),
+                  color: colorScheme.onSurfaceVariant,
                 ),
               ),
             ],
@@ -113,29 +113,23 @@ class TimelineTile extends StatelessWidget {
             child: InkWell(
               onTap: () => {
                 if (item.subjectCode != null)
-                  context.push("/syllabus/${item.subjectCode}"),
+                  context.push('/syllabus/${item.subjectCode}'),
               },
               child: Container(
                 margin: const EdgeInsets.only(bottom: Sizes.p20),
                 padding: const EdgeInsets.all(Sizes.p16),
+
                 decoration: BoxDecoration(
+                  border: BoxBorder.all(color: colorScheme.outline),
                   color: isActive
-                      ? colorScheme.primary
-                      : colorScheme.primaryContainer,
+                      ? colorScheme.primaryContainer
+                      : colorScheme.surface,
                   borderRadius: BorderRadius.circular(Sizes.p16),
-                  // boxShadow: [
-                  //   BoxShadow(
-                  //     color: Colors.red.withValues(alpha: 0.09),
-                  //     blurRadius: 10,
-                  //     offset: const Offset(0, 4),
-                  //   ),
-                  //],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image(
                           width: Sizes.p24,
@@ -147,34 +141,34 @@ class TimelineTile extends StatelessWidget {
                           item.subjectName,
                           style: TextStyle(
                             color: isActive
-                                ? colorScheme.onPrimary
-                                : colorScheme.onPrimaryContainer,
+                                ? colorScheme.onPrimaryContainer
+                                : colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
                           ),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
-                          item.subjectCode ?? "",
+                          item.subjectCode ?? '',
                           style: textTheme.labelSmall?.copyWith(
-                            color:
-                                (isActive
-                                        ? colorScheme.primary
-                                        : colorScheme.onPrimaryContainer)
-                                    .withValues(alpha: 0.8),
+                            color: (isActive
+                                ? colorScheme.onPrimaryContainer.withValues(
+                                    alpha: 0.6,
+                                  )
+                                : colorScheme.onSurfaceVariant),
                           ),
                         ),
                       ],
                     ),
                     gapH8,
                     Text(
-                      item.instructorName ?? "",
+                      item.instructorName ?? '',
                       style: TextStyle(
-                        color:
-                            (isActive
-                                    ? colorScheme.onPrimary
-                                    : colorScheme.onPrimaryContainer)
-                                .withValues(alpha: 0.8),
+                        color: (isActive
+                            ? colorScheme.onPrimaryContainer.withValues(
+                                alpha: 0.6,
+                              )
+                            : colorScheme.onSurfaceVariant),
                       ),
                     ),
                   ],

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:gpk_app/app_navigation.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/home/providers/home_providers.dart';
 import 'package:gpk_app/features/home/widgets/faculty_list.dart';
 import 'package:gpk_app/features/home/widgets/subjects_list.dart';
 import 'package:gpk_app/features/home/widgets/upcoming_events.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
+import 'package:gpk_app/routing/app_router.dart';
 import 'package:hugeicons/hugeicons.dart';
 
 class HomeScreen extends ConsumerWidget {
@@ -25,7 +24,10 @@ class HomeScreen extends ConsumerWidget {
       appBar: AppBar(
         actions: [
           IconButton(
-            icon: HugeIcon(icon: HugeIcons.strokeRoundedSettings05, size: 30.0),
+            icon: const HugeIcon(
+              icon: HugeIcons.strokeRoundedSettings05,
+              size: 30.0,
+            ),
             onPressed: () => context.push('/setting'),
           ),
         ],
@@ -33,53 +35,53 @@ class HomeScreen extends ConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsetsGeometry.symmetric(horizontal: 24),
+            padding: const EdgeInsetsGeometry.symmetric(horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 gapH20,
                 Text(
-                  "Hello",
-                  style: AppTextStyles.label,
+                  'Hello',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 Text(
                   displayName,
-                  style: AppTextStyles.display,
-                ),
-                gapH20,
-                Text(
-                  "Quote of the day",
-                  style: textTheme.titleMedium?.copyWith(
+                  style: textTheme.headlineLarge?.copyWith(
                     fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                    color: colorScheme.primary,
+                    color: colorScheme.onSurface,
                   ),
                 ),
-                QuoteOfTheDay(),
                 gapH32,
-                SectionHeader(
-                  title: "Upcoming Events",
-                  location: AppRouter.calendar,
+                const SectionHeader(title: 'Quote of the day'),
+
+                const QuoteOfTheDay(),
+                gapH32,
+                const SectionHeader(
+                  title: 'Upcoming Events',
+                  destination: AppRoutes.calendar,
                 ),
                 gapH8,
 
-                UpcomingEvents(),
+                const UpcomingEvents(),
                 gapH32,
-                SectionHeader(
-                  title: "Subjects",
-                  location: AppRouter.syllabus,
+                const SectionHeader(
+                  title: 'Subjects',
+                  destination: AppRoutes.syllabus,
                 ),
                 gapH8,
 
-                SubjectsList(),
+                const SubjectsList(),
                 gapH32,
-                SectionHeader(
-                  title: "Faculty",
-                  location: AppRouter.faculty,
+                const SectionHeader(
+                  title: 'Faculty',
+                  destination: AppRoutes.faculty,
                 ),
                 gapH8,
 
-                FacultyList(),
+                const FacultyList(),
               ],
             ),
           ),
@@ -101,16 +103,17 @@ class QuoteOfTheDay extends ConsumerWidget {
     final data = ref.watch(getQuoteOfDayProvider);
     return data.when(
       data: (quote) => Card(
-        elevation: 4,
-        shadowColor: Colors.black.withValues(alpha: 0.4),
-        surfaceTintColor: Colors.transparent,
-        color: colorScheme.surface, //Colors.white.withValues(alpha: 0.9),
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: colorScheme.outline),
+          borderRadius: BorderRadius.circular(16),
+        ),
         child: Padding(
-          padding: EdgeInsetsGeometry.all(16),
+          padding: const EdgeInsetsGeometry.all(16),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(Icons.format_quote),
+              const Icon(Icons.format_quote),
               gapH8,
               Text(
                 quote.quote,
@@ -128,27 +131,21 @@ class QuoteOfTheDay extends ConsumerWidget {
                   Container(
                     width: 24,
                     height: 1,
-                    color: colorScheme.onSurface.withValues(
-                      alpha: 0.3,
-                    ),
+                    color: colorScheme.onSurfaceVariant,
                   ),
                   gapW8,
                   Text(
                     quote.author,
                     style: textTheme.labelLarge?.copyWith(
                       fontWeight: FontWeight.w500,
-                      color: colorScheme.onSurface.withValues(
-                        alpha: 0.7,
-                      ),
+                      color: colorScheme.onSurfaceVariant,
                     ),
                   ),
                   gapW8,
                   Container(
                     width: 24,
                     height: 1,
-                    color: colorScheme.onSurface.withValues(
-                      alpha: 0.3,
-                    ),
+                    color: colorScheme.onSurfaceVariant,
                   ),
                 ],
               ),
@@ -156,12 +153,12 @@ class QuoteOfTheDay extends ConsumerWidget {
           ),
         ),
       ),
-      loading: () => Center(
+      loading: () => const Center(
         child: ElasticWaveLoader(),
       ),
       error: (error, stackTrace) {
-        Log.error("loading quote", error, stackTrace);
-        return Text("error loading quote");
+        Log.error('loading quote', error, stackTrace);
+        return const Text('error loading quote');
       },
     );
   }
@@ -169,8 +166,8 @@ class QuoteOfTheDay extends ConsumerWidget {
 
 class SectionHeader extends StatelessWidget {
   final String title;
-  final String location;
-  const SectionHeader({super.key, required this.title, required this.location});
+  final String? destination;
+  const SectionHeader({super.key, required this.title, this.destination});
 
   @override
   Widget build(BuildContext context) {
@@ -186,24 +183,25 @@ class SectionHeader extends StatelessWidget {
             color: colorScheme.primary,
           ),
         ),
-        TextButton(
-          onPressed: () {
-            context.go(location);
-          },
-          child: Row(
-            children: [
-              Text(
-                'See All',
-                style: textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.primary,
+        if (destination != null)
+          TextButton(
+            onPressed: () {
+              context.go(destination!);
+            },
+            child: Row(
+              children: [
+                Text(
+                  'See All',
+                  style: textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.primary,
+                  ),
                 ),
-              ),
-              gapW4,
-              HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
-            ],
+                gapW4,
+                const HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
+              ],
+            ),
           ),
-        ),
       ],
     );
   }

@@ -22,21 +22,22 @@ class RoutineScreen extends StatelessWidget {
             gapH20,
             Text(
               date.shortDate,
-              style: textTheme.titleMedium?.copyWith(
-                color: colorScheme.onSurface.withValues(alpha: 0.6),
+              style: TextStyle(
+                fontSize: 16,
+                color: colorScheme.onSurfaceVariant,
               ),
             ),
             Text(
-              "Today",
+              'Today',
               style: textTheme.headlineLarge?.copyWith(
                 fontWeight: FontWeight.bold,
                 color: colorScheme.onSurface,
               ),
             ),
             gapH20,
-            DatePicker(),
+            const DatePicker(),
             gapH20,
-            Timeline(),
+            const Timeline(),
           ],
         ),
       ),

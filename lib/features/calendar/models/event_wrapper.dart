@@ -10,9 +10,7 @@ class EventWrapper {
     final eventsHashMap = EventsMapList(
       equals: (a, b) => a.isSameDay(b),
       hashCode: (key) => key.year * 10000 + key.month * 100 + key.day,
-    );
-
-    eventsHashMap.addAll(eventsMap);
+    )..addAll(eventsMap);
     return eventsHashMap;
   }
 }

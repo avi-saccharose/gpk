@@ -15,7 +15,7 @@ class AppShellScaffold extends StatelessWidget {
       extendBody: true,
       body: navigationShell,
       bottomNavigationBar: Container(
-        margin: EdgeInsets.all(Sizes.p16),
+        margin: const EdgeInsets.all(Sizes.p16),
         decoration: BoxDecoration(
           color: colorScheme.surface,
           borderRadius: BorderRadius.circular(Sizes.p32),
@@ -36,30 +36,30 @@ class AppShellScaffold extends StatelessWidget {
               initialLocation: index == navigationShell.currentIndex,
             ),
             type: BottomNavigationBarType.fixed,
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: HugeIcon(
                   icon: HugeIcons.strokeRoundedHome01,
                 ), //Icon(Icons.home_outlined),
-                label: "Home",
+                label: 'Home',
               ),
 
               BottomNavigationBarItem(
                 icon: HugeIcon(icon: HugeIcons.strokeRoundedCalendar02),
-                label: "Calendar",
+                label: 'Calendar',
               ),
               BottomNavigationBarItem(
                 icon: HugeIcon(icon: HugeIcons.strokeRoundedTimelineList),
-                label: "Routine",
+                label: 'Routine',
               ),
 
               BottomNavigationBarItem(
                 icon: HugeIcon(icon: HugeIcons.strokeRoundedBooks02),
-                label: "Syllabus",
+                label: 'Syllabus',
               ),
               BottomNavigationBarItem(
                 icon: HugeIcon(icon: HugeIconsStrokeRounded.bookUser),
-                label: "Faculty",
+                label: 'Faculty',
               ),
             ],
           ),

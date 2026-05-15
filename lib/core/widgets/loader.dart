@@ -19,6 +19,7 @@ class _ElasticWaveLoaderState extends State<ElasticWaveLoader>
       return AnimationController(
         vsync: this,
         duration: const Duration(milliseconds: 1200),
+        // ignore: discarded_futures
       )..repeat(reverse: true, period: Duration(milliseconds: 1200 + i * 150));
     });
   }
@@ -66,7 +67,9 @@ class _ElasticWaveLoaderState extends State<ElasticWaveLoader>
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: const Color(0xFF667EEA).withOpacity(0.4 * value),
+                      color: const Color(
+                        0xFF667EEA,
+                      ).withValues(alpha: 0.4 * value),
                       blurRadius: 12,
                       spreadRadius: 2,
                     ),

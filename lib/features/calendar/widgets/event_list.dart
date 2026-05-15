@@ -6,6 +6,7 @@ import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/calendar/providers/calendar_providers.dart';
+import 'package:gpk_app/features/calendar/widgets/event_list_item.dart';
 
 class EventList extends ConsumerWidget {
   const EventList({super.key});
@@ -20,7 +21,7 @@ class EventList extends ConsumerWidget {
         // final eventsList = eventsMap.entries.toList();
         if (eventsList.isEmpty) {
           return Text(
-            "no events",
+            'no events',
             style: textTheme.bodyLarge?.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),
@@ -43,11 +44,8 @@ class EventList extends ConsumerWidget {
                   children: [
                     EventListDate(date: date, isToday: isToday),
                     ...entries.map(
-                      (e) => EventListItem(
-                        title: e.title,
-                        description: e.description,
-                        group: e.group.display,
-                        color: e.group.color,
+                      (event) => EventListItem(
+                        event: event,
                       ),
                     ), //.toList(),
                   ],
@@ -57,13 +55,13 @@ class EventList extends ConsumerWidget {
           ),
         );
       },
-      loading: () => Center(child: ElasticWaveLoader()),
+      loading: () => const Center(child: ElasticWaveLoader()),
       error: (error, stackTrace) {
-        Log.error("Fetching calendar failed", error, stackTrace);
+        Log.error('Fetching calendar failed', error, stackTrace);
         return ErrorCard(
-          message: "Failed fetching calendar events",
+          message: 'Failed fetching calendar events',
           retry: () {
-            ref.invalidate(monthlyEventsProvider);
+            ref.invalidate(calendarEventsProvider);
           },
         );
       },
@@ -112,90 +110,6 @@ class EventListDate extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class EventListItem extends StatelessWidget {
-  final String title;
-  final String description;
-  final String group;
-  final Color color;
-  const EventListItem({
-    super.key,
-    required this.title,
-    required this.description,
-    required this.group,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
-    return Container(
-      margin: EdgeInsetsGeometry.symmetric(
-        vertical: Sizes.p8,
-        horizontal: Sizes.p16,
-      ),
-      decoration: BoxDecoration(
-        color: colorScheme.surface,
-        borderRadius: BorderRadius.circular(Sizes.p16),
-        boxShadow: [
-          BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      // color: colorScheme.surface,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 8,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: EdgeInsetsGeometry.symmetric(
-                    vertical: Sizes.p4,
-                    horizontal: Sizes.p8,
-                  ),
-                  decoration: BoxDecoration(
-                    color: color.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(Sizes.p4),
-                  ),
-                  child: Text(
-                    group,
-                    style: TextStyle(color: color),
-                  ),
-                ),
-                gapW8,
-                Expanded(
-                  child: Text(
-                    title,
-                    style: textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            gapH8,
-            Text(
-              description,
-              style: textTheme.bodyMedium?.copyWith(
-                color: colorScheme.onSurfaceVariant,
-                height: 1.4,
-              ),
-            ),
-          ],
-        ),
       ),
     );
   }

@@ -225,7 +225,7 @@ final class CalendarEventsProvider
         argument: null,
         retry: null,
         name: r'calendarEventsProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -245,7 +245,7 @@ final class CalendarEventsProvider
   }
 }
 
-String _$calendarEventsHash() => r'b626cf8fa1c1fa75523e1974247a6fbd8d2ac403';
+String _$calendarEventsHash() => r'66757fa48250255d5d6f9912abc66cb3b4c43323';
 
 @ProviderFor(monthlyEventsMap)
 final monthlyEventsMapProvider = MonthlyEventsMapProvider._();

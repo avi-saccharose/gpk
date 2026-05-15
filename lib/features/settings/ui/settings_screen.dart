@@ -33,7 +33,7 @@ class SettingsScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SectionTitle(title: "PROFILE"),
+                const SectionTitle(title: 'PROFILE'),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(16),
@@ -42,11 +42,11 @@ class SettingsScreen extends ConsumerWidget {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        prefixIcon: Icon(Icons.person_outlined),
-                        label: const Text("Name"),
+                        prefixIcon: const Icon(Icons.person_outlined),
+                        label: const Text('Name'),
                       ),
-                      onSubmitted: (String text) {
-                        ref
+                      onSubmitted: (String text) async {
+                        await ref
                             .read(settingsProvider.notifier)
                             .updateDisplayName(text);
                       },
@@ -56,8 +56,8 @@ class SettingsScreen extends ConsumerWidget {
 
                 gapH24,
 
-                SectionTitle(
-                  title: "ACADEMIC INFORMATION",
+                const SectionTitle(
+                  title: 'ACADEMIC INFORMATION',
                 ),
                 Card(
                   child: Padding(
@@ -66,7 +66,7 @@ class SettingsScreen extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Branch",
+                          'Branch',
                           style: textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -78,10 +78,10 @@ class SettingsScreen extends ConsumerWidget {
                           children: List.generate(3, (index) {
                             final branch = branches[index];
                             return ChoiceChip(
-                              label: Text("$branch"),
+                              label: Text('$branch'),
                               selected: selectedBranch == branch,
-                              onSelected: (_) {
-                                ref
+                              onSelected: (_) async {
+                                await ref
                                     .read(settingsProvider.notifier)
                                     .updateBranch(branch);
                               },
@@ -92,7 +92,7 @@ class SettingsScreen extends ConsumerWidget {
                         const Divider(),
                         gapH12,
                         Text(
-                          "Semester",
+                          'Semester',
                           style: textTheme.titleSmall?.copyWith(
                             fontWeight: FontWeight.w600,
                           ),
@@ -109,8 +109,8 @@ class SettingsScreen extends ConsumerWidget {
                               return ChoiceChip(
                                 label: Text('Sem $sem'),
                                 selected: selectedSemester.value == sem,
-                                onSelected: (_) {
-                                  ref
+                                onSelected: (_) async {
+                                  await ref
                                       .read(settingsProvider.notifier)
                                       .updateSemester(sem);
                                 },
@@ -125,38 +125,38 @@ class SettingsScreen extends ConsumerWidget {
 
                 gapH24,
 
-                SectionTitle(
-                  title: "THEME",
+                const SectionTitle(
+                  title: 'THEME',
                 ),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: RadioGroup<bool>(
                       groupValue: isDarkMode,
-                      onChanged: (value) {
-                        ref
+                      onChanged: (value) async {
+                        await ref
                             .read(settingsProvider.notifier)
                             .updateTheme(value ?? false);
                       },
-                      child: Column(
+                      child: const Column(
                         children: [
                           RadioListTile(
-                            title: const Row(
+                            title: Row(
                               children: [
                                 HugeIcon(icon: HugeIcons.strokeRoundedSun03),
                                 gapW8,
-                                Text("Light"),
+                                Text('Light'),
                               ],
                             ),
                             value: false,
                           ),
                           Divider(),
                           RadioListTile(
-                            title: const Row(
+                            title: Row(
                               children: [
                                 HugeIcon(icon: HugeIcons.strokeRoundedMoon01),
                                 gapW8,
-                                Text("Dark"),
+                                Text('Dark'),
                               ],
                             ),
                             value: true,
@@ -168,10 +168,10 @@ class SettingsScreen extends ConsumerWidget {
                 ),
 
                 gapH24,
-                SectionTitle(title: "APP DATA"),
+                const SectionTitle(title: 'APP DATA'),
                 Card(
                   child: Padding(
-                    padding: const EdgeInsetsGeometry.all(8),
+                    padding: const EdgeInsetsGeometry.all(16),
                     child: Column(
                       children: [
                         Row(
@@ -182,13 +182,13 @@ class SettingsScreen extends ConsumerWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "Clear Cache",
+                                    'Clear Cache',
                                     style: textTheme.titleSmall?.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
-                                  Text(
-                                    "Clear cached data to refetch updated content",
+                                  const Text(
+                                    'Clear cached data to refetch updated content',
                                     maxLines: 2,
                                   ),
                                 ],
@@ -207,19 +207,20 @@ class SettingsScreen extends ConsumerWidget {
                                     .read(sylllabusCacheServiceProvider)
                                     .clearAll();
 
-                                ref.invalidate(calendarCacheServiceProvider);
-                                ref.invalidate(routineCacheServiceProvider);
-                                ref.invalidate(sylllabusCacheServiceProvider);
+                                ref
+                                  ..invalidate(calendarCacheServiceProvider)
+                                  ..invalidate(routineCacheServiceProvider)
+                                  ..invalidate(sylllabusCacheServiceProvider);
 
-                                Log.info("Clear cache");
+                                Log.info('Clear cache');
 
                                 scaffold.showSnackBar(
                                   const SnackBar(
-                                    content: Text("All caches cleared"),
+                                    content: Text('All caches cleared'),
                                   ),
                                 );
                               },
-                              child: Text('clear'),
+                              child: const Text('clear'),
                             ),
                           ],
                         ),
@@ -229,7 +230,7 @@ class SettingsScreen extends ConsumerWidget {
                 ),
 
                 gapH24,
-                SectionTitle(title: "ABOUT"),
+                const SectionTitle(title: 'ABOUT'),
                 Card(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -239,7 +240,7 @@ class SettingsScreen extends ConsumerWidget {
                           leading: const HugeIcon(
                             icon: HugeIcons.strokeRoundedBadgeInfo,
                           ),
-                          title: const Text("Version"),
+                          title: const Text('Version'),
                           subtitle: Text(AppConfig.displayVersion),
                         ),
                         const Divider(),
@@ -247,8 +248,8 @@ class SettingsScreen extends ConsumerWidget {
                           leading: const HugeIcon(
                             icon: HugeIcons.strokeRoundedLicenseDraft,
                           ),
-                          title: const Text("Licenses"),
-                          subtitle: const Text("MIT License"),
+                          title: const Text('Licenses'),
+                          subtitle: const Text('MIT License'),
                           onTap: () {
                             showLicensePage(context: context);
                           },
@@ -258,7 +259,7 @@ class SettingsScreen extends ConsumerWidget {
                           leading: const HugeIcon(
                             icon: HugeIcons.strokeRoundedGithub01,
                           ),
-                          title: const Text("Github"),
+                          title: const Text('Github'),
                           subtitle: const Text(
                             AppConfig.repoUrl,
                           ),
@@ -267,7 +268,7 @@ class SettingsScreen extends ConsumerWidget {
                             try {
                               await launchUrl(url);
                             } catch (error, stackTrace) {
-                              Log.error("launch Github", error, stackTrace);
+                              Log.error('launch Github', error, stackTrace);
                             }
                           },
                         ),

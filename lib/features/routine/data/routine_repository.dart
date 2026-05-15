@@ -13,14 +13,14 @@ class RoutineRepository {
     required Branch branch,
     required Semester semester,
   }) async {
-    final String cacheKey = "${branch.code}$semester";
+    final String cacheKey = '${branch.code}$semester';
     final cachedRoutine = cacheService.get(
       cacheKey,
     );
     if (cachedRoutine != null) return cachedRoutine.scheduleMap;
     try {
       final dynamic responseData = await apiServer.fetch(
-        "/routine/$branch/$semester",
+        '/routine/$branch/$semester',
       );
 
       final routineMap = {
@@ -32,7 +32,7 @@ class RoutineRepository {
               .toList(),
       };
 
-      cacheService.write(cacheKey, RoutineSchedule(routineMap));
+      await cacheService.write(cacheKey, RoutineSchedule(routineMap));
 
       return routineMap;
     } catch (E) {

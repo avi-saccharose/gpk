@@ -21,20 +21,22 @@ class FacultyList extends ConsumerWidget {
         itemBuilder: (context, index) {
           final item = faculty[index];
           return Card(
-            elevation: 4,
-            shadowColor: Colors.black.withValues(alpha: 0.4),
-            surfaceTintColor: Colors.transparent,
-            color: colorScheme.surface, //Colors.white.withValues(alpha: 0.9),
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: colorScheme.outline),
+              borderRadius: BorderRadius.circular(16),
+            ),
             margin: const EdgeInsetsGeometry.only(right: 16),
             child: InkWell(
               onTap: () {
+                // ignore: discarded_futures
                 showFacultyBottomSheet(context, item);
               },
               child: Padding(
                 padding: const EdgeInsets.all(24),
                 child: Column(
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       child: HugeIcon(icon: HugeIcons.strokeRoundedUser02),
                     ),
                     gapH8,

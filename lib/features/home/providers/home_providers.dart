@@ -31,6 +31,6 @@ Future<Quote> getQuoteOfDay(Ref ref) async {
   final List<dynamic> data = jsonDecode(response);
   List<Quote> quotes = data.map((json) => Quote.fromJson(json)).toList();
   final date = DateTime.now();
-  final int index = date.difference(DateTime(date.year, 1, 1)).inDays + 1;
+  final int index = date.difference(DateTime(date.year)).inDays + 1;
   return quotes[index % quotes.length];
 }

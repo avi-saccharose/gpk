@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/core/widgets/faculty_bottom_sheet.dart';
 import 'package:gpk_app/features/faculty/models/faculty.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -13,9 +12,14 @@ class FacultyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     return Card(
-      elevation: 4,
+      elevation: 2,
+
       shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: colorScheme.outline,
+        ),
         borderRadius: BorderRadiusGeometry.circular(12),
       ),
 
@@ -23,7 +27,7 @@ class FacultyCard extends StatelessWidget {
         padding: const EdgeInsets.all(Sizes.p12),
         child: Column(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               backgroundImage: AssetImage('assets/images/helen.jpeg'),
             ),
             gapH8,
@@ -33,7 +37,9 @@ class FacultyCard extends StatelessWidget {
             // ),
             Text(
               faculty.name,
-              style: AppTextStyles.bodyLarge,
+              style: textTheme.titleMedium?.copyWith(
+                color: colorScheme.onSurface,
+              ),
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -41,11 +47,13 @@ class FacultyCard extends StatelessWidget {
             gapH4,
             Text(
               faculty.qualification,
-              style: AppTextStyles.labelSmall,
+              style: textTheme.labelMedium?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-            Spacer(),
+            const Spacer(),
 
             Container(
               decoration: BoxDecoration(
@@ -54,7 +62,7 @@ class FacultyCard extends StatelessWidget {
               ),
               child: IconButton(
                 onPressed: () => showFacultyBottomSheet(context, faculty),
-                icon: HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
+                icon: const HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
               ),
             ),
           ],

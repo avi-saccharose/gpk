@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
@@ -18,21 +17,30 @@ class SyllabusScreen extends ConsumerWidget {
     final selectedBranch = ref.watch(settingsProvider).selectedBranch;
     final selectedSemester = ref.watch(settingsProvider).selectedSemester;
     final syllabus = ref.watch(syllabusProvider);
+
+    final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     return SafeArea(
       child: Padding(
-        padding: EdgeInsetsGeometry.symmetric(horizontal: 24),
+        padding: const EdgeInsetsGeometry.symmetric(horizontal: 24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             gapH20,
 
             Text(
-              "Syllabus",
-              style: TextStyle(color: Colors.grey, fontSize: 16),
+              'Syllabus',
+              style: TextStyle(
+                color: colorScheme.onSurfaceVariant,
+                fontSize: 16,
+              ),
             ),
             Text(
               '$selectedBranch $selectedSemester',
-              style: AppTextStyles.display,
+              style: textTheme.headlineLarge?.copyWith(
+                color: colorScheme.onSurface,
+                fontWeight: FontWeight.w600,
+              ),
             ),
             gapH20,
 
@@ -41,15 +49,15 @@ class SyllabusScreen extends ConsumerWidget {
                 subjects: data.subjects,
               ),
               error: (error, stackTrace) {
-                Log.error("fetch syllabus", error, stackTrace);
+                Log.error('fetch syllabus', error, stackTrace);
                 return ErrorCard(
-                  message: "Failed fetching syllabus",
+                  message: 'Failed fetching syllabus',
                   retry: () {
                     ref.invalidate(syllabusProvider);
                   },
                 );
               },
-              loading: () => Center(child: ElasticWaveLoader()),
+              loading: () => const Center(child: ElasticWaveLoader()),
             ),
           ],
         ),
@@ -119,6 +127,9 @@ class SubjectCard extends StatelessWidget {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: colorScheme.outline,
+        ),
         borderRadius: BorderRadius.circular(Sizes.p16),
       ),
       child: InkWell(

@@ -1,11 +1,11 @@
 import 'package:gpk_app/core/cache/cache_metadata.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
+import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/core/models/branch.dart';
 import 'package:gpk_app/core/models/semester.dart';
 import 'package:gpk_app/core/network/api_server.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
 import 'package:gpk_app/features/calendar/models/event.dart';
-import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/features/calendar/models/event_wrapper.dart';
 
 class CalendarRepository {
@@ -30,25 +30,20 @@ class CalendarRepository {
     final data = await apiServer.fetch(
       '/calendar/${branch ?? "all"}${semester?.year ?? ""}',
     );
-    final String calendarGroup = data["calendarGroup"];
+    final String calendarGroup = data['calendarGroup'];
     final EventGroup group = EventGroup.values.byName(calendarGroup);
 
-    return (group, data["events"]);
+    return (group, data['events']);
   }
 
-  // TODO: Very ugly code that does multiple things at once
-  Future<EventsMapList> getEvents(
-    Branch branch,
-    Semester semester, {
-    bool forceRefresh = false,
-  }) async {
+  Future<EventsMapList> getEvents(Branch branch, Semester semester) async {
     final String cacheKey = 'calendar$branch${semester.year}';
 
-    if (!forceRefresh && cacheMetadata.isCacheValid(cacheKey, cacheDuration)) {
+    if (cacheMetadata.isCacheValid(cacheKey, cacheDuration)) {
       final cachedEvents = await cacheService.get(cacheKey);
       if (cachedEvents != null) {
         Log.info(
-          "Calendar Event: Returning cache (Age: $cacheDuration mins)",
+          'Calendar Event: Returning cache (Age: $cacheDuration mins)',
         );
         return cachedEvents.events;
       }
@@ -84,8 +79,8 @@ class CalendarRepository {
     addEvents(allEventsJson, allEventGroup);
     addEvents(branchEventsJson, branchEventGroup);
     final eventsWrapper = EventWrapper(events);
-    cacheService.write(cacheKey, eventsWrapper);
-    cacheMetadata.updateCacheTimeStamp(cacheKey);
+    await cacheService.write(cacheKey, eventsWrapper);
+    await cacheMetadata.updateCacheTimeStamp(cacheKey);
     return events;
   }
 }
