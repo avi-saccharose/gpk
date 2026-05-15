@@ -24,7 +24,7 @@ class SubjectsList extends ConsumerWidget {
           itemCount: syllabus.subjects.length,
           itemBuilder: (context, index) {
             final subject = syllabus.subjects[index];
-            return SubjectCard(subject: subject);
+            return SizedBox(width: 220, child: SubjectCard(subject: subject));
           },
         ),
       ),
@@ -60,10 +60,11 @@ class SubjectCard extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     return Card(
-      elevation: 4,
-      shadowColor: Colors.black.withValues(alpha: 0.4),
-      surfaceTintColor: Colors.transparent,
-      color: colorScheme.surface, //Colors.white.withValues(alpha: 0.9),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: colorScheme.outline),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      elevation: 0,
       child: InkWell(
         onTap: () {
           context.go('${AppRoutes.syllabus}/${subject.subjectCode}');
@@ -78,10 +79,13 @@ class SubjectCard extends StatelessWidget {
                 child: const HugeIcon(icon: HugeIcons.strokeRoundedBacteria),
               ),
               gapW16,
-              Text(
-                subject.subjectName,
-                style: textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
+              Expanded(
+                child: Text(
+                  subject.subjectName,
+                  overflow: TextOverflow.ellipsis,
+                  style: textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ],

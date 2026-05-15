@@ -21,11 +21,9 @@ class UpcomingEvents extends ConsumerWidget {
       data: (data) {
         return data.isEmpty
             ? Card(
-                elevation: 2,
-                shadowColor: Colors.black.withValues(alpha: 0.2),
-                surfaceTintColor: Colors.transparent,
-                color: colorScheme.surface,
+                elevation: 1,
                 shape: RoundedRectangleBorder(
+                  side: BorderSide(color: colorScheme.outline),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Padding(
@@ -37,15 +35,13 @@ class UpcomingEvents extends ConsumerWidget {
                         HugeIcon(
                           icon: HugeIcons.strokeRoundedCalendar01,
                           size: 40,
-                          color: colorScheme.onSurface.withValues(alpha: 0.4),
+                          color: colorScheme.onSurfaceVariant,
                         ),
                         gapH12,
                         Text(
                           'No Upcoming Events',
                           style: textTheme.bodyLarge?.copyWith(
-                            color: colorScheme.onSurface.withValues(
-                              alpha: 0.4,
-                            ),
+                            color: colorScheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -94,11 +90,9 @@ class EventsList extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(bottom: 12),
           child: Card(
-            elevation: 2,
-            shadowColor: Colors.black.withValues(alpha: 0.2),
-            surfaceTintColor: Colors.transparent,
-            color: Theme.of(context).colorScheme.surface,
+            elevation: 0,
             shape: RoundedRectangleBorder(
+              side: BorderSide(color: colorScheme.outline),
               borderRadius: BorderRadius.circular(16),
             ),
             child: ListTile(
@@ -110,7 +104,7 @@ class EventsList extends StatelessWidget {
                 width: 48,
                 height: 48,
                 decoration: BoxDecoration(
-                  color: colorScheme.primary.withValues(alpha: 0.1),
+                  color: colorScheme.surfaceContainerHigh,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: HugeIcon(
@@ -122,21 +116,18 @@ class EventsList extends StatelessWidget {
                 event.title,
                 style: textTheme.titleSmall?.copyWith(
                   fontWeight: FontWeight.w600,
+                  color: colorScheme.onSurface,
                 ),
               ),
               subtitle: Text(
                 date.dayMonth,
                 style: textTheme.bodySmall?.copyWith(
-                  color: Theme.of(
-                    context,
-                  ).colorScheme.onSurface.withValues(alpha: 0.6),
+                  color: colorScheme.onSurfaceVariant,
                 ),
               ),
               trailing: Icon(
                 Icons.chevron_right,
-                color: Theme.of(
-                  context,
-                ).colorScheme.onSurface.withValues(alpha: 0.3),
+                color: colorScheme.onSurfaceVariant,
               ),
             ),
           ),

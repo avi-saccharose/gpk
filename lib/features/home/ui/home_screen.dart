@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/home/providers/home_providers.dart';
 import 'package:gpk_app/features/home/widgets/faculty_list.dart';
@@ -41,28 +40,28 @@ class HomeScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 gapH20,
-                const Text(
+                Text(
                   'Hello',
-                  style: AppTextStyles.label,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: colorScheme.onSurfaceVariant,
+                  ),
                 ),
                 Text(
                   displayName,
-                  style: AppTextStyles.display,
-                ),
-                gapH20,
-                Text(
-                  'Quote of the day',
-                  style: textTheme.titleMedium?.copyWith(
+                  style: textTheme.headlineLarge?.copyWith(
                     fontWeight: FontWeight.w600,
-                    letterSpacing: 0.5,
-                    color: colorScheme.primary,
+                    color: colorScheme.onSurface,
                   ),
                 ),
+                gapH32,
+                const SectionHeader(title: 'Quote of the day'),
+
                 const QuoteOfTheDay(),
                 gapH32,
                 const SectionHeader(
                   title: 'Upcoming Events',
-                  location: AppRoutes.calendar,
+                  destination: AppRoutes.calendar,
                 ),
                 gapH8,
 
@@ -70,7 +69,7 @@ class HomeScreen extends ConsumerWidget {
                 gapH32,
                 const SectionHeader(
                   title: 'Subjects',
-                  location: AppRoutes.syllabus,
+                  destination: AppRoutes.syllabus,
                 ),
                 gapH8,
 
@@ -78,7 +77,7 @@ class HomeScreen extends ConsumerWidget {
                 gapH32,
                 const SectionHeader(
                   title: 'Faculty',
-                  location: AppRoutes.faculty,
+                  destination: AppRoutes.faculty,
                 ),
                 gapH8,
 
@@ -104,10 +103,11 @@ class QuoteOfTheDay extends ConsumerWidget {
     final data = ref.watch(getQuoteOfDayProvider);
     return data.when(
       data: (quote) => Card(
-        elevation: 4,
-        shadowColor: Colors.black.withValues(alpha: 0.4),
-        surfaceTintColor: Colors.transparent,
-        color: colorScheme.surface, //Colors.white.withValues(alpha: 0.9),
+        elevation: 0,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: colorScheme.outline),
+          borderRadius: BorderRadius.circular(16),
+        ),
         child: Padding(
           padding: const EdgeInsetsGeometry.all(16),
           child: Column(
@@ -131,27 +131,21 @@ class QuoteOfTheDay extends ConsumerWidget {
                   Container(
                     width: 24,
                     height: 1,
-                    color: colorScheme.onSurface.withValues(
-                      alpha: 0.3,
-                    ),
+                    color: colorScheme.onSurfaceVariant,
                   ),
                   gapW8,
                   Text(
                     quote.author,
                     style: textTheme.labelLarge?.copyWith(
                       fontWeight: FontWeight.w500,
-                      color: colorScheme.onSurface.withValues(
-                        alpha: 0.7,
-                      ),
+                      color: colorScheme.onSurfaceVariant,
                     ),
                   ),
                   gapW8,
                   Container(
                     width: 24,
                     height: 1,
-                    color: colorScheme.onSurface.withValues(
-                      alpha: 0.3,
-                    ),
+                    color: colorScheme.onSurfaceVariant,
                   ),
                 ],
               ),
@@ -172,8 +166,8 @@ class QuoteOfTheDay extends ConsumerWidget {
 
 class SectionHeader extends StatelessWidget {
   final String title;
-  final String location;
-  const SectionHeader({super.key, required this.title, required this.location});
+  final String? destination;
+  const SectionHeader({super.key, required this.title, this.destination});
 
   @override
   Widget build(BuildContext context) {
@@ -189,24 +183,25 @@ class SectionHeader extends StatelessWidget {
             color: colorScheme.primary,
           ),
         ),
-        TextButton(
-          onPressed: () {
-            context.go(location);
-          },
-          child: Row(
-            children: [
-              Text(
-                'See All',
-                style: textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: colorScheme.primary,
+        if (destination != null)
+          TextButton(
+            onPressed: () {
+              context.go(destination!);
+            },
+            child: Row(
+              children: [
+                Text(
+                  'See All',
+                  style: textTheme.titleSmall?.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: colorScheme.primary,
+                  ),
                 ),
-              ),
-              gapW4,
-              const HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
-            ],
+                gapW4,
+                const HugeIcon(icon: HugeIcons.strokeRoundedArrowRight01),
+              ],
+            ),
           ),
-        ),
       ],
     );
   }

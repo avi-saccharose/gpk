@@ -171,7 +171,7 @@ class SettingsScreen extends ConsumerWidget {
                 const SectionTitle(title: 'APP DATA'),
                 Card(
                   child: Padding(
-                    padding: const EdgeInsetsGeometry.all(8),
+                    padding: const EdgeInsetsGeometry.all(16),
                     child: Column(
                       children: [
                         Row(

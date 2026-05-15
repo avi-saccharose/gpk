@@ -17,6 +17,9 @@ class AppTheme {
         primaryContainer: Color(0xFFC6D5FB),
         onPrimaryContainer: Color(0xFF0A1535),
       ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xFFEAEFF8),
+      ),
       searchBarTheme: SearchBarThemeData(
         backgroundColor: WidgetStateProperty.all(const Color(0xFFFFFFFF)),
         elevation: const WidgetStatePropertyAll(0),
@@ -43,6 +46,10 @@ class AppTheme {
         outlineVariant: Color(0xFF32415F),
         primaryContainer: Color(0xFF324677),
         onPrimaryContainer: Color(0xFFDCE5FF),
+      ),
+
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Color(0xFF1B2232),
       ),
       searchBarTheme: const SearchBarThemeData(
         // The elevated dark slate background
