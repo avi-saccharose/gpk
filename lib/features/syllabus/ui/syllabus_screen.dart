@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/core/widgets/error_card.dart';
 import 'package:gpk_app/core/widgets/loader.dart';
 import 'package:gpk_app/features/settings/providers/settings_providers.dart';
@@ -128,6 +127,9 @@ class SubjectCard extends StatelessWidget {
     return Card(
       elevation: 2,
       shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: colorScheme.outline,
+        ),
         borderRadius: BorderRadius.circular(Sizes.p16),
       ),
       child: InkWell(

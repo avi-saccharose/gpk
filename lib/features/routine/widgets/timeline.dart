@@ -32,7 +32,7 @@ class Timeline extends ConsumerWidget {
             final isLast = index == (routine.length - 1);
             return TimelineTile(
               item: routine[index],
-              isActive: isLast,
+              isActive: isActive,
               isLast: isLast,
             );
           },

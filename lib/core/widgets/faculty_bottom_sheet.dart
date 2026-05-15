@@ -24,6 +24,8 @@ Future<void> showFacultyBottomSheet(
   await showModalBottomSheet(
     context: context,
     builder: (context) {
+      final colorScheme = Theme.of(context).colorScheme;
+      final textTheme = Theme.of(context).textTheme;
       return SafeArea(
         child: Padding(
           padding: const EdgeInsetsGeometry.all(Sizes.p16),
@@ -35,7 +37,7 @@ Future<void> showFacultyBottomSheet(
                   width: 40,
                   height: 4,
                   decoration: BoxDecoration(
-                    color: Colors.grey[600],
+                    color: colorScheme.onSurface,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -48,7 +50,7 @@ Future<void> showFacultyBottomSheet(
 
               Text(
                 faculty.name,
-                style: AppTextStyles.bodyLarge,
+                style: textTheme.titleLarge,
                 textAlign: TextAlign.center,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -56,7 +58,9 @@ Future<void> showFacultyBottomSheet(
               gapH4,
               Text(
                 faculty.qualification,
-                style: AppTextStyles.labelSmall,
+                style: textTheme.labelMedium?.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
