@@ -13,9 +13,14 @@ class FacultyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final textTheme = Theme.of(context).textTheme;
     return Card(
-      elevation: 4,
+      elevation: 2,
+
       shape: RoundedRectangleBorder(
+        side: BorderSide(
+          color: colorScheme.outline,
+        ),
         borderRadius: BorderRadiusGeometry.circular(12),
       ),
 
@@ -33,7 +38,9 @@ class FacultyCard extends StatelessWidget {
             // ),
             Text(
               faculty.name,
-              style: AppTextStyles.bodyLarge,
+              style: textTheme.titleMedium?.copyWith(
+                color: colorScheme.onSurface,
+              ),
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -41,7 +48,9 @@ class FacultyCard extends StatelessWidget {
             gapH4,
             Text(
               faculty.qualification,
-              style: AppTextStyles.labelSmall,
+              style: textTheme.labelMedium?.copyWith(
+                color: colorScheme.onSurfaceVariant,
+              ),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
-import 'package:gpk_app/core/utils/text_styles.dart';
 import 'package:gpk_app/features/faculty/providers/faculty_providers.dart';
 import 'package:gpk_app/features/faculty/widgets/faculty_card.dart';
 import 'package:hugeicons/hugeicons.dart';
@@ -12,6 +11,8 @@ class FacultyScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final faculties = ref.watch(filteredFacultyProvider);
+    final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -19,13 +20,19 @@ class FacultyScreen extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             gapH20,
-            const Text(
+            Text(
               'Academic',
-              style: AppTextStyles.label,
+              style: TextStyle(
+                fontSize: 16,
+                color: colorScheme.onSurfaceVariant,
+              ),
             ),
-            const Text(
+            Text(
               'Faculty',
-              style: AppTextStyles.display,
+              style: textTheme.headlineLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: colorScheme.onSurface,
+              ),
             ),
             gapH20,
             SearchBar(
