@@ -1,3 +1,4 @@
+import 'package:gpk_app/core/cache/cache_metadata_provider.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/network/api_provider.dart';
 import 'package:gpk_app/core/utils/typedefs.dart';
@@ -16,8 +17,9 @@ CacheService sylllabusCacheService(Ref ref) {
 @riverpod
 SyllabusRepository syllabusRepository(Ref ref) {
   final cacheService = ref.watch(sylllabusCacheServiceProvider);
+  final cacheMetadata = ref.watch(cacheMetadataProvider);
   final apiServer = ref.watch(apiClientProvider);
-  return SyllabusRepository(cacheService, apiServer);
+  return SyllabusRepository(cacheService, cacheMetadata, apiServer);
 }
 
 @riverpod

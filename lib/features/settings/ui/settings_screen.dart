@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gpk_app/core/cache/cache_metadata_provider.dart';
 import 'package:gpk_app/core/constants/app_config.dart';
 import 'package:gpk_app/core/constants/app_sizes.dart';
 import 'package:gpk_app/core/models/branch.dart';
@@ -210,7 +211,8 @@ class SettingsScreen extends ConsumerWidget {
                                 ref
                                   ..invalidate(calendarCacheServiceProvider)
                                   ..invalidate(routineCacheServiceProvider)
-                                  ..invalidate(sylllabusCacheServiceProvider);
+                                  ..invalidate(sylllabusCacheServiceProvider)
+                                  ..invalidate(cacheMetadataProvider);
 
                                 Log.info('Clear cache');
 

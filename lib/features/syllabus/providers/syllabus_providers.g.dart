@@ -103,7 +103,7 @@ final class SyllabusRepositoryProvider
 }
 
 String _$syllabusRepositoryHash() =>
-    r'8c89b108e0ce311b1997f68cd7c0570d32e1fa0c';
+    r'c4693d5f15562e2842c4af1783889db10c243cf2';
 
 @ProviderFor(syllabus)
 final syllabusProvider = SyllabusProvider._();

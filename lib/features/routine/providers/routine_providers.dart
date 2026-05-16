@@ -1,3 +1,4 @@
+import 'package:gpk_app/core/cache/cache_metadata_provider.dart';
 import 'package:gpk_app/core/cache/cache_service.dart';
 import 'package:gpk_app/core/extensions/date_time_extension.dart';
 import 'package:gpk_app/core/network/api_provider.dart';
@@ -34,8 +35,9 @@ CacheService routineCacheService(Ref ref) {
 @riverpod
 RoutineRepository routineRepository(Ref ref) {
   final cacheService = ref.watch(routineCacheServiceProvider);
+  final cacheMetadata = ref.watch(cacheMetadataProvider);
   final apiServer = ref.watch(apiClientProvider);
-  return RoutineRepository(cacheService, apiServer);
+  return RoutineRepository(cacheService, cacheMetadata, apiServer);
 }
 
 // WARN: Handle empty value

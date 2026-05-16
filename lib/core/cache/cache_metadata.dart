@@ -13,6 +13,7 @@ class CacheMetadata {
     }
   }
 
+  // For Calendar Cache, we use a time limit based cache logic
   Future<void> updateCacheTimeStamp(String keyName) async {
     final timeStampKey = '${keyName}_timestamp';
     await _metadataBox.put(timeStampKey, DateTime.now().toIso8601String());
@@ -32,9 +33,5 @@ class CacheMetadata {
       Log.error('CacheMetadata: Error parsing date', e);
       return false;
     }
-  }
-
-  Future<void> clearCacheTimeStamp(String keyName) async {
-    await _metadataBox.delete('${keyName}_timestamp');
   }
 }
