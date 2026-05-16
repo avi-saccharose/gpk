@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:gpk_app/app_shell_scaffold.dart';
 import 'package:gpk_app/core/utils/app_log.dart';
@@ -12,7 +13,6 @@ import 'package:gpk_app/features/settings/ui/settings_screen.dart';
 import 'package:gpk_app/features/syllabus/ui/syllabus_screen.dart';
 import 'package:gpk_app/features/syllabus/widgets/syllabus_detail_screen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 part 'app_router.g.dart';
 
 final rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -44,14 +44,16 @@ class AppRoutes {
 
 @riverpod
 GoRouter router(Ref ref) {
-  final onboarding = ref.watch(settingsProvider);
+  final completedOnboarding = ref.watch(
+    settingsProvider.select((settings) => settings.completedOnboarding),
+  );
   return GoRouter(
     navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.home,
     redirect: (context, state) {
-      final bool completed = onboarding.completedOnboarding;
-      Log.info('completedOnboarding: $completed');
-      if (!completed) {
+      // final bool completed = onboarding.completedOnboarding;
+      Log.info('completedOnboarding: $completedOnboarding');
+      if (!completedOnboarding) {
         return AppRoutes.onBoarding;
       }
       return null;

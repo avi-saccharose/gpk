@@ -48,7 +48,7 @@ final class AllFacultyProvider
   }
 }
 
-String _$allFacultyHash() => r'7b188f4ef6891f7fb49082e408be6b1717083a38';
+String _$allFacultyHash() => r'4e689dfaeeb99b0e7bff8e187859ae568c477298';
 
 @ProviderFor(SearchQuery)
 final searchQueryProvider = SearchQueryProvider._();
