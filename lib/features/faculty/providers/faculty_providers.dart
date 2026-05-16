@@ -22,7 +22,7 @@ List<Faculty> allFaculty(Ref ref) {
     Faculty("Limasenla", "B.E(Civil)", "7085811923", 'asenshijoh12@gmail.com', 'GPK'),
     Faculty("Ketoulhoukho Kengurusie", "M.Tech(CTM)", "8787705284", 'akhorusie@gmail.com', 'GPK'),
     Faculty("Petesetuo", "M.Sc(Physics)", "9612336146", 'petekets01@gmail.com', 'GPK'),
-    Faculty("Puthu Vitsu", "M.Sc (Chemistry)", "986298868", 'GPK'),
+    Faculty("Puthu Vitsu", "M.Sc (Chemistry)", "986298868", null, 'GPK'),
     Faculty("Yibenthung Tungoe", "BE(CSE),ME(CSE)", "8731950457", 'yibenthungtungoe@gmail.com', 'GPK'),
     Faculty("Viketol Thol", "B.E(CS & E)", "9862376252", 'viketol84@gmail.com', 'GPK'),
     Faculty("Athalie Dolie", "B.Tech", "8837204136", 'athaliedolie@gmail.com', 'GPK'),
@@ -31,7 +31,7 @@ List<Faculty> allFaculty(Ref ref) {
     Faculty("Punyi Krocha", "BA (PGD)", "8413957587", 'punyikrocha1@gmail.com', 'GPK'),
     Faculty("Rusou Shupao", "BA", "9615244604", 'rosuoshupao79@gmail.com', 'GPK'),
     Faculty("Pelesituo Theunuo", "(ITI) Matriculate", "8974610999", 'pelesituotheunuo@gmail.com', 'GPK'),
-    Faculty("Pfuvosa Thingo", "(ITI) Matriculate", "8837017483", 'pfuvosathingo@gmail.com', 'GPK'),
+    Faculty("Pfuvosa Thingo", "(ITI) Matriculate", "8837017483", null, 'GPK'),
 
   ];
 }
