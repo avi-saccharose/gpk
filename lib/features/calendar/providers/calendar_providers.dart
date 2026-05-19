@@ -63,6 +63,14 @@ Future<EventsMapList> calendarEvents(Ref ref) async {
 }
 
 @riverpod
+Future<void> calendarRefresh(Ref ref) async {
+  final repo = ref.watch(calendarRepositoryProvider);
+  final branch = ref.watch(settingsProvider).selectedBranch;
+  final semester = ref.watch(settingsProvider).selectedSemester;
+  return await repo.clearCache(branch, semester);
+}
+
+@riverpod
 Future<Map<DateTime, List<Event>>> monthlyEventsMap(Ref ref) async {
   final allEvents = await ref.watch(calendarEventsProvider.future);
   final seclectedMonth = ref.watch(selectedMonthProvider);

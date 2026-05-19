@@ -247,6 +247,39 @@ final class CalendarEventsProvider
 
 String _$calendarEventsHash() => r'66757fa48250255d5d6f9912abc66cb3b4c43323';
 
+@ProviderFor(calendarRefresh)
+final calendarRefreshProvider = CalendarRefreshProvider._();
+
+final class CalendarRefreshProvider
+    extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
+    with $FutureModifier<void>, $FutureProvider<void> {
+  CalendarRefreshProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'calendarRefreshProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$calendarRefreshHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<void> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<void> create(Ref ref) {
+    return calendarRefresh(ref);
+  }
+}
+
+String _$calendarRefreshHash() => r'3df3b854f2a52ca45000e3a3389f60c064617469';
+
 @ProviderFor(monthlyEventsMap)
 final monthlyEventsMapProvider = MonthlyEventsMapProvider._();
 

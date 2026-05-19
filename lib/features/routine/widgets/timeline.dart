@@ -142,6 +142,8 @@ class TimelineTile extends StatelessWidget {
                         gapW12,
                         Text(
                           item.subjectName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: isActive
                                 ? colorScheme.onPrimaryContainer

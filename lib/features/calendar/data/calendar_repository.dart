@@ -36,6 +36,11 @@ class CalendarRepository {
     return (group, data['events']);
   }
 
+  Future<void> clearCache(Branch branch, Semester semester) async {
+    final String cacheKey = 'calendar$branch${semester.year}';
+    await cacheService.delete(cacheKey);
+  }
+
   Future<EventsMapList> getEvents(Branch branch, Semester semester) async {
     final String cacheKey = 'calendar$branch${semester.year}';
 

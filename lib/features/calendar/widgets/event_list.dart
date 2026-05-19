@@ -35,11 +35,13 @@ class EventList extends ConsumerWidget {
         });
 
         Log.info('Calendar Event offset: $targetIndex');
-
         return Expanded(
           child: RefreshIndicator(
             onRefresh: () async {
-              ref.invalidate(monthlyEventsProvider);
+              Log.info("refresh calendar");
+              await ref.read(calendarRefreshProvider.future);
+              ref.invalidate(calendarEventsProvider);
+              await ref.refresh(monthlyEventsProvider);
             },
             child: ScrollablePositionedList.builder(
               physics: const AlwaysScrollableScrollPhysics(),
