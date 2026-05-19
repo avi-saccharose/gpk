@@ -18,9 +18,10 @@ class Faculty {
     return Faculty(
       name: source['name'] as String,
       qualification: source['qualification'] as String,
-      number: source['number'] as String,
-      email: source['email'] as String,
-      address: source['address'] as String,
+      number: source['number'] as String?,
+      email: source['email'] as String?,
+      address: source['address'] as String?,
+      imgUrl: source['imgUrl'] as String?,
     );
   }
 }

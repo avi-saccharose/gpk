@@ -13,8 +13,13 @@ part of 'faculty_providers.dart';
 final allFacultyProvider = AllFacultyProvider._();
 
 final class AllFacultyProvider
-    extends $FunctionalProvider<List<Faculty>, List<Faculty>, List<Faculty>>
-    with $Provider<List<Faculty>> {
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<Faculty>>,
+          List<Faculty>,
+          FutureOr<List<Faculty>>
+        >
+    with $FutureModifier<List<Faculty>>, $FutureProvider<List<Faculty>> {
   AllFacultyProvider._()
     : super(
         from: null,
@@ -31,24 +36,17 @@ final class AllFacultyProvider
 
   @$internal
   @override
-  $ProviderElement<List<Faculty>> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+  $FutureProviderElement<List<Faculty>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
 
   @override
-  List<Faculty> create(Ref ref) {
+  FutureOr<List<Faculty>> create(Ref ref) {
     return allFaculty(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<Faculty> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<List<Faculty>>(value),
-    );
   }
 }
 
-String _$allFacultyHash() => r'4e689dfaeeb99b0e7bff8e187859ae568c477298';
+String _$allFacultyHash() => r'ffe2710dc86b14e32c6451d4eb767ba18ebe92fd';
 
 @ProviderFor(SearchQuery)
 final searchQueryProvider = SearchQueryProvider._();
@@ -105,8 +103,13 @@ abstract class _$SearchQuery extends $Notifier<String> {
 final filteredFacultyProvider = FilteredFacultyProvider._();
 
 final class FilteredFacultyProvider
-    extends $FunctionalProvider<List<Faculty>, List<Faculty>, List<Faculty>>
-    with $Provider<List<Faculty>> {
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<Faculty>>,
+          List<Faculty>,
+          FutureOr<List<Faculty>>
+        >
+    with $FutureModifier<List<Faculty>>, $FutureProvider<List<Faculty>> {
   FilteredFacultyProvider._()
     : super(
         from: null,
@@ -123,21 +126,14 @@ final class FilteredFacultyProvider
 
   @$internal
   @override
-  $ProviderElement<List<Faculty>> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+  $FutureProviderElement<List<Faculty>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
 
   @override
-  List<Faculty> create(Ref ref) {
+  FutureOr<List<Faculty>> create(Ref ref) {
     return filteredFaculty(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(List<Faculty> value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<List<Faculty>>(value),
-    );
   }
 }
 
-String _$filteredFacultyHash() => r'ee17bd7851e1e045857adea9dc7cbab172897c64';
+String _$filteredFacultyHash() => r'4942cf80253a5fdaaf02afe3305942f3e4ff0212';

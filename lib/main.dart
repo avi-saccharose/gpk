@@ -74,15 +74,6 @@ class MyApp extends ConsumerWidget {
       themeMode: settings.isDarkMode ? ThemeMode.dark : ThemeMode.light,
       darkTheme: AppTheme.darkTheme,
       theme: AppTheme.lightTheme,
-      // theme: ThemeData(
-      //   fontFamily: 'Inter',
-      //   actionIconTheme: ActionIconThemeData(
-      //     backButtonIconBuilder: (BuildContext context) =>
-      //         const HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft02),
-      //   ),
-      //   useMaterial3: true,
-      //   colorSchemeSeed: Colors.white,
-      // ),
       routerConfig: router,
     );
   }
