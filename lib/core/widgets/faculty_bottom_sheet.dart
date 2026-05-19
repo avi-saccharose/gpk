@@ -22,6 +22,7 @@ Future<void> showFacultyBottomSheet(
 ) async {
   await showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     builder: (context) {
       final colorScheme = Theme.of(context).colorScheme;
       final textTheme = Theme.of(context).textTheme;
@@ -30,6 +31,7 @@ Future<void> showFacultyBottomSheet(
         child: Padding(
           padding: const EdgeInsetsGeometry.all(Sizes.p16),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Center(
                 child: Container(
