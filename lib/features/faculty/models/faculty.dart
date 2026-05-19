@@ -4,5 +4,6 @@ class Faculty {
   String? number;
   String? email;
   String? address;
-  Faculty(this.name, this.qualification, this.number, this.email, this.address);
+  String? imgUrl;
+  Faculty(this.name, this.qualification, this.number, this.email, this.address, this.imgUrl);
 }
