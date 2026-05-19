@@ -12,7 +12,7 @@ TimelineItem _$TimelineItemFromJson(Map<String, dynamic> json) => TimelineItem(
   subjectName: json['subjectName'] as String,
   subjectCode: json['subjectCode'] as String?,
   instructorName: json['instructorName'] as String?,
-  iconUrl: json['iconUrl'] as String,
+  iconUrl: json['iconUrl'] as String?,
 );
 
 Map<String, dynamic> _$TimelineItemToJson(TimelineItem instance) =>

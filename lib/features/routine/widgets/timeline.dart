@@ -76,6 +76,7 @@ class TimelineTile extends StatelessWidget {
               Text(
                 displayTime(item.startTime),
                 style: textTheme.titleLarge?.copyWith(
+                  fontFamily: "SpaceMono",
                   fontWeight: FontWeight.bold,
                   color: colorScheme.onSurface,
                 ),
@@ -130,12 +131,14 @@ class TimelineTile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Image(
-                          width: Sizes.p24,
-                          height: Sizes.p24,
-                          image: AssetImage(item.iconUrl),
-                        ),
+                        // if (item.iconUrl != null)
+                        //   Image(
+                        //     width: Sizes.p24,
+                        //     height: Sizes.p24,
+                        //     image: AssetImage(item.iconUrl!),
+                        //   ),
                         gapW12,
                         Text(
                           item.subjectName,
@@ -144,12 +147,12 @@ class TimelineTile extends StatelessWidget {
                                 ? colorScheme.onPrimaryContainer
                                 : colorScheme.onSurface,
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 16,
                           ),
                         ),
                         const Spacer(),
                         Text(
-                          item.subjectCode ?? '',
+                          item.subjectCode ?? ' ',
                           style: textTheme.labelSmall?.copyWith(
                             color: (isActive
                                 ? colorScheme.onPrimaryContainer.withValues(
@@ -162,7 +165,7 @@ class TimelineTile extends StatelessWidget {
                     ),
                     gapH8,
                     Text(
-                      item.instructorName ?? '',
+                      item.instructorName ?? ' ',
                       style: TextStyle(
                         color: (isActive
                             ? colorScheme.onPrimaryContainer.withValues(

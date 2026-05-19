@@ -10,7 +10,7 @@ class TimelineItem {
   final String subjectName;
   final SubjectCode? subjectCode;
   final String? instructorName;
-  final String iconUrl;
+  final String? iconUrl;
 
   const TimelineItem({
     required this.startTime,

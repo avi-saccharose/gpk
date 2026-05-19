@@ -101,6 +101,11 @@ flutter:
           weight: 500
         - asset: assets/fonts/Inter-Bold.ttf
           weight: 700
+    - family: SpaceMono
+      fonts:
+        - asset: assets/fonts/SpaceMono-Regular.ttf
+        - asset: assets/fonts/SpaceMono-Bold.ttf
+          weight: 700
   # fonts:
   #   - family: Schyler
   #     fonts:

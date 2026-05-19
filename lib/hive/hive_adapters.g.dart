@@ -338,7 +338,7 @@ class TimelineItemAdapter extends TypeAdapter<TimelineItem> {
       subjectName: fields[2] as String,
       subjectCode: fields[3] as String?,
       instructorName: fields[4] as String?,
-      iconUrl: fields[5] as String,
+      iconUrl: fields[5] as String?,
     );
   }
 
