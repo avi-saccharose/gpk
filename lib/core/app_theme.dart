@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 class AppTheme {
   static ThemeData get lightTheme {
@@ -32,6 +33,11 @@ class AppTheme {
         textStyle: const WidgetStatePropertyAll(
           TextStyle(color: Color(0xFF1F2A4A)),
         ),
+      ),
+
+      actionIconTheme: ActionIconThemeData(
+        backButtonIconBuilder: (BuildContext context) =>
+            const HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft02),
       ),
     );
   }
@@ -68,6 +74,11 @@ class AppTheme {
         backgroundColor: WidgetStatePropertyAll(Color(0xFF26324A)),
         elevation: WidgetStatePropertyAll(1),
         textStyle: WidgetStatePropertyAll(TextStyle(color: Color(0xFFF1F5FF))),
+      ),
+
+      actionIconTheme: ActionIconThemeData(
+        backButtonIconBuilder: (BuildContext context) =>
+            const HugeIcon(icon: HugeIcons.strokeRoundedArrowLeft02),
       ),
     );
   }
