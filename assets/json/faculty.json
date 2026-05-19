@@ -1,21 +1,31 @@
 [
   {
-    "name": "Keneingunuo Kire",
-    "qualification": "M.Sc(Math)",
-    "number": "7640830169",
-    "email": "keneikoza13@gmail.com"
+    "name": "A. Chubamenla",
+    "qualification": "M.Sc(Ftech & Design)",
+    "number": "8732813548",
+    "email": "chubamenj@gmail.com",
+    "imgUrl": "assets/images/chubamenla ft.jpg"
   },
   {
-    "name": "Zhalhourienuo",
-    "qualification": "B.E(Mechanical)",
-    "number": "8415994972",
-    "email": "arenokuotsu9@gmail.com"
+    "name": "Abeno Odyuo",
+    "qualification": "M.Tech",
+    "number": "7389442385",
+    "email": "benodys@gmail.com",
+    "imgUrl": "assets/images/abeno cse.jpg"
   },
   {
-    "name": "Mhiesino Sofia Naleo",
-    "qualification": "MA with NET JRF",
-    "number": "7005427887",
-    "email": "naleosofia@gmail.com"
+    "name": "Aoienla",
+    "qualification": "M.Tech",
+    "number": "8974522285",
+    "email": "aien123@gmail.com",
+    "imgUrl": "assets/images/aoienla.jpg"
+  },
+  {
+    "name": "Athalie Dolie",
+    "qualification": "B.Tech",
+    "number": "8837204136",
+    "email": "athaliedolie@gmail.com",
+    "imgUrl": "assets/images/athale cse.jpg"
   },
   {
     "name": "Katijungla",
@@ -24,46 +34,39 @@
     "email": "katyimchenpaul@gmail.com"
   },
   {
-    "name": "Neisahole Phinyo",
-    "qualification": "Post Graduate",
-    "number": "9615182117",
-    "email": "neisahole@gmail.com"
-  },
-  {
-    "name": "Aoienla",
-    "qualification": "M.Tech",
-    "number": "8974522285",
-    "email": "aien123@gmail.com"
+    "name": "Keneingunuo Kire",
+    "qualification": "M.Sc(Math)",
+    "number": "7640830169",
+    "email": "keneikoza13@gmail.com",
+    "imgUrl": "assets/images/kenei maths.jpg"
   },
   {
     "name": "Kerehienuo Keditsu",
     "qualification": "M.Sc(Fashion)",
     "number": "9402489781",
-    "email": "kerehienuo@gmail.com"
+    "email": "kerehienuo@gmail.com",
+    "imgUrl": "assets/images/kere ft.jpg"
   },
   {
-    "name": "A. Chubamenla",
-    "qualification": "M.Sc(Ftech & Design)",
-    "number": "8732813548",
-    "email": "chubamenj@gmail.com"
+    "name": "Ketoulhoukho Kengurusie",
+    "qualification": "M.Tech(CTM)",
+    "number": "8787705284",
+    "email": "akhorusie@gmail.com",
+    "imgUrl": "assets/images/akho.jpg"
   },
   {
-    "name": "Modovina Mocha",
-    "qualification": "M.Sc(Fashion)",
-    "number": "8413958658",
-    "email": "modovinamocha123@gmail.com"
+    "name": "Limasenla",
+    "qualification": "B.E(Civil)",
+    "number": "7085811923",
+    "email": "asenshijoh12@gmail.com",
+    "imgUrl": "assets/images/limasenla ce.jpg"
   },
   {
     "name": "Mary Puro",
     "qualification": "M.Sc(Ftech)",
     "number": "9863127985",
-    "email": "marypuro@yaho.com"
-  },
-  {
-    "name": "Sano Yoho",
-    "qualification": "BA",
-    "number": "9856848293",
-    "email": "sanoyswu@gmail.com"
+    "email": "marypuro@yaho.com",
+    "imgUrl": "assets/images/mary ft.jpg"
   },
   {
     "name": "Medozonuo Ruth Kelio",
@@ -72,75 +75,24 @@
     "email": "medozonuo@gmail.com"
   },
   {
-    "name": "Tiamongla",
-    "qualification": "B.Tech(Civil)",
-    "number": "8837089881",
-    "email": "mongshitzudir9615@gmail.com"
+    "name": "Mhiesino Sofia Naleo",
+    "qualification": "MA with NET JRF",
+    "number": "7005427887",
+    "email": "naleosofia@gmail.com"
   },
   {
-    "name": "Limasenla",
-    "qualification": "B.E(Civil)",
-    "number": "7085811923",
-    "email": "asenshijoh12@gmail.com"
+    "name": "Modovina Mocha",
+    "qualification": "M.Sc(Fashion)",
+    "number": "8413958658",
+    "email": "modovinamocha123@gmail.com",
+    "imgUrl": "assets/images/modo ft.jpg"
   },
   {
-    "name": "Ketoulhoukho Kengurusie",
-    "qualification": "M.Tech(CTM)",
-    "number": "8787705284",
-    "email": "akhorusie@gmail.com"
-  },
-  {
-    "name": "Petesetuo",
-    "qualification": "M.Sc(Physics)",
-    "number": "9612336146",
-    "email": "petekets01@gmail.com"
-  },
-  {
-    "name": "Puthu Vitsu",
-    "qualification": "M.Sc (Chemistry)",
-    "number": "986298868"
-  },
-  {
-    "name": "Yibenthung Tungoe",
-    "qualification": "BE(CSE)",
-    "number": "ME(CSE)",
-    "email": "8731950457"
-  },
-  {
-    "name": "Viketol Thol",
-    "qualification": "B.E(CS & E)",
-    "number": "9862376252",
-    "email": "viketol84@gmail.com"
-  },
-  {
-    "name": "Athalie Dolie",
-    "qualification": "B.Tech",
-    "number": "8837204136",
-    "email": "athaliedolie@gmail.com"
-  },
-  {
-    "name": "Yimayangba",
-    "qualification": "B.Tech(CSE)",
-    "number": "9366075934",
-    "email": "ayanggpk111@gmail.com"
-  },
-  {
-    "name": "Abeno Odyuo",
-    "qualification": "M.Tech",
-    "number": "7389442385",
-    "email": "benodys@gmail.com"
-  },
-  {
-    "name": "Punyi Krocha",
-    "qualification": "BA (PGD)",
-    "number": "8413957587",
-    "email": "punyikrocha1@gmail.com"
-  },
-  {
-    "name": "Rusou Shupao",
-    "qualification": "BA",
-    "number": "9615244604",
-    "email": "rosuoshupao79@gmail.com"
+    "name": "Neisahole Phinyo",
+    "qualification": "Post Graduate",
+    "number": "9615182117",
+    "email": "neisahole@gmail.com",
+    "imgUrl": "assets/images/neisa.jpg"
   },
   {
     "name": "Pelesituo Theunuo",
@@ -149,8 +101,71 @@
     "email": "pelesituotheunuo@gmail.com"
   },
   {
+    "name": "Petesetuo",
+    "qualification": "M.Sc(Physics)",
+    "number": "9612336146",
+    "email": "petekets01@gmail.com"
+  },
+  {
     "name": "Pfuvosa Thingo",
     "qualification": "(ITI) Matriculate",
     "number": "8837017483"
+  },
+  {
+    "name": "Punyi Krocha",
+    "qualification": "BA (PGD)",
+    "number": "8413957587",
+    "email": "punyikrocha1@gmail.com"
+  },
+  {
+    "name": "Puthu Vitsu",
+    "qualification": "M.Sc (Chemistry)",
+    "number": "986298868"
+  },
+  {
+    "name": "Rusou Shupao",
+    "qualification": "BA",
+    "number": "9615244604",
+    "email": "rosuoshupao79@gmail.com"
+  },
+  {
+    "name": "Sano Yoho",
+    "qualification": "BA",
+    "number": "9856848293",
+    "email": "sanoyswu@gmail.com",
+    "imgUrl": "assets/images/sano.jpg"
+  },
+  {
+    "name": "Tiamongla",
+    "qualification": "B.Tech(Civil)",
+    "number": "8837089881",
+    "email": "mongshitzudir9615@gmail.com"
+  },
+  {
+    "name": "Viketol Thol",
+    "qualification": "B.E(CS & E)",
+    "number": "9862376252",
+    "email": "viketol84@gmail.com",
+    "imgUrl": "assets/images/viketol cse.jpg"
+  },
+  {
+    "name": "Yibenthung Tungoe",
+    "qualification": "BE(CSE)",
+    "number": "ME(CSE)",
+    "email": "8731950457",
+    "imgUrl": "assets/images/yiben cse.jpg"
+  },
+  {
+    "name": "Yimayangba",
+    "qualification": "B.Tech(CSE)",
+    "number": "9366075934",
+    "email": "ayanggpk111@gmail.com"
+  },
+  {
+    "name": "Zhalhourienuo",
+    "qualification": "B.E(Mechanical)",
+    "number": "8415994972",
+    "email": "arenokuotsu9@gmail.com",
+    "imgUrl": "assets/images/zalhou.jpg"
   }
 ]

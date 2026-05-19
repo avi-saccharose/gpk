@@ -25,6 +25,7 @@ Future<void> showFacultyBottomSheet(
     builder: (context) {
       final colorScheme = Theme.of(context).colorScheme;
       final textTheme = Theme.of(context).textTheme;
+      final imgUrl = faculty.imgUrl;
       return SafeArea(
         child: Padding(
           padding: const EdgeInsetsGeometry.all(Sizes.p16),
@@ -42,9 +43,12 @@ Future<void> showFacultyBottomSheet(
                 ),
               ),
               gapH12,
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage('assets/images/helen.jpeg'),
+                backgroundImage: imgUrl != null ? AssetImage(imgUrl) : null,
+                child: imgUrl == null
+                    ? const HugeIcon(icon: HugeIcons.strokeRoundedUser02)
+                    : null,
               ),
 
               Text(

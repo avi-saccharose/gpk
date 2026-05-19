@@ -23,6 +23,7 @@ class FacultyList extends ConsumerWidget {
           itemCount: faculty.length,
           itemBuilder: (context, index) {
             final item = faculty[index];
+            final imgUrl = item.imgUrl;
             return Card(
               elevation: 0,
               shape: RoundedRectangleBorder(
@@ -39,8 +40,15 @@ class FacultyList extends ConsumerWidget {
                   padding: const EdgeInsets.all(24),
                   child: Column(
                     children: [
-                      const CircleAvatar(
-                        child: HugeIcon(icon: HugeIcons.strokeRoundedUser02),
+                      CircleAvatar(
+                        backgroundImage: imgUrl != null
+                            ? AssetImage(imgUrl)
+                            : null,
+                        child: imgUrl == null
+                            ? const HugeIcon(
+                                icon: HugeIcons.strokeRoundedUser02,
+                              )
+                            : null,
                       ),
                       gapH8,
                       Text(

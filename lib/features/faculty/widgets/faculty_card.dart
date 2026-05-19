@@ -13,6 +13,7 @@ class FacultyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
+    final imgUrl = faculty.imgUrl;
     return Card(
       elevation: 2,
 
@@ -27,8 +28,11 @@ class FacultyCard extends StatelessWidget {
         padding: const EdgeInsets.all(Sizes.p12),
         child: Column(
           children: [
-            const CircleAvatar(
-              backgroundImage: AssetImage('assets/images/helen.jpeg'),
+            CircleAvatar(
+              backgroundImage: imgUrl != null ? AssetImage(imgUrl) : null,
+              child: imgUrl == null
+                  ? const HugeIcon(icon: HugeIcons.strokeRoundedUser02)
+                  : null,
             ),
             gapH8,
             // Image(
