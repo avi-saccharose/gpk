@@ -140,16 +140,18 @@ class TimelineTile extends StatelessWidget {
                         //     image: AssetImage(item.iconUrl!),
                         //   ),
                         gapW12,
-                        Text(
-                          item.subjectName,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: isActive
-                                ? colorScheme.onPrimaryContainer
-                                : colorScheme.onSurface,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
+                        Flexible(
+                          child: Text(
+                            item.subjectName,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: isActive
+                                  ? colorScheme.onPrimaryContainer
+                                  : colorScheme.onSurface,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                         const Spacer(),
